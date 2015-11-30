@@ -17,7 +17,7 @@ namespace Blog.Data.Config
             {
                 if (string.IsNullOrEmpty(_connectionString))
                 {
-                    _connectionString = ConfigurationManager.ConnectionStrings["Blog"].ConnectionString;
+                    _connectionString = ConfigurationManager.ConnectionStrings["Blogs"].ConnectionString;
                 }
 
                 return _connectionString;
