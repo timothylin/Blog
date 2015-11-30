@@ -1,0 +1,15 @@
+﻿@model Blog.Models.BlogPost
+
+@{
+    ViewBag.Title = "View New Post";
+}
+
+<h2>View New Post</h2>
+
+@Model.BlogTitle
+
+@Model.TimeCreated
+
+@Html.Raw(Model.BlogText)
+
+@Model.BlogText
