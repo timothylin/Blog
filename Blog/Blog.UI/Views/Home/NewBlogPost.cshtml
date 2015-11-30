@@ -1,0 +1,36 @@
+﻿@model Blog.UI.Models.NewBlogPostVM
+
+@{
+    ViewBag.Title = "New Blog Post";
+}
+
+<h2>New Blog Post</h2>
+
+<div class="container">
+@using (Html.BeginForm("NewBlogPost", "Home", null, FormMethod.Post, new {@class = "form-group"}))
+{
+    <div class="row">
+        @Html.EditorFor(m => m.BlogPost.BlogTitle, new {@class = "form-control"})
+    </div>
+
+    <div class="row">
+        @Html.TextAreaFor(m => m.BlogPost.BlogText, new {@id = "mytextarea"})
+    </div>
+
+    <div class="row">
+        @Html.EditorFor(m => m.BlogPost.TimeCreated, new {@class = "form-control"})
+    </div>
+
+
+    <button type="submit" class="btn btn-success">Submit</button>
+}
+    </div>
+@section Scripts
+{
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
+}
