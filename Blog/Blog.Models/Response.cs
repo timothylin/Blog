@@ -18,6 +18,8 @@ namespace Blog.Models
         public List<BlogPost> BlogPosts { get; set; }
         public StaticPage StaticPage { get; set; }
         public List<StaticPage> StaticPages { get; set; }
+        public Category Category { get; set; }
+        public List<Category> Categories { get; set; }
 
         public Response()
         {
@@ -29,6 +31,8 @@ namespace Blog.Models
             BlogPosts = new List<BlogPost>();
             StaticPage = new StaticPage();
             StaticPages = new List<StaticPage>();
+            Category = new Category();
+            Categories = new List<Category>();
         }
     }
 }
