@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Blog.Data;
@@ -13,12 +14,13 @@ namespace Blog.UI.ConsoleApp
         {
             //var repo = new BlogRepository();
 
-            //var hashtags = repo.GetAllHashtags();
+            //var users = repo.GetAllUsers();
 
-            //foreach (var hashtag in hashtags)
+            //foreach (var user in users)
             //{
-            //    Console.WriteLine(hashtag.HashtagId);
-            //    Console.WriteLine(hashtag.HashtagText);
+            //    Console.WriteLine(user.Id);
+            //    Console.WriteLine(user.Role.Name);
+            //    Console.WriteLine(user.Email);
             //}
 
             //Console.ReadLine();
