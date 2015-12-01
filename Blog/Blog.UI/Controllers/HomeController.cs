@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Blog.UI.Models;
 
 namespace Blog.UI.Controllers
 {
@@ -11,25 +10,21 @@ namespace Blog.UI.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult NewBlogPost()
+        public ActionResult Contact()
         {
-            var newBlog = new NewBlogPostVM();
+            ViewBag.Message = "Your contact page.";
 
-
-            return View(newBlog);
-        }
-
-
-        [HttpPost]
-        public ActionResult NewBlogPost(NewBlogPostVM newPost)
-        {
-
-            return View("ViewNewPost", newPost.BlogPost);
+            return View();
         }
     }
 }
