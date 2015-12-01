@@ -9,12 +9,15 @@ namespace Blog.UI.Models
     public class NewBlogPostVM
     {
         public BlogPost BlogPost { get; set; }
-        //List of Categories
+        public List<Category> Categories { get; set; } 
+        public List<Hashtag> Hashtags { get; set; } 
         //List of Users
 
         public NewBlogPostVM()
         {
             BlogPost = new BlogPost();
+            Categories = new List<Category>();
+            Hashtags = new List<Hashtag>();
         }
 
     }
