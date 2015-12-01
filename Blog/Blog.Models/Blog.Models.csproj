@@ -43,7 +43,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlogPost.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="Hashtag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Response.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="StaticPage.cs" />
+    <Compile Include="Status.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

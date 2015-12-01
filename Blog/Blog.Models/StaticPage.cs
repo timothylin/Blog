@@ -7,25 +7,21 @@ using System.Web.Mvc;
 
 namespace Blog.Models
 {
-    public class BlogPost
+    public class StaticPage
     {
-        public int BlogPostId { get; set; }
-        public string BlogPostTitle { get; set; }
+        public int StaticPageId { get; set; }
+        public string StaticPageTitle { get; set; }
         [AllowHtml]
-        public string BlogPostText { get; set; }
+        public string StaticPageText { get; set; }
         public Status Status { get; set; }
-        public DateTime TimeCreated { get; set; }
-        public DateTime? ExpirationDate { get; set; }
-        public List<Hashtag> Hashtags { get; set; } 
         public User User { get; set; }
+        public DateTime TimeCreated { get; set; }
         public Category Category { get; set; }
 
-        public BlogPost()
+        public StaticPage()
         {
-            Hashtags = new List<Hashtag>();
             User = new User();
             Category = new Category();
         }
-
     }
 }

@@ -10,11 +10,11 @@
 @using (Html.BeginForm("NewBlogPost", "Home", null, FormMethod.Post, new {@class = "form-group"}))
 {
     <div class="row">
-        @Html.EditorFor(m => m.BlogPost.BlogTitle, new {@class = "form-control"})
+        @Html.EditorFor(m => m.BlogPost.BlogPostTitle, new {@class = "form-control"})
     </div>
 
     <div class="row">
-        @Html.TextAreaFor(m => m.BlogPost.BlogText, new {@id = "mytextarea"})
+        @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new {@id = "mytextarea"})
     </div>
 
     <div class="row">
