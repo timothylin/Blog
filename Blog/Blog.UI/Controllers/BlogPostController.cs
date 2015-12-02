@@ -16,7 +16,7 @@ namespace Blog.UI.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, PR")]
         public ActionResult AddNewBlogPost()
         {
             var newBlogPostVM = new AddBlogPostVM();
@@ -24,7 +24,18 @@ namespace Blog.UI.Controllers
 
             return View(newBlogPostVM);
 
+        }
 
+        [Authorize(Roles = "Admin, PR")]
+        [HttpPost]
+        public ActionResult AddNewBlogPost(AddBlogPostVM newPost)
+        {
+            newPost.BlogPost.TimeCreated = DateTime.Now;
+
+            //repo submit post
+
+
+            return View("ViewNewBlogPost", newPost.BlogPost);
         }
     }
 }

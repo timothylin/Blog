@@ -12,7 +12,6 @@ namespace Blog.UI.Models
         public BlogPost BlogPost { get; set; }
         public List<SelectListItem> CategoriesList { get; set; }
 
-
         public AddBlogPostVM()
         {
             BlogPost = new BlogPost();

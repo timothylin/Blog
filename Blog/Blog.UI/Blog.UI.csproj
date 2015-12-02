@@ -1228,6 +1228,7 @@
     <Content Include="Views\BlogPost\AddNewBlogPost.cshtml" />
     <Content Include="Views\Page\Index.cshtml" />
     <Content Include="Views\Page\AddNewPage.cshtml" />
+    <Content Include="Views\BlogPost\ViewNewBlogPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
