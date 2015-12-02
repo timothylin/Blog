@@ -15,7 +15,25 @@ namespace Blog.Data
     {
         public List<BlogPost> GetAllBlogPosts()
         {
-            throw new NotImplementedException();
+            List<BlogPost> blogPosts = new List<BlogPost>();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "select * from BlogPosts";
+                cmd.Connection = cn;
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        blogPosts.Add(PopulateBlogPostFromReader(dr));
+                    }
+                }
+            }
+
+            return blogPosts;
         }
 
         public BlogPost GetBlogPostById(int blogPostId)
@@ -117,6 +135,27 @@ namespace Blog.Data
             user.UserName = dr["UserName"].ToString();
 
             return user;
+        }
+
+
+        private BlogPost PopulateBlogPostFromReader(SqlDataReader dr)
+        {
+            BlogPost blogPost = new BlogPost();
+
+            blogPost.BlogPostId = (int) dr["BlogPostID"];
+            blogPost.BlogPostTitle = dr["BlogPostTitle"].ToString();
+            blogPost.BlogPostText = dr["BlogPostText"].ToString();
+            blogPost.TimeCreated = DateTime.Parse(dr["TimeCreated"].ToString());
+            if (dr["ExpirationDate"] != DBNull.Value)
+            {
+                blogPost.ExpirationDate = DateTime.Parse(dr["ExpirationDate"].ToString());
+            }
+            blogPost.Status = (Status) dr["Status"];
+            blogPost.Category.CategoryId = (int) dr["CategoryID"];
+            blogPost.Category.CategoryTitle = dr["CategoryTitle"].ToString();
+            blogPost.User = PopulateUserDataFromReader(dr);
+
+            return blogPost;
         }
     }
 }
