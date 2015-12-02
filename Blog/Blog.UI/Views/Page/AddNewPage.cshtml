@@ -1,0 +1,14 @@
+﻿@model Blog.UI.Models.AddStaticPageVM
+
+@{
+    ViewBag.Title = "AddNewPage";
+}
+
+<h2>Add a New Page</h2>
+
+<textarea id="mytextarea">Hello, World!</textarea>
+
+@section scripts{
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/app/tinymce.js"></script>
+}
