@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminDashboardLayout.cshtml";
+}
+
+<div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
+    <br/>
+    <h2>Admin Dashboard</h2>
+    <hr/>
+    <!--DASHBOARD-->
+
+    <div class="col-md-3">
+        <div class="panel">
+            <div class="panel-body">
+                <a href="#"><h4 class="glyphicon glyphicon-plus-sign"> New User</h4></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="panel">
+            <div class="panel-body">
+                <a href="#"><span class="glyphicon glyphicon-plus-sign"> @Html.ActionLink(" Add New Page", "AddNewPage", "Page")</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="panel">
+            <div class="panel-body">
+                <a href="#"><span class="glyphicon glyphicon-plus-sign"> @Html.ActionLink(" Add New Post", "AddNewBlogPost", "BlogPost")</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="panel">
+            <div class="panel-body">
+                <a href="#"><h4 class="glyphicon glyphicon-plus-sign"> New Profile</h4></a>
+            </div>
+        </div>
+    </div>
+</div>

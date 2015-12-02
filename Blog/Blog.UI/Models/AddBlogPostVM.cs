@@ -13,6 +13,7 @@ namespace Blog.UI.Models
         public AddBlogPostVM()
         {
             BlogPost = new BlogPost();
+
         }
     }
 }

@@ -206,6 +206,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\selectize.bootstrap3.css" />
+    <Content Include="Content\selectize.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1018,6 +1020,8 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\selectize\selectize.js" />
+    <Content Include="Scripts\selectize\selectize.min.js" />
     <Content Include="Scripts\tinymce\license.txt" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />
@@ -1222,12 +1226,18 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Admin\Admin.cshtml" />
+    <Content Include="Views\Admin\AngAdmin.cshtml" />
     <Content Include="Views\Home\PR.cshtml" />
     <Content Include="Views\BlogPost\Index.cshtml" />
     <Content Include="Views\BlogPost\AddNewBlogPost.cshtml" />
     <Content Include="Views\Page\Index.cshtml" />
     <Content Include="Views\Page\AddNewPage.cshtml" />
+    <Content Include="Views\Shared\_AdminDashboardLayout.cshtml" />
+    <Content Include="Views\Shared\_UserDashboardLayout.cshtml" />
+    <Content Include="Views\Admin\Posts.cshtml" />
+    <Content Include="Views\Admin\Pages.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
