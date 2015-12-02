@@ -136,12 +136,12 @@ namespace Blog.BLL
         public Response GetAllRoles()
         {
             _response = new Response();
-            var roles = _repo.GetAllRoles();
+            var idRoles = _repo.GetAllRoles();
 
-            if (roles != null)
+            if (idRoles != null)
             {
                 _response.Success = true;
-                _response.Roles = roles;
+                _response.IdRoles = idRoles;
             }
 
             return _response;

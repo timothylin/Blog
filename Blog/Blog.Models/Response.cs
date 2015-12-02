@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Blog.Models
 {
@@ -11,7 +12,8 @@ namespace Blog.Models
         public bool Success { get; set; }
         public string Message { get; set; }
         public List<ApplicationUser> Users { get; set; }
-        public List<Role> Roles { get; set; }
+        public List<IdentityUserRole> IdUserRoles { get; set; }
+        public List<IdentityRole> IdRoles { get; set; }
         public Hashtag Hashtag { get; set; }
         public List<Hashtag> Hashtags { get; set; }
         public BlogPost BlogPost { get; set; }
@@ -24,7 +26,8 @@ namespace Blog.Models
         public Response()
         {
             Users = new List<ApplicationUser>();
-            Roles = new List<Role>();
+            IdUserRoles = new List<IdentityUserRole>();
+            IdRoles = new List<IdentityRole>();
             Hashtag = new Hashtag();
             Hashtags = new List<Hashtag>();
             BlogPost = new BlogPost();

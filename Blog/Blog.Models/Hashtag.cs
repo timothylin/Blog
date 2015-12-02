@@ -9,6 +9,6 @@ namespace Blog.Models
     public class Hashtag
     {
         public int HashtagId { get; set; }
-        public string HashtagText { get; set; }
+        public string HashtagTitle { get; set; }
     }
 }

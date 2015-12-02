@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using Blog.Data.Config;
 using Blog.Models;
 using Dapper;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Blog.Data
 {
@@ -20,7 +22,8 @@ namespace Blog.Data
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "select * from BlogPosts";
+                cmd.CommandText = "GetAllBlogPosts";
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Connection = cn;
                 cn.Open();
 
@@ -29,6 +32,23 @@ namespace Blog.Data
                     while (dr.Read())
                     {
                         blogPosts.Add(PopulateBlogPostFromReader(dr));
+                    }
+                }
+
+                foreach (var blogPost in blogPosts)
+                {
+                    cmd = new SqlCommand();
+                    cmd.CommandText = "GetHashtagByBlogPostID";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@BlogPostID", blogPost.BlogPostId);
+                    cmd.Connection = cn;
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            blogPost.Hashtags.Add(PopulateHashtagsFromReader(dr));
+                        }
                     }
                 }
             }
@@ -85,16 +105,16 @@ namespace Blog.Data
             throw new NotImplementedException();
         }
 
-        public List<Role> GetAllRoles()
+        public List<IdentityRole> GetAllRoles()
         {
-            List<Role> roles = new List<Role>();
+            List<IdentityRole> idRoles = new List<IdentityRole>();
 
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
-                roles = cn.Query<Role>("select * from AspNetRoles").ToList();
+                idRoles = cn.Query<IdentityRole>("select * from AspNetRoles").ToList();
             }
 
-            return roles;
+            return idRoles;
 
         }
 
@@ -114,7 +134,7 @@ namespace Blog.Data
                 {
                     while (dr.Read())
                     {
-                        users.Add(PopulateUserDataFromReader(dr));
+                        users.Add(PopulateUserFromDataReader(dr));
                     }
                 }
             }
@@ -122,19 +142,28 @@ namespace Blog.Data
             return users;
         }
 
-        private ApplicationUser PopulateUserDataFromReader(SqlDataReader dr)
+        private ApplicationUser PopulateUserFromDataReader(SqlDataReader dr)
         {
             ApplicationUser user = new ApplicationUser();
 
             user.Id = dr["UserID"].ToString();
-            //user.Role.Id = dr["RoleID"].ToString();
-            //user.Role.Name = dr["RoleName"].ToString();
             user.Email = dr["Email"].ToString();
             user.FirstName = dr["FirstName"].ToString();
             user.LastName = dr["LastName"].ToString();
             user.UserName = dr["UserName"].ToString();
 
+            user.Roles.Add(PopulateRoleFromDataReader(dr));
+
             return user;
+        }
+
+        private IdentityUserRole PopulateRoleFromDataReader(SqlDataReader dr)
+        {
+            IdentityUserRole role = new IdentityUserRole();
+
+            role.RoleId = dr["RoleID"].ToString();
+
+            return role;
         }
 
 
@@ -142,7 +171,7 @@ namespace Blog.Data
         {
             BlogPost blogPost = new BlogPost();
 
-            blogPost.BlogPostId = (int) dr["BlogPostID"];
+            blogPost.BlogPostId = (int)dr["BlogPostID"];
             blogPost.BlogPostTitle = dr["BlogPostTitle"].ToString();
             blogPost.BlogPostText = dr["BlogPostText"].ToString();
             blogPost.TimeCreated = DateTime.Parse(dr["TimeCreated"].ToString());
@@ -150,12 +179,22 @@ namespace Blog.Data
             {
                 blogPost.ExpirationDate = DateTime.Parse(dr["ExpirationDate"].ToString());
             }
-            blogPost.Status = (Status) dr["Status"];
-            blogPost.Category.CategoryId = (int) dr["CategoryID"];
+            blogPost.Status = (Status)dr["Status"];
+            blogPost.Category.CategoryId = (int)dr["CategoryID"];
             blogPost.Category.CategoryTitle = dr["CategoryTitle"].ToString();
-            blogPost.User = PopulateUserDataFromReader(dr);
+            blogPost.User = PopulateUserFromDataReader(dr);
 
             return blogPost;
+        }
+
+        private Hashtag PopulateHashtagsFromReader(SqlDataReader dr)
+        {
+            Hashtag hashtag = new Hashtag();
+
+            hashtag.HashtagId = (int)dr["HashtagID"];
+            hashtag.HashtagTitle = dr["HashtagTitle"].ToString();
+
+            return hashtag;
         }
     }
 }

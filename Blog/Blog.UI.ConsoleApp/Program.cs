@@ -12,18 +12,34 @@ namespace Blog.UI.ConsoleApp
     {
         static void Main(string[] args)
         {
-            //var repo = new BlogRepository();
+            var repo = new BlogRepository();
 
-            //var users = repo.GetAllUsers();
+            //var hashtags = repo.GetAllBlogPosts();
 
-            //foreach (var user in users)
+            //foreach (var hashtag in hashtags)
             //{
-            //    Console.WriteLine(user.Id);
-            //    Console.WriteLine(user.Role.Name);
-            //    Console.WriteLine(user.Email);
+            //    Console.WriteLine(hashtag.HashtagId);
+            //    Console.WriteLine(hashtag.HashtagTitle);
             //}
 
-            //Console.ReadLine();
+            var blogPosts = repo.GetAllBlogPosts();
+
+            foreach (var blogPost in blogPosts)
+            {
+                Console.WriteLine(blogPost.BlogPostId);
+
+                foreach (var hashtag in blogPost.Hashtags)
+                {
+                    Console.WriteLine(hashtag.HashtagId);
+                    Console.WriteLine(hashtag.HashtagTitle);
+                }
+
+                Console.WriteLine(blogPost.BlogPostTitle);
+                Console.WriteLine(blogPost.BlogPostText);
+
+            }
+
+            Console.ReadLine();
         }
     }
 }
