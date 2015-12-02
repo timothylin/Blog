@@ -1,4 +1,11 @@
-﻿body {
+﻿/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -9,16 +16,61 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.navbar-brand img{
+    max-height: 90px;
+}
+
+.jsDate-logo {
+    max-height: 90px;
+}
+
+.nav-sidebar {
+    margin-right: -21px;
+    margin-bottom: 20px;
+    margin-left: -20px;
+}
+@media (min-width: 768px) {
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        display: block;
+        padding: 20px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: #32323e;
+        border-right: 1px solid #19191f;
+        height: 100%;
+    }
+}
+
+.sidebar a {
+    color: white;
+}
+
+.sidebar a:hover {
+    background-color: #19191f;
+}
+
+@media (min-width: 768px) {
+    .main {
+        background-color: #f8f8f8;
+        height: 100%;
+    }
+}
+
+#admin-body {
+    padding-top: 0;
+}
+
+.nav-sidebar > li > a:hover, a:active {
+    background-color: #19191f;
 }
