@@ -27,12 +27,12 @@ namespace Blog.UI.Controllers
             return View();
         }
 
-        public ActionResult Admin()
+        public ActionResult PR()
         {
             return View();
         }
 
-        public ActionResult PR()
+        public ActionResult BlogPost()
         {
             return View();
         }

@@ -9,7 +9,7 @@ namespace Blog.UI.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-        public ActionResult Index()
+        public ActionResult Admin()
         {
             return View();
         }
