@@ -98,9 +98,9 @@ namespace Blog.Data
 
         }
 
-        public List<User> GetAllUsers()
+        public List<ApplicationUser> GetAllUsers()
         {
-            List<User> users = new List<User>();
+            List<ApplicationUser> users = new List<ApplicationUser>();
 
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
@@ -122,13 +122,13 @@ namespace Blog.Data
             return users;
         }
 
-        private User PopulateUserDataFromReader(SqlDataReader dr)
+        private ApplicationUser PopulateUserDataFromReader(SqlDataReader dr)
         {
-            User user = new User();
+            ApplicationUser user = new ApplicationUser();
 
             user.Id = dr["UserID"].ToString();
-            user.Role.Id = dr["RoleID"].ToString();
-            user.Role.Name = dr["RoleName"].ToString();
+            //user.Role.Id = dr["RoleID"].ToString();
+            //user.Role.Name = dr["RoleName"].ToString();
             user.Email = dr["Email"].ToString();
             user.FirstName = dr["FirstName"].ToString();
             user.LastName = dr["LastName"].ToString();
