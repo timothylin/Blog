@@ -1,0 +1,265 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/flatly/bootstrap.min.css" rel="stylesheet" typ="text/css" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                            <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+<body id="admin-body" ng-app="PR">
+    <section ng-controller="PRPanelController as panel">
+        <div class="row">
+            <div class="col-sm-3 col-md-2  sidebar">
+                <ul class="nav nav-sidebar">
+                    <li ng-class="{ active: panel.isSelected(1)}">
+                        <a href ng-click="panel.selectTab(1)">Dashboard</a>
+                    </li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li ng-class="{ active: panel.isSelected(3)}">
+                        <a href ng-click="panel.selectTab(3)"> New Post</a>
+                    </li>
+                    <li ng-class="{ active: panel.isSelected(4)}">
+                        <a href ng-click="panel.selectTab(4)"> New Page</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
+                <br />
+                <h2>Admin Dashboard</h2>
+                <hr />
+                <!--DASHBOARD-->
+                <div ng-show="panel.isSelected(1)">
+                    <div class="col-md-3">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <a href="#"><h4 class="glyphicon glyphicon-plus-sign"> New User</h4></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <a href="#"><h4 class="glyphicon glyphicon-plus-sign"> New Page</h4></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <a href="#"><h4 class="glyphicon glyphicon-plus-sign"> New Post</h4></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <a href="#"><h4 class="glyphicon glyphicon-plus-sign"> New Profile</h4></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="panel.isSelected(3)">
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Blog Posts</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Type</th>
+                                            <th>Author</th>
+                                            <th>Date</th>
+                                            <th>Approve</th>
+                                            <th>Deny</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Dean's First Date Tips</td>
+                                            <td>Blog</td>
+                                            <td>Dean Choi</td>
+                                            <td>12/12/2015</td>
+                                            <td><button>Approve</button></td>
+                                            <td><button>Deny</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tim's Dream Girl</td>
+                                            <td>Blog</td>
+                                            <td>Tim Lim</td>
+                                            <td>9/12/2015</td>
+                                            <td><button>Approve</button></td>
+                                            <td><button>Deny</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Just Lunch</td>
+                                            <td>Blog</td>
+                                            <td>Patrick Tighe</td>
+                                            <td>8/12/2015</td>
+                                            <td><button>Approve</button></td>
+                                            <td><button>Deny</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>What Bombs Does She Like!: Wonder Bar Edition</td>
+                                            <td>Blog</td>
+                                            <td>Dean Choi</td>
+                                            <td>12/12/2015</td>
+                                            <td><button>Approve</button></td>
+                                            <td><button>Deny</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tim's Dream Girl</td>
+                                            <td>Blog</td>
+                                            <td>Tim Lim</td>
+                                            <td>9/12/2015</td>
+                                            <td><button>Approve</button></td>
+                                            <td><button>Deny</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>What do Hot Date's Eat: Taco Bell Edition</td>
+                                            <td>Blog</td>
+                                            <td>Patrick Tighe</td>
+                                            <td>8/12/2015</td>
+                                            <td><button>Approve</button></td>
+                                            <td><button>Deny</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="panel.isSelected(4)">
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Pages</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Type</th>
+                                            <th>Author</th>
+                                            <th>Date</th>
+                                            <th>Approve</th>
+                                            <th>Deny</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Profiles</td>
+                                            <td>Page</td>
+                                            <td>Dean Choi</td>
+                                            <td>12/12/2015</td>
+                                            <td><button>Approve</button></td>
+                                            <td><button>Deny</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>About</td>
+                                            <td>Blog</td>
+                                            <td>Tim Lim</td>
+                                            <td>9/12/2015</td>
+                                            <td><button>Approve</button></td>
+                                            <td><button>Deny</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Events</td>
+                                            <td>Blog</td>
+                                            <td>Patrick Tighe</td>
+                                            <td>8/12/2015</td>
+                                            <td><button>Approve</button></td>
+                                            <td><button>Deny</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="panel.isSelected(5)">
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Users</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Role</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>deinzel</td>
+                                            <td>deanthedeanofmean@xanga.com</td>
+                                            <td>Dean</td>
+                                            <td>Choi</td>
+                                            <td>Admin</td>
+                                        </tr>
+                                        <tr>
+                                            <td>BIGTIMLIM</td>
+                                            <td>thechamp@hotmail.com</td>
+                                            <td>Timothy</td>
+                                            <td>Lim</td>
+                                            <td>Admin</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@RenderSection("scripts", required: false)*@
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/app/admin.js"></script>
+</body>
+</html>
