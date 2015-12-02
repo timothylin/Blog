@@ -3,37 +3,59 @@
 @{
     ViewBag.Title = "Add New Blog Post";
 }
-
+<link href="~/Content/selectize.css" rel="stylesheet" type="text/css" />
 <h2>Add Blog Post</h2>
 
 <div class="container">
-    <div class="panel">
-        @using (Html.BeginForm("AddNewBlogPost", "BlogPost", null, FormMethod.Post, new { @class = "form-group" }))
-        {
-            <div class="row">
-                @Html.EditorFor(m => m.BlogPost.BlogPostTitle, new {@class = "form-control"})
-            </div>
-            <br/>
-            <div class="row">
-                @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new {@id = "mytextarea"})
-            </div>
-            <br/>
-            <div class="row">
-                @Html.DropDownListFor(m => m.BlogPost.Category.CategoryTitle, Model.CategoriesList, new { @class = "form-control" })
-        </div>
-        @Html.HiddenFor(m => m.BlogPost.User.Id)    
-        
-        <div class="row">
-                <button type="submit" class="btn btn-success">Submit</button>
-                <button type="reset" class="btn btn-danger">Reset</button>
-            </div>
-        }
-    </div>
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                @using (Html.BeginForm("AddNewBlogPost", "BlogPost", null, FormMethod.Post, new { @class = "form-group" }))
+                {
+                    <div class="row">
+                        <label>Blog Title</label>
+                    </div>
+                    <div class="Row">
+                        @Html.EditorFor(m => m.BlogPost.BlogPostTitle, new { @class = "form-control" })
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-11">
+                            @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new { @id = "mytextarea" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Category</label>
+                            @Html.DropDownListFor(m => m.BlogPost.Category.CategoryTitle, Model.CategoriesList, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6">
 
+                            <div class="control-group">
+                                <label for="input-tags">Hashtags:</label>
+                                <input type="text" id="input-tags" class="demo-default" value="hashtags,neat">
+                            </div>
+                                
+
+                        </div>
+                    </div>
+                    @Html.HiddenFor(m => m.BlogPost.User.Id)
+
+                    <div class="row">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-danger">Reset</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 
 </div>
 
 @section scripts{
     <script src="~/Scripts/tinymce/tinymce.min.js"></script>
     <script src="~/Scripts/app/tinymce.js"></script>
+    <script src="~/Scripts/selectize/selectize.min.js"></script>
+    <script src="~/Scripts/app/selectizefortags.js"></script>
 }

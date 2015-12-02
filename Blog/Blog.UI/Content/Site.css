@@ -83,3 +83,14 @@ html, body {
     background-color: #313145;
 }
 
+
+#home-banner {
+    background-image: url("https://www.jdate.com/RegContent/CSS/images/splash-bg.jpg");
+    background-size: cover;
+    width: 100%;
+}       
+
+.jumbotron {
+    background-color: transparent;
+}
+    
