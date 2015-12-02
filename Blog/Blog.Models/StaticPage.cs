@@ -14,13 +14,13 @@ namespace Blog.Models
         [AllowHtml]
         public string StaticPageText { get; set; }
         public Status Status { get; set; }
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
         public DateTime TimeCreated { get; set; }
         public Category Category { get; set; }
 
         public StaticPage()
         {
-            User = new User();
+            User = new ApplicationUser();
             Category = new Category();
         }
     }

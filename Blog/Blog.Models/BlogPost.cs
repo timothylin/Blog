@@ -17,13 +17,13 @@ namespace Blog.Models
         public DateTime TimeCreated { get; set; }
         public DateTime? ExpirationDate { get; set; }
         public List<Hashtag> Hashtags { get; set; } 
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
         public Category Category { get; set; }
 
         public BlogPost()
         {
             Hashtags = new List<Hashtag>();
-            User = new User();
+            User = new ApplicationUser();
             Category = new Category();
         }
 

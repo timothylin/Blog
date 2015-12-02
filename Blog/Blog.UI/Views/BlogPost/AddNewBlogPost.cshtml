@@ -1,12 +1,37 @@
 ﻿@model Blog.UI.Models.AddBlogPostVM
 
 @{
-    ViewBag.Title = "AddNewBlogPost";
+    ViewBag.Title = "Add New Blog Post";
 }
 
 <h2>Add Blog Post</h2>
 
-<textarea id="mytextarea">Hello, World!</textarea>
+<div class="container">
+    <div class="panel">
+        @using (Html.BeginForm("AddNewBlogPost", "BlogPost", null, FormMethod.Post, new { @class = "form-group" }))
+        {
+            <div class="row">
+                @Html.EditorFor(m => m.BlogPost.BlogPostTitle, new {@class = "form-control"})
+            </div>
+            <br/>
+            <div class="row">
+                @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new {@id = "mytextarea"})
+            </div>
+            <br/>
+            <div class="row">
+                @Html.DropDownListFor(m => m.BlogPost.Category.CategoryTitle, Model.CategoriesList, new { @class = "form-control" })
+        </div>
+        @Html.HiddenFor(m => m.BlogPost.User.Id)    
+        
+        <div class="row">
+                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+            </div>
+        }
+    </div>
+
+
+</div>
 
 @section scripts{
     <script src="~/Scripts/tinymce/tinymce.min.js"></script>
