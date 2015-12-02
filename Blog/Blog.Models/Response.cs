@@ -10,7 +10,7 @@ namespace Blog.Models
     {
         public bool Success { get; set; }
         public string Message { get; set; }
-        public List<User> Users { get; set; }
+        public List<ApplicationUser> Users { get; set; }
         public List<Role> Roles { get; set; }
         public Hashtag Hashtag { get; set; }
         public List<Hashtag> Hashtags { get; set; }
@@ -23,7 +23,7 @@ namespace Blog.Models
 
         public Response()
         {
-            Users = new List<User>();
+            Users = new List<ApplicationUser>();
             Roles = new List<Role>();
             Hashtag = new Hashtag();
             Hashtags = new List<Hashtag>();
