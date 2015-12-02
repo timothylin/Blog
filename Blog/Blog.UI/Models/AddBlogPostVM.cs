@@ -15,8 +15,7 @@ namespace Blog.UI.Models
         public AddBlogPostVM()
         {
             BlogPost = new BlogPost();
-<<<<<<< HEAD
-=======
+
             CategoriesList = new List<SelectListItem>()
             {
                 new SelectListItem()
@@ -60,8 +59,6 @@ namespace Blog.UI.Models
                     Text = "Opinions"
                 }
             };
->>>>>>> f4ce1f184c4217fe6e9dfb3a708f4709504abb08
-
         }
     }
 }
