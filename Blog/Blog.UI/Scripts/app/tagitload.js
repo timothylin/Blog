@@ -12,7 +12,7 @@
         readOnly: false,
         tagLimit: 10,
         singleField: false,
-        placeholderText: "Enter hashtags (no #, ',', or ' ' allowed)...",
+        placeholderText: "Enter hashtags...",
 
         // Events
         beforeTagAdded: function(event, ui) {
@@ -24,6 +24,7 @@
             }
             return true;
         }
+    
     });
-
+    
 });
