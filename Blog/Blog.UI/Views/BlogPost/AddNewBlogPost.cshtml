@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label>Category</label>
-                            @Html.DropDownListFor(m => m.BlogPost.Category.CategoryTitle, Model.CategoriesList, new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.BlogPost.Category.CategoryId, Model.CategoriesList, "-- Please Select Category --", new { @class = "form-control" })
                         </div>
                         <div class="col-md-6">
 

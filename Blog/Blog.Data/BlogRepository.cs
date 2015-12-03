@@ -58,15 +58,16 @@ namespace Blog.Data
 
         public BlogPost GetBlogPostById(int blogPostId)
         {
-            BlogPost blogpost = new BlogPost();
+
+            BlogPost blogPost = new BlogPost();
 
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
-                var cmd = new SqlCommand();
+                SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "GetBlogPostByID";
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Connection = cn;
                 cmd.Parameters.AddWithValue("@BlogPostID", blogPostId);
+                cmd.Connection = cn;
 
                 cn.Open();
 
@@ -74,11 +75,25 @@ namespace Blog.Data
                 {
                     while (dr.Read())
                     {
-                        blogpost = PopulateBlogPostFromReader(dr);
+                        blogPost = PopulateBlogPostFromReader(dr);
+                    }
+                }
+
+                cmd = new SqlCommand();
+                cmd.CommandText = "GetHashtagByBlogPostID";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@BlogPostID", blogPostId);
+                cmd.Connection = cn;
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        blogPost.Hashtags.Add(PopulateHashtagsFromReader(dr));
                     }
                 }
             }
-            return blogpost;
+            return blogPost;
 
         }
 
@@ -99,7 +114,7 @@ namespace Blog.Data
 
                 cn.Execute("AddNewBlogPost", p, commandType: CommandType.StoredProcedure);
 
-                var blogPostId = p.Get<int>("BlogPostID");
+                blogPost.BlogPostId = p.Get<int>("BlogPostID");
 
                 foreach (var hashtag in blogPost.Hashtags)
                 {
@@ -113,24 +128,26 @@ namespace Blog.Data
 
                         cn.Execute("AddNewHashtag", p, commandType: CommandType.StoredProcedure);
 
-                        var hashtagId = p.Get<int>("HashtagID");
+                        hashtag.HashtagId = p.Get<int>("HashtagID");
 
                         p = new DynamicParameters();
-                        p.Add("@BlogPostID", blogPostId);
-                        p.Add("@HashtagID", hashtagId);
+                        p.Add("@BlogPostID", blogPost.BlogPostId);
+                        p.Add("@HashtagID", hashtag.HashtagId);
 
                         cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
                     }
                     else
                     {
                         p = new DynamicParameters();
-                        p.Add("@BlogPostID", blogPostId);
+                        p.Add("@BlogPostID", blogPost.BlogPostId);
                         p.Add("@HashtagID", checkHashtag.HashtagId);
 
                         cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
+
+                        hashtag.HashtagId = checkHashtag.HashtagId;
                     }
                 }
-                return GetBlogPostById(blogPostId);
+                return blogPost;
             }
         }
 
@@ -187,7 +204,7 @@ namespace Blog.Data
 
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
-                categories = cn.Query<Category>("select * from Categories").ToList();
+                categories = cn.Query<Category>("select * from Categories").OrderBy(c => c.CategoryTitle).ToList();
             }
 
             return categories;
