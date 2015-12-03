@@ -68,6 +68,7 @@ namespace Blog.Data
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@BlogPostID", blogPostId);
                 cmd.Connection = cn;
+
                 cn.Open();
 
                 using (SqlDataReader dr = cmd.ExecuteReader())
@@ -93,6 +94,7 @@ namespace Blog.Data
                 }
             }
             return blogPost;
+
         }
 
         public BlogPost AddNewBlogPost(BlogPost blogPost)
@@ -156,7 +158,27 @@ namespace Blog.Data
 
         public StaticPage GetStaticPageById(int staticPageId)
         {
-            throw new NotImplementedException();
+            StaticPage page = new StaticPage();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var cmd = new SqlCommand();
+                cmd.CommandText = "GetPageByID";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = cn;
+                cmd.Parameters.AddWithValue("@staticPageID", staticPageId);
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        page = PopulateStaticPageFromReader(dr);
+                    }
+                }
+            }
+            return page;
         }
 
         public List<Hashtag> GetAllHashtags()
@@ -273,6 +295,23 @@ namespace Blog.Data
             blogPost.User = PopulateUserFromDataReader(dr);
 
             return blogPost;
+        }
+
+        private StaticPage PopulateStaticPageFromReader(SqlDataReader dr)
+        {
+            StaticPage staticPage = new StaticPage();
+
+            staticPage.StaticPageId = (int) dr["StaticPageID"];
+            staticPage.StaticPageTitle = dr["StaticPageTitle"].ToString();
+            staticPage.StaticPageText = dr["StaticPageText"].ToString();
+            staticPage.TimeCreated = DateTime.Parse(dr["TimeCreated"].ToString());
+            staticPage.Status = (Status) dr["Status"];
+            staticPage.Category.CategoryId = (int) dr["CategoryID"];
+            staticPage.Category.CategoryTitle = dr["CategoryTitle"].ToString();
+            staticPage.User = PopulateUserFromDataReader(dr);
+
+            return staticPage;
+
         }
 
         private Hashtag PopulateHashtagsFromReader(SqlDataReader dr)
