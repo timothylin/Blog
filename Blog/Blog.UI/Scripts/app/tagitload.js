@@ -12,29 +12,17 @@
         readOnly: false,
         tagLimit: 10,
         singleField: false,
-        singleFieldDelimiter: ',',
-        singleFieldNode: null,
-        tabIndex: null,
         placeholderText: "Enter hashtags (no #, ',', or ' ' allowed)...",
 
         // Events
         beforeTagAdded: function(event, ui) {
-            console.log(ui.tag);
-        },
-        afterTagAdded: function(event, ui) {
-            console.log(ui.tag);
-        },
-        beforeTagRemoved: function(event, ui) {
-            console.log(ui.tag);
-        },
-        onTagExists: function(event, ui) {
-            console.log(ui.tag);
-        },
-        onTagClicked: function(event, ui) {
-            console.log(ui.tag);
-        },
-        onTagLimitExceeded: function(event, ui) {
-            console.log(ui.tag);
+            if (ui.tagLabel.indexOf("#") !== -1) {
+                return false;
+            }
+            if (ui.tagLabel.indexOf(" ") !== -1) {
+                return false;
+            }
+            return true;
         }
     });
 
