@@ -65,10 +65,6 @@ namespace Blog.UI.Controllers
         //[HttpPost]
         //public ActionResult SubmitBlogPost(BlogPost newPost)
         //{
-            
-            
-        //    //repo method to submit to library
-
         //    return RedirectToAction("Index", "Home");
         //}
     }
