@@ -58,7 +58,41 @@ namespace Blog.Data
 
         public BlogPost GetBlogPostById(int blogPostId)
         {
-            throw new NotImplementedException();
+
+            BlogPost blogPost = new BlogPost();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "GetBlogPostByID";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@BlogPostID", blogPostId);
+                cmd.Connection = cn;
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        blogPost = PopulateBlogPostFromReader(dr);
+                    }
+                }
+
+                cmd = new SqlCommand();
+                cmd.CommandText = "GetHashtagByBlogPostID";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@BlogPostID", blogPostId);
+                cmd.Connection = cn;
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        blogPost.Hashtags.Add(PopulateHashtagsFromReader(dr));
+                    }
+                }
+            }
+            return blogPost;
         }
 
         public BlogPost AddNewBlogPost(BlogPost blogPost)
