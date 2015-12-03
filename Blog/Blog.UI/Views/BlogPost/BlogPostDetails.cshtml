@@ -7,15 +7,15 @@
 <h2>Blog Post Details</h2>
 
 <div class="container">
-<div class="row">
-    <table class="table table-bordered">
-        <thead>
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
             <tr>
                 <th>Property</th>
                 <th>Input</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             <tr>
                 <td>Title</td>
                 <td>@Model.BlogPostTitle</td>
@@ -38,30 +38,30 @@
             </tr>
             <tr>
                 <td>Hashtags</td>
-                    @if (Model.Hashtags.Count > 0)
+                @if (Model.Hashtags.Count > 0)
+                {
+                    string hashtags = "";
+                    for (int i = 0; i < Model.Hashtags.Count - 1; i++)
                     {
-                        string hashtags = "";
-                        for (int i = 0; i < Model.Hashtags.Count - 1; i++)
-                        {
-                            hashtags += "#" + Model.Hashtags[i].HashtagTitle + ", ";
-                        }
-                        hashtags += "#" + Model.Hashtags[Model.Hashtags.Count - 1].HashtagTitle;
-                        <td>@hashtags</td>
+                        hashtags += "#" + Model.Hashtags[i].HashtagTitle + ", ";
                     }
-                    else
-                    {
-                        <td>No hashtags added...</td>
-                    }
+                    hashtags += "#" + Model.Hashtags[Model.Hashtags.Count - 1].HashtagTitle;
+                    <td>@hashtags</td>
+                }
+                else
+                {
+                    <td>No hashtags added...</td>
+                }
             </tr>
             <tr>
-                    <td>Status</td>
-                    <td>@Model.Status</td>
-                </tr>
+                <td>Status</td>
+                <td>@Model.Status</td>
+            </tr>
             <tr>
                 <td>Html Body</td>
                 <td>@Html.Raw(Model.BlogPostText)</td>
             </tr>
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
     </div>
+</div>
