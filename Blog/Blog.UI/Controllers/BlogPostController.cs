@@ -12,6 +12,8 @@ namespace Blog.UI.Controllers
 {
     public class BlogPostController : Controller
     {
+        private BlogOperations _ops;
+        
         // GET: BlogPost
         public ActionResult Index()
         {
@@ -21,8 +23,13 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin, PR")]
         public ActionResult AddNewBlogPost()
         {
+            _ops = new BlogOperations();
+
             var newBlogPostVM = new AddBlogPostVM();
             newBlogPostVM.BlogPost.User.Id = User.Identity.GetUserId();
+            newBlogPostVM.BlogPost.User.UserName = User.Identity.GetUserName();
+            
+            newBlogPostVM.InitializeCategoriesList(_ops.GetAllCategories().Categories);
 
             return View(newBlogPostVM);
 
@@ -32,30 +39,33 @@ namespace Blog.UI.Controllers
         [HttpPost]
         public ActionResult AddNewBlogPost(AddBlogPostVM newPost)
         {
-            //newPost.BlogPost.TimeCreated = DateTime.Now;
+            _ops = new BlogOperations();
+            newPost.BlogPost.Status = Status.Approved;
+            newPost.BlogPost.TimeCreated = DateTime.Now;
 
-            //repo submit post
-
-            return View("ConfirmBlogPost", newPost.BlogPost);
-        }
-
-        [Authorize(Roles = "Admin, PR")]
-        [HttpPost]
-        public ActionResult SubmitBlogPost(BlogPost newPost)
-        {
-            //repo method to submit to library
-            newPost.TimeCreated = DateTime.Now;
-
-            var ops = new BlogOperations();
-
-            var response = ops.AddNewBlogPost(newPost);
-
-            if (response.Success)
+            foreach (var ht in newPost.hashtags)
             {
-                return View("Index");
+                var newTag = new Hashtag();
+                newTag.HashtagTitle = ht;
+                newPost.BlogPost.Hashtags.Add(newTag);
             }
 
-            return RedirectToAction("Index", "Home");
+            //newPost.BlogPost.Category.CategoryTitle = _ops.GetCategoryById(newPost.BlogPost.Category.CategoryId).Category.CategoryTitle;
+
+            //submit to repo
+
+            return View("BlogPostDetails", newPost.BlogPost);
+
+            //Ajax API call for confirmation modal
+
+
         }
+
+        //[Authorize(Roles = "Admin, PR")]
+        //[HttpPost]
+        //public ActionResult SubmitBlogPost(BlogPost newPost)
+        //{
+        //    return RedirectToAction("Index", "Home");
+        //}
     }
 }

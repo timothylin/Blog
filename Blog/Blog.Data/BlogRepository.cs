@@ -180,7 +180,7 @@ namespace Blog.Data
 
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
-                categories = cn.Query<Category>("select * from Categories").ToList();
+                categories = cn.Query<Category>("select * from Categories").OrderBy(c => c.CategoryTitle).ToList();
             }
 
             return categories;
