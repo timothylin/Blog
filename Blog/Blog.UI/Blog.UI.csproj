@@ -1238,7 +1238,7 @@
     <Content Include="Views\Admin\Pages.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\BlogPost\ViewNewBlogPost.cshtml" />
+    <Content Include="Views\BlogPost\ConfirmBlogPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Blog.Models;
 using Blog.UI.Models;
 using Microsoft.AspNet.Identity;
 
@@ -35,7 +36,16 @@ namespace Blog.UI.Controllers
             //repo submit post
 
 
-            return View("ViewNewBlogPost", newPost.BlogPost);
+            return View("ConfirmBlogPost", newPost.BlogPost);
+        }
+
+        [Authorize(Roles = "Admin, PR")]
+        [HttpPost]
+        public ActionResult SubmitBlogPost(BlogPost newPost)
+        {
+            //repo method to submit to library
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
