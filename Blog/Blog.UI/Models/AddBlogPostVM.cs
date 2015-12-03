@@ -19,49 +19,19 @@ namespace Blog.UI.Models
 
             hashtags = new List<string>();
 
-            CategoriesList = new List<SelectListItem>()
+            CategoriesList = new List<SelectListItem>();
+        }
+
+        public void InitializeCategoriesList(List<Category> catsList)
+        {
+            foreach (var category in catsList)
             {
-                new SelectListItem()
-                {
-                    Value = "Events",
-                    Text = "Events"
-                },
-                new SelectListItem()
-                {
-                    Value = "Requests",
-                    Text = "Requests"
-                },
-                new SelectListItem()
-                {
-                    Value = "News",
-                    Text = "News"
-                },
-                new SelectListItem()
-                {
-                    Value = "Reviews",
-                    Text = "Reviews"
-                },
-                new SelectListItem()
-                {
-                    Value = "Recaps",
-                    Text = "Recaps"
-                },
-                new SelectListItem()
-                {
-                    Value = "Advice",
-                    Text = "Advice"
-                },
-                new SelectListItem()
-                {
-                    Value = "Articles",
-                    Text = "Articles"
-                },
-                new SelectListItem()
-                {
-                    Value = "Opinions",
-                    Text = "Opinions"
-                }
-            };
+                var newItem = new SelectListItem();
+                newItem.Text = category.CategoryTitle;
+                newItem.Value = category.CategoryId.ToString();
+
+                CategoriesList.Add(newItem);
+            }
         }
     }
 }
