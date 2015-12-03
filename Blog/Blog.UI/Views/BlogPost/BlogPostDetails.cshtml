@@ -38,7 +38,20 @@
             </tr>
             <tr>
                 <td>Hashtags</td>
-                <td>#Delly, #Delly, #Delly</td>
+                    @if (Model.Hashtags.Count > 0)
+                    {
+                        string hashtags = "";
+                        for (int i = 0; i < Model.Hashtags.Count - 1; i++)
+                        {
+                            hashtags += "#" + Model.Hashtags[i].HashtagTitle + ", ";
+                        }
+                        hashtags += "#" + Model.Hashtags[Model.Hashtags.Count - 1].HashtagTitle;
+                        <td>@hashtags</td>
+                    }
+                    else
+                    {
+                        <td>No hashtags added...</td>
+                    }
             </tr>
             <tr>
                     <td>Status</td>

@@ -27,7 +27,6 @@ namespace Blog.UI.Controllers
 
             var newBlogPostVM = new AddBlogPostVM();
             newBlogPostVM.BlogPost.User.Id = User.Identity.GetUserId();
-            newBlogPostVM.BlogPost.User.UserName = User.Identity.GetUserName();
             
             newBlogPostVM.InitializeCategoriesList(_ops.GetAllCategories().Categories);
 
@@ -41,6 +40,7 @@ namespace Blog.UI.Controllers
         {
             _ops = new BlogOperations();
             newPost.BlogPost.Status = Status.Approved;
+            newPost.BlogPost.User.UserName = User.Identity.GetUserName();
             newPost.BlogPost.TimeCreated = DateTime.Now;
 
             foreach (var ht in newPost.hashtags)
