@@ -3,7 +3,9 @@
 @{
     ViewBag.Title = "Add New Blog Post";
 }
-<link href="~/Content/selectize.css" rel="stylesheet" type="text/css" />
+@*<link href="~/Content/selectize.css" rel="stylesheet" type="text/css"/>*@
+<link href="~/Content/jquery.tagit.css" rel="stylesheet" type="text/css">
+<link href="~/Content/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 <h2>Add Blog Post</h2>
 
 <div class="container">
@@ -33,10 +35,14 @@
                         <div class="col-md-6">
 
                             <div class="control-group">
-                                <label for="input-tags">Hashtags:</label>
-                                <input type="text" id="input-tags" class="demo-default" value="hashtags,neat">
+                                <label for="myTags">Hashtags:</label>
+                                @*<input type="text" id="input-tags" class="demo-default" value="hashtags,neat">*@
+
+                                <ul id="myTags">
+                                </ul>
                             </div>
-                                
+
+
 
                         </div>
                     </div>
@@ -56,6 +62,9 @@
 @section scripts{
     <script src="~/Scripts/tinymce/tinymce.min.js"></script>
     <script src="~/Scripts/app/tinymce.js"></script>
-    <script src="~/Scripts/selectize/selectize.min.js"></script>
-    <script src="~/Scripts/app/selectizefortags.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.11.min.js"></script>
+    <script src="~/Scripts/tag-it.min.js"></script>
+    <script src="~/Scripts/app/tagitload.js"></script>
+    @*<script src="~/Scripts/selectize/selectize.min.js"></script>
+    <script src="~/Scripts/app/selectizefortags.js"></script>*@
 }
