@@ -206,8 +206,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.tagit.css" />
     <Content Include="Content\selectize.bootstrap3.css" />
     <Content Include="Content\selectize.css" />
+    <Content Include="Content\tagit.ui-zendesk.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -1022,6 +1024,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\selectize\selectize.js" />
     <Content Include="Scripts\selectize\selectize.min.js" />
+    <Content Include="Scripts\tag-it.js" />
+    <Content Include="Scripts\tag-it.min.js" />
     <Content Include="Scripts\tinymce\license.txt" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />
