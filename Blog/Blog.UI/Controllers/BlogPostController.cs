@@ -36,7 +36,13 @@ namespace Blog.UI.Controllers
             //repo submit post
 
 
+
+
             return View("ConfirmBlogPost", newPost.BlogPost);
+
+
+
+
         }
 
         [Authorize(Roles = "Admin, PR")]

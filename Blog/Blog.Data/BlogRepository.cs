@@ -61,6 +61,58 @@ namespace Blog.Data
             throw new NotImplementedException();
         }
 
+        public BlogPost AddNewBlogPost(BlogPost blogPost)
+        {
+            var hashtags = GetAllHashtags();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@UserID", blogPost.User.Id);
+                p.Add("@BlogPostTitle", blogPost.BlogPostTitle);
+                p.Add("@BlogPostText", blogPost.BlogPostText);
+                p.Add("@TimeCreated", blogPost.TimeCreated);
+                p.Add("@Status", (int)blogPost.Status);
+                p.Add("@CategoryID", blogPost.Category.CategoryId);
+                p.Add("@BlogPostID", DbType.Int32, direction: ParameterDirection.Output);
+
+                cn.Execute("AddNewBlogPost", p, commandType: CommandType.StoredProcedure);
+
+                var blogPostId = p.Get<int>("BlogPostID");
+
+                foreach (var hashtag in blogPost.Hashtags)
+                {
+                    var checkHashtag = hashtags.FirstOrDefault(h => h.HashtagTitle == hashtag.HashtagTitle);
+
+                    if (checkHashtag == null)
+                    {
+                        p = new DynamicParameters();
+                        p.Add("@HashtagTitle", hashtag.HashtagTitle);
+                        p.Add("@HashtagID", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                        cn.Execute("AddNewHashtag", p, commandType: CommandType.StoredProcedure);
+
+                        var hashtagId = p.Get<int>("HashtagID");
+
+                        p = new DynamicParameters();
+                        p.Add("@BlogPostID", blogPostId);
+                        p.Add("@HashtagID", hashtagId);
+
+                        cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
+                    }
+                    else
+                    {
+                        p = new DynamicParameters();
+                        p.Add("@BlogPostID", blogPostId);
+                        p.Add("@HashtagID", checkHashtag.HashtagId);
+
+                        cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
+                    }
+                }
+                return GetBlogPostById(blogPostId);
+            }
+        }
+
         public List<StaticPage> GetAllStaticPages()
         {
             throw new NotImplementedException();
