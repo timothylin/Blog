@@ -1,14 +1,21 @@
-﻿@model List<Blog.Models.BlogPost>
+﻿@model List<Blog.UI.Models.AddBlogPostVM>
 @{
     ViewBag.Title = "Home Page";
 }
 
-<div class="container-fluid">
+<div class="no-container">
     <div id="home-banner">
-        <div class="jumbotron">
-            <h1 class="pull-right">ASP.NET</h1>
-            <p class="lead pull-right">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-            <p><button class="btn btn-default"pull-right">@Html.ActionLink("Register Today!", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</button></p>
+
+        <div class="container">
+            <div class="row">
+                <h4><span class="pull-right lead">We are JsDate and we aim to "plug" you in with the coding “partner” of your dreams.</span></h4>
+                <h4><span class="pull-right lead">Get ready to take your “paired-programming” to the next level...</span></h4>
+            </div>
+            <div class="row">
+                <p>
+                    <button class="btn btn-default pull-right">@Html.ActionLink("Register Today!", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</button>
+                </p>
+            </div>
         </div>
     </div>
 </div>
@@ -19,17 +26,17 @@
         @*@foreach (var blogPost in Model)
         {
             <div class="row">
-                <h3>@blogPost.BlogPostTitle</h3>
+                <h3>@blogPost.BlogPost.BlogPostTitle</h3>
             </div>
             <div class="row">
-                <p>@Html.Raw(blogPost.BlogPostText)</p>
+                <p>@Html.Raw(blogPost.BlogPost.BlogPostText)</p>
             </div>
             <div class="row">
                 <div class="pull-left">
-                    <p>Category: @blogPost.Category</p>
+                    <p>Category: @blogPost.BlogPost.Category.CategoryTitle</p>
                 </div>
                 <div class="pull-right">
-                    <p>Date: @blogPost.TimeCreated</p>
+                    <p>Date: @blogPost.BlogPost.TimeCreated</p>
                 </div>
         </div>
         }*@

@@ -23,12 +23,8 @@ textarea {
     max-width: 280px;
 }
 
-.navbar-brand img{
-    max-height: 90px;
-}
-
-.jsDate-logo {
-    max-height: 90px;
+#jsDate-logo {
+    max-height: 80px;
 }
 
 .nav-sidebar {
@@ -87,10 +83,21 @@ html, body {
 #home-banner {
     background-image: url("https://www.jdate.com/RegContent/CSS/images/splash-bg.jpg");
     background-size: cover;
-
+    width: 100%;
+    min-height: 600px;
 }       
 
 .jumbotron {
     background-color: transparent;
 }
-    
+
+.lead {
+    background-color: white;
+    margin-bottom: 5px;
+    padding: 23px;
+    font-size: 27px;
+}
+
+.banner-h4 {
+    padding-top: 100px;
+}
