@@ -49,6 +49,20 @@ namespace Blog.BLL
             return _response;
         }
 
+        public Response AddNewBlogPost(BlogPost b)
+        {
+            _response = new Response();
+            var blogPost = _repo.AddNewBlogPost(b);
+
+            if (blogPost != null)
+            {
+                _response.Success = true;
+                _response.BlogPost = blogPost;
+            }
+
+            return _response;
+        }
+
         public Response GetAllStaticPages()
         {
             _response = new Response();
