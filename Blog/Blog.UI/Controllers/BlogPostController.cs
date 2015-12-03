@@ -52,9 +52,9 @@ namespace Blog.UI.Controllers
 
             //newPost.BlogPost.Category.CategoryTitle = _ops.GetCategoryById(newPost.BlogPost.Category.CategoryId).Category.CategoryTitle;
 
-            //submit to repo
+            var post = _ops.AddNewBlogPost(newPost.BlogPost).BlogPost;
 
-            return View("BlogPostDetails", newPost.BlogPost);
+            return View("BlogPostDetails", post);
 
             //Ajax API call for confirmation modal
 

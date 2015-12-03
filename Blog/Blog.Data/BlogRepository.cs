@@ -78,7 +78,7 @@ namespace Blog.Data
 
                 cn.Execute("AddNewBlogPost", p, commandType: CommandType.StoredProcedure);
 
-                var blogPostId = p.Get<int>("BlogPostID");
+                blogPost.BlogPostId = p.Get<int>("BlogPostID");
 
                 foreach (var hashtag in blogPost.Hashtags)
                 {
@@ -92,24 +92,26 @@ namespace Blog.Data
 
                         cn.Execute("AddNewHashtag", p, commandType: CommandType.StoredProcedure);
 
-                        var hashtagId = p.Get<int>("HashtagID");
+                        hashtag.HashtagId = p.Get<int>("HashtagID");
 
                         p = new DynamicParameters();
-                        p.Add("@BlogPostID", blogPostId);
-                        p.Add("@HashtagID", hashtagId);
+                        p.Add("@BlogPostID", blogPost.BlogPostId);
+                        p.Add("@HashtagID", hashtag.HashtagId);
 
                         cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
                     }
                     else
                     {
                         p = new DynamicParameters();
-                        p.Add("@BlogPostID", blogPostId);
+                        p.Add("@BlogPostID", blogPost.BlogPostId);
                         p.Add("@HashtagID", checkHashtag.HashtagId);
 
                         cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
+
+                        hashtag.HashtagId = checkHashtag.HashtagId;
                     }
                 }
-                return GetBlogPostById(blogPostId);
+                return blogPost;
             }
         }
 
