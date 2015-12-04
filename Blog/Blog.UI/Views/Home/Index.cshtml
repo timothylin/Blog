@@ -11,11 +11,13 @@
                 <h4><span class="pull-right lead">We are JsDate and we aim to "plug" you in with the coding “partner” of your dreams.</span></h4>
                 <h4><span class="pull-right lead">Get ready to take your “paired-programming” to the next level...</span></h4>
             </div>
-            <div class="row">
-                <p>
-                    <button class="btn btn-default pull-right">@Html.ActionLink("Register Today!", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</button>
-                </p>
-            </div>
+            @if(!Request.IsAuthenticated) {
+                <div class="row">
+                    <p>
+                        <button class="btn btn-default pull-right">@Html.ActionLink("Register Today!", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</button>
+                    </p>
+                </div>
+            }
         </div>
     </div>
 </div>
