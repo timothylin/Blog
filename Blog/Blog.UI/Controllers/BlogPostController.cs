@@ -41,14 +41,11 @@ namespace Blog.UI.Controllers
             _ops = new BlogOperations();
             newPost.BlogPost.User.UserName = User.Identity.GetUserName();
             newPost.BlogPost.TimeCreated = DateTime.Now;
+            newPost.BlogPost.Status = Status.Pending;
 
             if (User.IsInRole("Admin"))
             {
                 newPost.BlogPost.Status = Status.Approved;
-            }
-            if (User.IsInRole("PR"))
-            {
-                newPost.BlogPost.Status = Status.Pending;
             }
 
             foreach (var ht in newPost.hashtags)
