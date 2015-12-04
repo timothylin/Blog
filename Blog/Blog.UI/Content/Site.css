@@ -80,11 +80,10 @@ html, body {
 }
 
 
-#home-banner {
-    background-image: url("https://www.jdate.com/RegContent/CSS/images/splash-bg.jpg");
-    background-size: cover;
+#home-slider {
     width: 100%;
     min-height: 600px;
+    padding: 0;
 }       
 
 .jumbotron {

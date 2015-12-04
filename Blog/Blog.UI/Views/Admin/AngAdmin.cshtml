@@ -58,79 +58,109 @@
                 <li>@Html.ActionLink("Add New Post", "AddNewBlogPost", "BlogPost")</li>
             </ul>
             </div>
-            <div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
-                <br/>
-                <h2>Admin Dashboard</h2>
-                <hr/>
-                <!--DASHBOARD-->
-                <div ng-show="panel.isSelected(1)">
-                    <div class="col-md-3">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <a href="#"><h4 class="glyphicon glyphicon-plus-sign"> New User</h4></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <a href="#"><span class="glyphicon glyphicon-plus-sign"> @Html.ActionLink(" Add New Page", "AddNewPage", "Page")</span></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <a href="#"><span class="glyphicon glyphicon-plus-sign"> @Html.ActionLink(" Add New Post", "AddNewBlogPost", "BlogPost")</span></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <a href="#"><h4 class="glyphicon glyphicon-plus-sign"> New Profile</h4></a>
-                                </div>
-                            </div>
+        <div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
+            <br />
+            <h2>Admin Dashboard</h2>
+            <hr />
+            <!--DASHBOARD-->
+            <div ng-show="panel.isSelected(1)">
+                <div class="col-md-3">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <a href="#"><h4 class="glyphicon glyphicon-plus-sign"> New User</h4></a>
                         </div>
                     </div>
-                <div ng-show="panel.isSelected(3)">
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Blog Posts</h3>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <a href="#"><span class="glyphicon glyphicon-plus-sign"> @Html.ActionLink(" Add New Page", "AddNewPage", "Page")</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <a href="#"><span class="glyphicon glyphicon-plus-sign"> @Html.ActionLink(" Add New Post", "AddNewBlogPost", "BlogPost")</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <a href="#"><h4 class="glyphicon glyphicon-plus-sign"> New Profile</h4></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div ng-show="panel.isSelected(3)">
+            <div class="col-md-8">
+                <h3>Blog Posts</h3>
+
+                @foreach (var post in Model.BlogPosts)
+                {
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h4>@post.BlogPostTitle</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <p>Post Text</p>
+                                @Html.Raw(post.BlogPostText)
                             </div>
-                            <div class="panel-body">
-                                @foreach (var post in Model.BlogPosts)
-                                {
-                                    @post.BlogPostTitle
-                                    @Html.Raw(post.BlogPostText)
-                                    @post.Category.CategoryTitle
-                                    if (post.Hashtags.Count > 0)
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p>Category: @post.Category.CategoryTitle</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>Status: @post.Status</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>Hashtags</p>
+                                    @if (post.Hashtags.Count > 0)
                                     {
-                                    string hashtags = "";
-                                    for (int i = 0; i < post.Hashtags.Count - 1; i++)
-                                    {
-                                    hashtags += "#" + post.Hashtags[i].HashtagTitle + ", ";
-                                    }
-                                    hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
+                                        string hashtags = "";
+                                        for (int i = 0; i < post.Hashtags.Count - 1; i++)
+                                        {
+                                            hashtags += "#" + post.Hashtags[i].HashtagTitle + ", ";
+                                        }
+                                        hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
                                         <p>@hashtags</p>
                                     }
                                     else
                                     {
                                         <p>No hashtags added...</p>
                                     }
-                                    @post.User.UserName
-                                    @post.TimeCreated
-                                    @post.BlogPostId
-                                    @post.Status
-                                    @post.ExpirationDate
-                                }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p>Author: @post.User.UserName</p>
+                                </div>
 
-                                @*<table class="table table-striped">
-                                    <thead>
+                                <div class="col-md-4">
+                                    <p>Date: @post.TimeCreated</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+            <div ng-show="panel.isSelected(4)">
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Pages</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
                                     <tr>
                                         <th>Title</th>
                                         <th>Type</th>
@@ -139,18 +169,18 @@
                                         <th>Approve</th>
                                         <th>Deny</th>
                                     </tr>
-                                    </thead>
-                                    <tbody>
+                                </thead>
+                                <tbody>
                                     <tr>
-                                        <td>Dean's First Date Tips</td>
-                                        <td>Blog</td>
+                                        <td>Profiles</td>
+                                        <td>Page</td>
                                         <td>Dean Choi</td>
                                         <td>12/12/2015</td>
                                         <td><button>Approve</button></td>
                                         <td><button>Deny</button></td>
                                     </tr>
                                     <tr>
-                                        <td>Tim's Dream Girl</td>
+                                        <td>About</td>
                                         <td>Blog</td>
                                         <td>Tim Lim</td>
                                         <td>9/12/2015</td>
@@ -158,92 +188,19 @@
                                         <td><button>Deny</button></td>
                                     </tr>
                                     <tr>
-                                        <td>Just Lunch</td>
+                                        <td>Events</td>
                                         <td>Blog</td>
                                         <td>Patrick Tighe</td>
                                         <td>8/12/2015</td>
                                         <td><button>Approve</button></td>
                                         <td><button>Deny</button></td>
                                     </tr>
-                                    <tr>
-                                        <td>What Bombs Does She Like!: Wonder Bar Edition</td>
-                                        <td>Blog</td>
-                                        <td>Dean Choi</td>
-                                        <td>12/12/2015</td>
-                                        <td><button>Approve</button></td>
-                                        <td><button>Deny</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tim's Dream Girl</td>
-                                        <td>Blog</td>
-                                        <td>Tim Lim</td>
-                                        <td>9/12/2015</td>
-                                        <td><button>Approve</button></td>
-                                        <td><button>Deny</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>What do Hot Date's Eat: Taco Bell Edition</td>
-                                        <td>Blog</td>
-                                        <td>Patrick Tighe</td>
-                                        <td>8/12/2015</td>
-                                        <td><button>Approve</button></td>
-                                        <td><button>Deny</button></td>
-                                    </tr>
-                                    </tbody>
-                                </table>*@
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div ng-show="panel.isSelected(4)">
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Pages</h3>
-                            </div>
-                            <div class="panel-body">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Title</th>
-                                            <th>Type</th>
-                                            <th>Author</th>
-                                            <th>Date</th>
-                                            <th>Approve</th>
-                                            <th>Deny</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Profiles</td>
-                                            <td>Page</td>
-                                            <td>Dean Choi</td>
-                                            <td>12/12/2015</td>
-                                            <td><button>Approve</button></td>
-                                            <td><button>Deny</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>About</td>
-                                            <td>Blog</td>
-                                            <td>Tim Lim</td>
-                                            <td>9/12/2015</td>
-                                            <td><button>Approve</button></td>
-                                            <td><button>Deny</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Events</td>
-                                            <td>Blog</td>
-                                            <td>Patrick Tighe</td>
-                                            <td>8/12/2015</td>
-                                            <td><button>Approve</button></td>
-                                            <td><button>Deny</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
             <div ng-show="panel.isSelected(5)">
                 <div class="col-md-6">
                     <div class="panel">
@@ -253,29 +210,29 @@
                         <div class="panel-body">
                             <table class="table table-striped">
                                 <thead>
-                                <tr>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Role</th>
-                                </tr>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Role</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>deinzel</td>
-                                    <td>deanthedeanofmean@xanga.com</td>
-                                    <td>Dean</td>
-                                    <td>Choi</td>
-                                    <td>Admin</td>
-                                </tr>
-                                <tr>
-                                    <td>BIGTIMLIM</td>
-                                    <td>thechamp@hotmail.com</td>
-                                    <td>Timothy</td>
-                                    <td>Lim</td>
-                                    <td>Admin</td>
-                                </tr>
+                                    <tr>
+                                        <td>deinzel</td>
+                                        <td>deanthedeanofmean@xanga.com</td>
+                                        <td>Dean</td>
+                                        <td>Choi</td>
+                                        <td>Admin</td>
+                                    </tr>
+                                    <tr>
+                                        <td>BIGTIMLIM</td>
+                                        <td>thechamp@hotmail.com</td>
+                                        <td>Timothy</td>
+                                        <td>Lim</td>
+                                        <td>Admin</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

@@ -197,6 +197,7 @@
     <Compile Include="Models\AddBlogPostVM.cs" />
     <Compile Include="Models\AddStaticPageVM.cs" />
     <Compile Include="Models\AdminVM.cs" />
+    <Compile Include="Models\HomeVM.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
