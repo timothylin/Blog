@@ -25,6 +25,7 @@
             <div class="item">
                 <img src="img_chania2.jpg" alt="Chania">
             </div>
+<<<<<<< HEAD
 
             <div class="item">
                 <img src="img_flower.jpg" alt="Flower">
@@ -33,6 +34,15 @@
             <div class="item">
                 <img src="img_flower2.jpg" alt="Flower">
             </div>
+=======
+            @if(!Request.IsAuthenticated) {
+                <div class="row">
+                    <p>
+                        <button class="btn btn-default pull-right">@Html.ActionLink("Register Today!", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</button>
+                    </p>
+                </div>
+            }
+>>>>>>> ee1f8d238e3b5d63959962f7aedff66465444a01
         </div>
 
         <!-- Left and right controls -->

@@ -195,7 +195,17 @@ namespace Blog.Data
 
         public Hashtag GetHashtagById(int hashtagId)
         {
-            throw new NotImplementedException();
+            Hashtag hashtag = new Hashtag();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@HashtagID", hashtagId);
+
+                hashtag = cn.Query<Hashtag>("GetHashtagByID", p, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+
+            return hashtag;
         }
 
         public List<Category> GetAllCategories()
@@ -212,7 +222,17 @@ namespace Blog.Data
 
         public Category GetCategoryById(int categoryId)
         {
-            throw new NotImplementedException();
+            Category category = new Category();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@CategoryID", categoryId);
+
+                category = cn.Query<Category>("GetCategoryByID", p, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+
+            return category;
         }
 
         public List<IdentityRole> GetAllRoles()
@@ -301,12 +321,12 @@ namespace Blog.Data
         {
             StaticPage staticPage = new StaticPage();
 
-            staticPage.StaticPageId = (int) dr["StaticPageID"];
+            staticPage.StaticPageId = (int)dr["StaticPageID"];
             staticPage.StaticPageTitle = dr["StaticPageTitle"].ToString();
             staticPage.StaticPageText = dr["StaticPageText"].ToString();
             staticPage.TimeCreated = DateTime.Parse(dr["TimeCreated"].ToString());
-            staticPage.Status = (Status) dr["Status"];
-            staticPage.Category.CategoryId = (int) dr["CategoryID"];
+            staticPage.Status = (Status)dr["Status"];
+            staticPage.Category.CategoryId = (int)dr["CategoryID"];
             staticPage.Category.CategoryTitle = dr["CategoryTitle"].ToString();
             staticPage.User = PopulateUserFromDataReader(dr);
 
