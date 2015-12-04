@@ -8,7 +8,7 @@ namespace Blog.Models
 {
     public enum Status
     {
-        Default,
+        Pending,
         Approved,
         Denied,
         Deleted

@@ -39,9 +39,17 @@ namespace Blog.UI.Controllers
         public ActionResult AddNewBlogPost(AddBlogPostVM newPost)
         {
             _ops = new BlogOperations();
-            newPost.BlogPost.Status = Status.Approved;
             newPost.BlogPost.User.UserName = User.Identity.GetUserName();
             newPost.BlogPost.TimeCreated = DateTime.Now;
+
+            if (User.IsInRole("Admin"))
+            {
+                newPost.BlogPost.Status = Status.Approved;
+            }
+            if (User.IsInRole("PR"))
+            {
+                newPost.BlogPost.Status = Status.Pending;
+            }
 
             foreach (var ht in newPost.hashtags)
             {
