@@ -1,8 +1,4 @@
-﻿//tinymce.init({
-//    selector: '#mytextarea'
-//});
-
-tinymce.init({
+﻿tinymce.init({
     selector: '#mytextarea',
     height: 400,
     theme: 'modern',
