@@ -4,8 +4,9 @@
 }
 
 <div class="no-container">
+    <br/>
     <div class="row">
-        <div class="col-md-offset-1 col-md-7">
+        <div class="col-md-offset-1 col-md-6">
             <div id="home-slider" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
@@ -24,7 +25,7 @@
                                 <h4><span class="pull-right lead">We are JsDate and we aim to "plug" you in with the coding “partner” of your dreams.</span></h4>
                                 <h4><span class="pull-right lead">Get ready to take your “paired-programming” to the next level...</span></h4>
                                 <p>
-                                    <button class="btn btn-default pull-right">@Html.ActionLink("Register Today!", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</button>
+                                    <button class="btn btn-default pull-right">@Html.ActionLink("Register Today!", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</button>
                                 </p>
                             </div>
                         }
@@ -33,18 +34,17 @@
             <img src="img_chania.jpg" alt="Chania">
             <h1 class="lead">@bannerPost.BlogPostTitle</h1>
 
-            }*@
-                    </div>
+            }*@</div>
                     <div class="item">
-                        <img src="img_chania2.jpg" alt="Chania">
+                        <img src="@Model.BlogPosts[0].CoverImageUrl" alt="Chania">
+                    </div>
+                    
+                    <div class="item">
+                        <img src="@Model.BlogPosts[1].CoverImageUrl" alt="Flower">
                     </div>
 
                     <div class="item">
-                        <img src="img_flower.jpg" alt="Flower">
-                    </div>
-
-                    <div class="item">
-                        <img src="img_flower2.jpg" alt="Flower">
+                        <img src="@Model.BlogPosts[2].CoverImageUrl" alt="Flower">
                     </div>
                 </div>
 
@@ -60,11 +60,25 @@
             </div>
         </div>
         <div class="col-md-4">
-
+            <div class="row">
+                <div class="col-md-12 padding-bot-40">
+                    <img src="@Model.BlogPosts[2].CoverImageUrl"/>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 padding-bot-40">
+                        <img src="@Model.BlogPosts[2].CoverImageUrl"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <img src="@Model.BlogPosts[2].CoverImageUrl"/>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-        @*<div id="home-banner">
+    @*<div id="home-banner">
 
             <div class="container">
 
@@ -76,58 +90,62 @@
             </div>
         </div>*@
 
-        <div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
-            <div class="row">
-                <div class="col-md-8">
-                    <h3>Blog Posts</h3>
-                    @foreach (var post in Model.BlogPosts)
-                    {
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                            <h3>@post.BlogPostTitle<small class="pull-right">Date: @post.TimeCreated</small></h3>
-                            </div>
+    <div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Blog Posts</h3>
+                @foreach (var post in Model.BlogPosts)
 
-                            <div class="panel-body">
-                                <div class="col-md-12">
-                                    <p>Post Text</p>
-                                    <blockquote>@Html.Raw(post.BlogPostText)</blockquote>
+                    //for (int i = 6; i < 12; i++){
+                    //Model.BlogPosts[i].;
+                {
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3>@post.BlogPostTitle<small class="pull-right">Date: @post.TimeCreated</small>
+                            </h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <p>Post Text</p>
+                                <blockquote>@Html.Raw(post.Description)</blockquote>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p>Category: @post.Category.CategoryTitle</p>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <p>Category: @post.Category.CategoryTitle</p>
-                                    </div>
-                                    <div class="col-md-3 pull-right">
-                                        <p>Hashtags</p>
-                                        @if (post.Hashtags.Count > 0)
+                                <div class="col-md-3 pull-right">
+                                    <p>Hashtags</p>
+                                    @if (post.Hashtags.Count > 0)
+                                    {
+                                        string hashtags = "";
+                                        for (int i = 0; i < post.Hashtags.Count - 1; i++)
                                         {
-                                            string hashtags = "";
-                                            for (int i = 0; i < post.Hashtags.Count - 1; i++)
-                                            {
-                                                hashtags += "#" + post.Hashtags[i].HashtagTitle + ", ";
-                                            }
-                                            hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
-                                            <p>@hashtags</p>
+                                            hashtags += "#" + post.Hashtags[i].HashtagTitle + ", ";
                                         }
-                                        else
-                                        {
-                                            <p>No hashtags added...</p>
-                                        }
-                                    </div>
+                                        hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
+                                        <p>@hashtags</p>
+                                    }
+                                    else
+                                    {
+                                        <p>No hashtags added...</p>
+                                    }
                                 </div>
-                                <small><cite title="Source Title">Source Title</cite></small>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <p>Author: @post.User.UserName</p>
-                                    </div>
-                                    @*<div class="col-md-2">
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <small><cite title="Source Title">By: @(post.User.FirstName + " " + post.User.LastName)</cite></small>
+                                </div>
+                                @*<div class="col-md-2">
                                     <p>Status: @post.Status</p>
                                 </div>*@
-                                </div>
                             </div>
                         </div>
-                    }
-                </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
+</div>
 

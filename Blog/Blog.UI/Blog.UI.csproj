@@ -1284,6 +1284,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\BlogPost\ConfirmBlogPost.cshtml" />
     <Content Include="Views\BlogPost\BlogPostDetails.cshtml" />
+    <Content Include="Views\BlogPost\ViewBlogPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

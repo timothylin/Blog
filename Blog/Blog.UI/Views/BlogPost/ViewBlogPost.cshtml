@@ -1,0 +1,52 @@
+﻿@model Blog.Models.BlogPost
+
+@{
+    ViewBag.Title = "ViewBlogPost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewBlogPost</h2>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3>
+            @Model.BlogPostTitle<small class="pull-right">Date: @Model.TimeCreated</small>
+        </h3>
+    </div>
+
+<div class="panel-body">
+    <div class="col-md-12">
+        <p>Post Text</p>
+        <blockquote>@Html.Raw(Model.BlogPostText)</blockquote>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <p>Category: @Model.Category.CategoryTitle</p>
+        </div>
+        <div class="col-md-3 pull-right">
+            <p>Hashtags</p>
+            @if (Model.Hashtags.Count > 0)
+            {
+                string hashtags = "";
+                for (int i = 0; i < Model.Hashtags.Count - 1; i++)
+                {
+                    hashtags += "#" + Model.Hashtags[i].HashtagTitle + ", ";
+                }
+                hashtags += "#" + Model.Hashtags[Model.Hashtags.Count - 1].HashtagTitle;
+                <p>@hashtags</p>
+            }
+            else
+            {
+                <p>No hashtags added...</p>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <small><cite title="Source Title">By: @(Model.User.FirstName + " " + Model.User.LastName)</cite></small>
+        </div>
+    </div>
+</div>
+</div>
+
