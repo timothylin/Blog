@@ -15,13 +15,13 @@ namespace Blog.UI.ConsoleApp
         {
             //var repo = new BlogRepository();
 
-            ////var hashtags = repo.GetAllBlogPosts();
+            //var hashtags = repo.GetAllBlogPosts();
 
-            ////foreach (var hashtag in hashtags)
-            ////{
-            ////    Console.WriteLine(hashtag.HashtagId);
-            ////    Console.WriteLine(hashtag.HashtagTitle);
-            ////}
+            //foreach (var hashtag in hashtags)
+            //{
+            //    Console.WriteLine(hashtag.HashtagId);
+            //    Console.WriteLine(hashtag.HashtagTitle);
+            //}
 
             //var blogPosts = repo.GetAllBlogPosts();
 
@@ -40,15 +40,15 @@ namespace Blog.UI.ConsoleApp
 
             //}
 
-            var ops = new BlogOperations();
+            //var ops = new BlogOperations();
 
-            var blog = ops.GetBlogPostById(2);
+            //var blog = ops.GetBlogPostById(2);
 
-            Console.WriteLine(blog.BlogPost.BlogPostId);
-            Console.WriteLine(blog.BlogPost.BlogPostText);
-            Console.WriteLine(blog.BlogPost.BlogPostTitle);
+            //Console.WriteLine(blog.BlogPost.BlogPostId);
+            //Console.WriteLine(blog.BlogPost.BlogPostText);
+            //Console.WriteLine(blog.BlogPost.BlogPostTitle);
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
     }
 }

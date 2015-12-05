@@ -149,6 +149,9 @@ namespace Blog.Data
                         hashtag.HashtagId = checkHashtag.HashtagId;
                     }
                 }
+
+                blogPost.Category = GetCategoryById(blogPost.Category.CategoryId);
+
                 return blogPost;
             }
         }
@@ -273,6 +276,18 @@ namespace Blog.Data
 
             return users;
         }
+
+        //public ApplicationUser UpdateRoleByUserID(string userId, int roleId)
+        //{
+        //    ApplicationUser user = new ApplicationUser();
+
+        //    using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+        //    {
+                
+        //    }
+
+        //    return user;
+        //}
 
         private ApplicationUser PopulateUserFromDataReader(SqlDataReader dr)
         {
