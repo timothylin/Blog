@@ -5,49 +5,62 @@
 }
 <link href="~/Content/jquery.tagit.css" rel="stylesheet" type="text/css">
 <link href="~/Content/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
-<h2>Add Blog Post</h2>
 
 <div class="container">
     <div class="row">
-        <div class="panel">
-            <div class="panel-body">
-                @using (Html.BeginForm("AddNewBlogPost", "BlogPost", null, FormMethod.Post, new { @class = "form-group" }))
+        <div class="well">
+                @using (Html.BeginForm("AddNewBlogPost", "BlogPost", null, FormMethod.Post, new { @class = "form-horizontal" }))
                 {
-                    <div class="row">
-                        <label>Blog Title</label>
-                    </div>
-                    <div class="Row">
-                        @Html.EditorFor(m => m.BlogPost.BlogPostTitle, new { @class = "form-control" })
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-11">
-                            @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new { @id = "mytextarea" })
+                    <fieldset>
+                        <legend>Add a New Blog Post</legend>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Blog Title</label>
                         </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Category</label>
-                            @Html.DropDownListFor(m => m.BlogPost.Category.CategoryId, Model.CategoriesList, "-- Please Select Category --", new { @class = "form-control" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.BlogPost.BlogPostTitle, new {@class = "form-control", @placeholder = "Blog Title" })
                         </div>
-                        <div class="col-md-6">
-
-                            <div class="control-group">
-                                <label for="myTags">Hashtags:</label>
-                                <ul id="myTags">
-                                </ul>
+                        <br/>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Blog Description (250 characters max)</label>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.BlogPost.Description, new { @class = "form-control", @placeholder = "Blog Description" })
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Cover Image URL</label>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.BlogPost.CoverImageUrl, new { @class = "form-control", @placeholder = "Cover Image URL" })
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Content Text</label>
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new {@id = "mytextarea"})
                             </div>
                         </div>
-                    </div>
-                    @Html.HiddenFor(m => m.BlogPost.User.Id)
+                        <br/>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="col-md-2 control-label">Category</label>
+                                @Html.DropDownListFor(m => m.BlogPost.Category.CategoryId, Model.CategoriesList, "-- Please Select Category --", new {@class = "form-control"})
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="myTags" class="col-md-2 control-label">Hashtags:</label>
+                                    <ul id="myTags"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.HiddenFor(m => m.BlogPost.User.Id)
 
-                    <div class="row">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <button type="reset" class="btn btn-danger">Reset</button>
-                    </div>
+                        <div class="row">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                        </div>
+                    </fieldset>
                 }
-            </div>
         </div>
     </div>
 

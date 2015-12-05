@@ -110,6 +110,8 @@ namespace Blog.Data
                 p.Add("@TimeCreated", blogPost.TimeCreated);
                 p.Add("@Status", (int)blogPost.Status);
                 p.Add("@CategoryID", blogPost.Category.CategoryId);
+                p.Add("@Description", blogPost.Description);
+                p.Add("@CoverImageUrl", blogPost.CoverImageUrl);
                 p.Add("@BlogPostID", DbType.Int32, direction: ParameterDirection.Output);
 
                 cn.Execute("AddNewBlogPost", p, commandType: CommandType.StoredProcedure);
@@ -312,6 +314,8 @@ namespace Blog.Data
             blogPost.Status = (Status)dr["Status"];
             blogPost.Category.CategoryId = (int)dr["CategoryID"];
             blogPost.Category.CategoryTitle = dr["CategoryTitle"].ToString();
+            blogPost.Description = dr["Description"].ToString();
+            blogPost.CoverImageUrl = dr["CoverImageUrl"].ToString();
             blogPost.User = PopulateUserFromDataReader(dr);
 
             return blogPost;

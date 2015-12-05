@@ -13,7 +13,7 @@ namespace Blog.Models
         public string BlogPostTitle { get; set; }
         [AllowHtml]
         public string BlogPostText { get; set; }
-        public string CoverImage { get; set; }
+        public string CoverImageUrl { get; set; }
         public string Description { get; set; }
         public Status Status { get; set; }
         public DateTime TimeCreated { get; set; }
