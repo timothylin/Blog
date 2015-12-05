@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.ApplicationServices;
 using System.Web.Mvc;
 using Blog.BLL;
 using Blog.Models;
@@ -72,5 +73,13 @@ namespace Blog.UI.Controllers
         //{
         //    return RedirectToAction("Index", "Home");
         //}
+        [Authorize(Roles = "Admin, PR")]
+        public ActionResult ViewBlogPost(int id)
+        {
+            _ops = new BlogOperations();
+            var post = _ops.GetBlogPostById(id);
+
+            return View(post);
+        }
     }
 }
