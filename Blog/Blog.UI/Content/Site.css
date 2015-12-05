@@ -82,7 +82,7 @@ html, body {
 
 #home-slider {
     width: 100%;
-    min-height: 600px;
+    min-height: 400px;
     padding: 0;
 }       
 
@@ -103,4 +103,8 @@ html, body {
 
 .pull-right  {
     color: white;
+}
+
+.padding-bot-40 {
+    padding-bottom: 40px;
 }
