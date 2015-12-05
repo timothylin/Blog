@@ -58,6 +58,14 @@
                 <td>@Model.Status</td>
             </tr>
             <tr>
+                <td>Description</td>
+                <td>@Model.Description</td>
+            </tr>
+            <tr>
+                <td>Cover Image</td>
+                <td><img class="img-responsive" src="@Model.CoverImageUrl" alt="not a valid image url"/></td>
+            </tr>
+            <tr>
                 <td>Html Body</td>
                 <td>@Html.Raw(Model.BlogPostText)</td>
             </tr>
