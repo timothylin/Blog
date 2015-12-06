@@ -20,7 +20,7 @@ body {
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 500px;
 }
 
 #jsDate-logo {
@@ -101,10 +101,14 @@ html, body {
     padding-top: 100px;
 }
 
-.pull-right  {
+/*.pull-right  {
     color: white;
-}
+}*/
 
 .padding-bot-40 {
     padding-bottom: 40px;
+}
+
+.tiny {
+    font-size: 10px;
 }

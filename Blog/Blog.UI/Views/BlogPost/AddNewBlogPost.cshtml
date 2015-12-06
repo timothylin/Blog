@@ -3,79 +3,92 @@
 @{
     ViewBag.Title = "Add New Blog Post";
 }
-<link href="~/Content/jquery.tagit.css" rel="stylesheet" type="text/css">
-<link href="~/Content/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 
 <br/>
 <div class="container">
-    <div class="row">
+    <div class="row" ng-app="validationPost">
         <div class="well">
-                @using (Html.BeginForm("AddNewBlogPost", "BlogPost", null, FormMethod.Post, new { @class = "form-horizontal" }))
-                {
-                    <fieldset>
-                        <legend><b>Add a New Blog Post</b></legend>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">Blog Title</label>
-                            <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.BlogPost.BlogPostTitle, new { @class = "form-control", @placeholder = "Blog Title" })
-                            </div>
+            <form action="/BlogPost/AddNewBlogPost" class="form-horizontal" method="post" name="myForm" novalidate>
+                <fieldset>
+                    <legend><b>Add a New Blog Post</b></legend>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Blog Title</label>
+                        <div class="col-md-10">
+                            <input class="form-control" id="BlogPost_BlogPostTitle" name="BlogPost.BlogPostTitle" placeholder="Blog Title" type="text" value="">
                         </div>
+                    </div>
 
-                        <br/>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">Blog Description</label>
-                            <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.BlogPost.Description, new { @class = "form-control", @placeholder = "Blog Description" })
-                            </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Blog Description</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" id="BlogPost_Description" name="BlogPost.Description" placeholder="Blog Description" type="text" value="" ng-model="Description" required ng-maxlength="200"></textarea>
+                            <label class="control-label text-danger" ng-show="myForm['BlogPost.Description'].$dirty && myForm['BlogPost.Description'].$invalid && myForm['BlogPost.Description'].$error.required">
+                                Description is required
+                            </label>
+                            <label class="control-label text-danger" ng-show="myForm['BlogPost.Description'].$dirty && myForm['BlogPost.Description'].$invalid && myForm['BlogPost.Description'].$error.maxlength">
+                                Your description cannot be longer than 200 characters
+                            </label>
                         </div>
+                    </div>
 
-                        <br/>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">Cover Image URL</label>
-                            <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.BlogPost.CoverImageUrl, new { @class = "form-control", @placeholder = "Cover Image URL" })
-                            </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Cover Image URL</label>
+                        <div class="col-md-10">
+                            <input class="form-control" id="BlogPost_CoverImageUrl" name="BlogPost.CoverImageUrl" placeholder="Cover Image URL" type="text" value="">
                         </div>
+                    </div>
 
-                        <br />
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">Content Text</label>
-                            <div class="col-md-10">
-                                @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new {@id = "mytextarea"})
-                            </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Category</label>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(m => m.BlogPost.Category.CategoryId, Model.CategoriesList, "-- Select Category --", new {@class = "form-control"})
                         </div>
-                        <br/>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">Category</label>
-                            <div class="col-md-10">
-                                @Html.DropDownListFor(m => m.BlogPost.Category.CategoryId, Model.CategoriesList, "-- Please Select Category --", new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">Hashtags</label>
-                            <div class="col-md-8">
-                                <ul id="myTags"></ul>
-                            </div>
-                        </div>
-                        @Html.HiddenFor(m => m.BlogPost.User.Id)
+                    </div>
+                    
 
-                        <div class="form-group">
-                            <div class="col-md-10 col-md-offset-2">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Content Text</label>
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new {@id = "mytextarea"})
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Hashtags</label>
+                        <div class="col-md-8">
+                            <ul id="myTags"></ul>
+                            <div class="pull-right tiny">* No # signs or spaces allowed</div>
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(m => m.BlogPost.User.Id)
+
+                    <div class="form-group">
+                        <div class="col-md-10 col-md-offset-2">
                             <button type="submit" class="btn btn-success">Submit</button>
-                                <button type="reset" class="btn btn-danger">Reset</button>
-                                </div>
+                            <button type="reset" class="btn btn-danger">Reset</button>
                         </div>
-                    </fieldset>
-                }
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
 
 </div>
 
+@section Styles{
+    <link href="~/Content/jquery.tagit.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app/angvalidation.css" />
+}
+
 @section scripts{
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
     <script src="~/Scripts/tinymce/tinymce.min.js"></script>
     <script src="~/Scripts/app/tinymce.js"></script>
     <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
     <script src="~/Scripts/tag-it.min.js"></script>
     <script src="~/Scripts/app/tagitload.js"></script>
+    <script src="~/Scripts/app/angvalidation.js"></script>
 }
