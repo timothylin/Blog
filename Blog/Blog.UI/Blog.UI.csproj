@@ -1281,6 +1281,7 @@
     <Content Include="Views\BlogPost\ViewBlogPost.cshtml" />
     <Content Include="Views\BlogPost\AllPosts.cshtml" />
     <Content Include="Views\PR\PRDashboard.cshtml" />
+    <Content Include="Views\Shared\_RegisterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

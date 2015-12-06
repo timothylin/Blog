@@ -149,6 +149,9 @@ namespace Blog.Data
                         hashtag.HashtagId = checkHashtag.HashtagId;
                     }
                 }
+
+                blogPost = GetBlogPostById(blogPost.BlogPostId);
+
                 return blogPost;
             }
         }
@@ -272,6 +275,32 @@ namespace Blog.Data
             }
 
             return users;
+        }
+
+        public ApplicationUser UpdateRoleByUserID(string userId, string roleId)
+        {
+            ApplicationUser user = new ApplicationUser();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "UpdateRoleByUserID";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@UserID", userId);
+                cmd.Parameters.AddWithValue("@roleID", roleId);
+                cmd.Connection = cn;
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        user = PopulateUserFromDataReader(dr);
+                    }
+                }
+            }
+
+            return user;
         }
 
         private ApplicationUser PopulateUserFromDataReader(SqlDataReader dr)

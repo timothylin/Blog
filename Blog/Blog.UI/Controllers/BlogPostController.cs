@@ -73,7 +73,7 @@ namespace Blog.UI.Controllers
         //{
         //    return RedirectToAction("Index", "Home");
         //}
-        [Authorize(Roles = "Admin, PR")]
+        [Authorize(Roles = "Admin, PR, User")]
         public ActionResult ViewBlogPost(int id)
         {
             _ops = new BlogOperations();
