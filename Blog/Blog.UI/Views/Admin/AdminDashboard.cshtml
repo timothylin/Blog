@@ -242,7 +242,7 @@
                                                 @foreach (var role in user.Roles)
                                                 {
                                                     var userRole = Model.Roles.FirstOrDefault(r => r.Id == role.RoleId);
-
+                                                    
                                                     <td>@userRole.Name</td>
                                                 }
                                             </tr>
