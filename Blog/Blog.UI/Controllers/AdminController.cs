@@ -20,7 +20,7 @@ namespace Blog.UI.Controllers
             var vm = new AdminVM();
             vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts;
             vm.Users = _ops.GetAllUsers().Users;
-            vm.Roles = _ops.GetAllRoles().IdRoles;
+            vm.CreateRolesList(_ops.GetAllRoles().IdRoles);
 
             return View(vm);
         }
