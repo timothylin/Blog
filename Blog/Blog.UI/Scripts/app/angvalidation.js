@@ -1,1 +1,1 @@
-﻿var app = angular.module('validationPost', []);
+﻿var app = angular.module('validationPost', ['platanus.keepValues']);

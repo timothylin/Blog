@@ -12,7 +12,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/flatly/bootstrap.min.css" rel="stylesheet" typ="text/css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cerulean/bootstrap.min.css" rel="stylesheet" typ="text/css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <meta name="viewport" content="width=device-width" />
@@ -35,7 +35,7 @@
 </div>
 
 
-<body @*id="admin-body"*@ ng-app="PR">
+<body id="pr-body" ng-app="PR">
     <section ng-controller="PRPanelController as panel">
         <div class="row">
             <div class="col-sm-3 col-md-2  sidebar">
@@ -46,23 +46,14 @@
                     <li ng-class="{ active: panel.isSelected(2)}">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     </li>
-                    <li ng-class="{ active: panel.isSelected(3)}">
-                        <a href ng-click="panel.selectTab(3)">Posts</a>
-                    </li>
-                    <li ng-class="{ active: panel.isSelected(4)}">
-                        <a href ng-click="panel.selectTab(4)">Pages</a>
-                    </li>
-                    <li ng-class="{ active: panel.isSelected(5)}">
-                        <a href ng-click="panel.selectTab(5)">Users</a>
-                    </li>
                     <li>@Html.ActionLink("Add New Page", "AddNewPage", "Page")</li>
                     <li>@Html.ActionLink("Add New Post", "AddNewBlogPost", "BlogPost")</li>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
-                <br />
+                <br/>
                 <h2>PR Dashboard</h2>
-                <hr />
+                <hr/>
                 <!--DASHBOARD-->
                 <div ng-show="panel.isSelected(1)">
                     <div class="col-md-3">
@@ -97,149 +88,8 @@
                         </div>
                     </div>
                 </div>
-                <div ng-show="panel.isSelected(3)">
-                    <div class="col-md-8">
-                        <h3>Blog Posts</h3>
-
-                        @foreach (var post in Model.BlogPosts)
-                        {
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <h4>@post.BlogPostTitle</h4>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="col-md-12">
-                                        <p>Post Text</p>
-                                        @Html.Raw(post.BlogPostText)
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <p>Category: @post.Category.CategoryTitle</p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p>Status: @post.Status</p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p>Hashtags</p>
-                                            @if (post.Hashtags.Count > 0)
-                                            {
-                                                string hashtags = "";
-                                                for (int i = 0; i < post.Hashtags.Count - 1; i++)
-                                                {
-                                                    hashtags += "#" + post.Hashtags[i].HashtagTitle + ", ";
-                                                }
-                                                hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
-                                                <p>@hashtags</p>
-                                            }
-                                            else
-                                            {
-                                                <p>No hashtags added...</p>
-                                            }
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <p>Author: @post.User.UserName</p>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <p>Date: @post.TimeCreated</p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-
-                <div ng-show="panel.isSelected(4)">
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Pages</h3>
-                            </div>
-                            <div class="panel-body">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Title</th>
-                                            <th>Type</th>
-                                            <th>Author</th>
-                                            <th>Date</th>
-                                            <th>Approve</th>
-                                            <th>Deny</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Profiles</td>
-                                            <td>Page</td>
-                                            <td>Dean Choi</td>
-                                            <td>12/12/2015</td>
-                                            <td><button>Approve</button></td>
-                                            <td><button>Deny</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>About</td>
-                                            <td>Blog</td>
-                                            <td>Tim Lim</td>
-                                            <td>9/12/2015</td>
-                                            <td><button>Approve</button></td>
-                                            <td><button>Deny</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Events</td>
-                                            <td>Blog</td>
-                                            <td>Patrick Tighe</td>
-                                            <td>8/12/2015</td>
-                                            <td><button>Approve</button></td>
-                                            <td><button>Deny</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div ng-show="panel.isSelected(5)">
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Users</h3>
-                            </div>
-                            <div class="panel-body">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Role</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>deinzel</td>
-                                            <td>deanthedeanofmean@xanga.com</td>
-                                            <td>Dean</td>
-                                            <td>Choi</td>
-                                            <td>Admin</td>
-                                        </tr>
-                                        <tr>
-                                            <td>BIGTIMLIM</td>
-                                            <td>thechamp@hotmail.com</td>
-                                            <td>Timothy</td>
-                                            <td>Lim</td>
-                                            <td>Admin</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </div>
     </section>
 
 
