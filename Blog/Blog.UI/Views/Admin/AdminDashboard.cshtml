@@ -168,50 +168,51 @@
                         <div class="panel">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Pages</h3>
-                            </div>
-                            <div class="panel-body">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Title</th>
-                                            <th>Type</th>
-                                            <th>Author</th>
-                                            <th>Date</th>
-                                            <th>Approve</th>
-                                            <th>Deny</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Profiles</td>
-                                            <td>Page</td>
-                                            <td>Dean Choi</td>
-                                            <td>12/12/2015</td>
-                                            <td><button>Approve</button></td>
-                                            <td><button>Deny</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>About</td>
-                                            <td>Blog</td>
-                                            <td>Tim Lim</td>
-                                            <td>9/12/2015</td>
-                                            <td><button>Approve</button></td>
-                                            <td><button>Deny</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Events</td>
-                                            <td>Blog</td>
-                                            <td>Patrick Tighe</td>
-                                            <td>8/12/2015</td>
-                                            <td><button>Approve</button></td>
-                                            <td><button>Deny</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="panel-body">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Type</th>
+                                                <th>Author</th>
+                                                <th>Date</th>
+                                                <th>Approve</th>
+                                                <th>Deny</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Profiles</td>
+                                                <td>Page</td>
+                                                <td>Dean Choi</td>
+                                                <td>12/12/2015</td>
+                                                <td><button>Approve</button></td>
+                                                <td><button>Deny</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>About</td>
+                                                <td>Blog</td>
+                                                <td>Tim Lim</td>
+                                                <td>9/12/2015</td>
+                                                <td><button>Approve</button></td>
+                                                <td><button>Deny</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Events</td>
+                                                <td>Blog</td>
+                                                <td>Patrick Tighe</td>
+                                                <td>8/12/2015</td>
+                                                <td><button>Approve</button></td>
+                                                <td><button>Deny</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div ng-show="panel.isSelected(5)">
                     <div class="col-md-6">
                         <div class="panel">
@@ -240,9 +241,9 @@
 
                                                 @foreach (var role in user.Roles)
                                                 {
-                                                var userRole = Model.Roles.FirstOrDefault(r => r.Id == role.RoleId);
+                                                    var userRole = Model.Roles.FirstOrDefault(r => r.Id == role.RoleId);
 
-                                                <td>@userRole.Name</td>
+                                                    <td>@userRole.Name</td>
                                                 }
                                             </tr>
                                         }
@@ -268,6 +269,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </section>
 
 
