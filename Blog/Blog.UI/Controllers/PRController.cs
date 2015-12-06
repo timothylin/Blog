@@ -15,7 +15,7 @@ namespace Blog.UI.Controllers
         public ActionResult PRDashboard()
         {
             _ops = new BlogOperations();
-            var vm = new PrVM();
+            var vm = new PRVM();
             vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts;
             return View(vm);
         }

@@ -1,7 +1,7 @@
 USE [Blogs]
 GO
 
-/****** Object:  StoredProcedure [dbo].[UpdateRoleByUserID]    Script Date: 12/5/2015 8:11:50 PM ******/
+/****** Object:  StoredProcedure [dbo].[UpdateRoleByUserID]    Script Date: 12/6/2015 4:56:38 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,13 +11,13 @@ GO
 CREATE procedure [dbo].[UpdateRoleByUserID]
 (
 @UserID nvarchar(128),
-@roleID nvarchar(128)
+@RoleID nvarchar(128)
 )
 as
 begin
 
 update AspNetUserRoles
-	set RoleId = @roleID
+	set RoleId = @RoleID
 	where UserId = @UserID
 
 exec GetUserByID @UserID

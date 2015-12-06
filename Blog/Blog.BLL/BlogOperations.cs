@@ -175,10 +175,28 @@ namespace Blog.BLL
             return _response;
         }
 
-        public Response UpdateRoleByUserID(string userId, string roleId)
+        public Response AddRoleToUser(string userId, string roleId)
         {
             _response = new Response();
-            var user = _repo.UpdateRoleByUserID(userId, roleId);
+            var user = _repo.AddRoleToUser(userId, roleId);
+
+            foreach (var role in user.Roles)
+            {
+                if (role.RoleId == roleId)
+                {
+                    _response.Success = true;
+                    _response.User = user;
+                }
+            }
+
+            return _response;
+
+        }
+
+        public Response UpdateRoleByUserId(string userId, string roleId)
+        {
+            _response = new Response();
+            var user = _repo.UpdateRoleByUserId(userId, roleId);
 
             foreach (var role in user.Roles)
             {
