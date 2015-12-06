@@ -11,7 +11,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-nav navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -20,26 +20,28 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                @*<a href="~/Views/Home/Index.cshtml" class="navbar-brand"><img id="jsDate-logo" src="~/Content/img/Logo_JDate_official.png" /></a>*@
-                <div class="hidden-lg hidden-md">
-                    @*@Html.ActionLink("Js Date", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
-                </div>
+                <a href="~/Home" class="pull-left" > <img alt="JS Date" id="jsDate-logo" src="~/Content/img/Logo_JDate_official.png" /></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - JSDate: brought to you by JDate</p>
-        </footer>
+<div class="body-content">
+    @RenderBody()
+    <hr/>
+</div>
+<footer class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <a href="~/Home" class="pull-left"> <img alt="JS Date" id="jsDate-logo" src="~/Content/img/Logo_JDate_official.png" /></a>
+        </div>
     </div>
+    <p>&copy; @DateTime.Now.Year - JSDate: brought to you by JDate</p>
+</footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

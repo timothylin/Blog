@@ -6,8 +6,9 @@
 }
 
 body {
-    padding-top: 50px;
+    padding-top: 85px;
     padding-bottom: 20px;
+    min-height: 400px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -53,6 +54,7 @@ textarea {
 
 #jsDate-logo {
     max-height: 80px;
+    margin: 5px 20px;
 }
 
 .nav-sidebar {
@@ -77,8 +79,15 @@ textarea {
     }
 }
 
+/*.icon-bar {
+    background-color: grey;
+}*/
+
+.navbar-toggle .icon-bar {
+    background-color: black;
+}
 html, body {
-    background-color: #f8f8f8;
+    background-color: #ffeeee;
 }
 .sidebar a {
     color: white;
@@ -98,15 +107,29 @@ html, body {
     padding-top: 50px;
 }
 
+#pr-body {
+    padding-top: 50px;
+}
+
 .nav-sidebar > li > a:hover {
     background-color:  #323045;
 }
 
-.navbar-inverse {
+.navbar-nav {
     z-index: 1;
-    background-color: #313145;
+    background-color: white;
+    background-image: none;
+}
+.navbar-nav li {
+    font-size: 20px;
+    background-color: white;
+    padding-top: 15px;
 }
 
+.navbar-inverse {
+    z-index: 1;
+    background-color: #19191f;
+}
 
 #home-slider item {
     width: 100%;
@@ -129,9 +152,10 @@ html, body {
     padding-top: 100px;
 }
 
-/*.pull-right  {
+.date {
     color: white;
-}*/
+    font-size: 12px;
+}
 
 .padding-bot-40 {
     padding-bottom: 40px;
@@ -146,6 +170,26 @@ html, body {
 }
 
 .head-block-thumb {
-    max-width: 220px;
-    max-height: 225px;
+    max-width: 150px;
+    max-height: 150px;
 }
+
+.head-block-desc {
+    padding-left: 10px;
+}
+
+.panel {
+    border-radius: 0;
+    border: 0;
+}
+
+footer {
+    background-color: #323045;
+    color: #fff;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 115px 0;
+    position:relative;
+}
+
+

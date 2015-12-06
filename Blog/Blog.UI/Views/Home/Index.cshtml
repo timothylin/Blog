@@ -1,9 +1,10 @@
 ﻿@model Blog.UI.Models.HomeVM
+
 @{
     ViewBag.Title = "Home Page";
 }
 
-<div class="container">
+<div class="container main-body">
     <br/>
     <div class="row">
         <div class="col-md-6">
@@ -19,22 +20,22 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     @*<div class="item active">
-                        @if (!Request.IsAuthenticated)
-                        {
-                            <div class="row">
-                                <h4><span class="pull-right lead">We are JsDate and we aim to "plug" you in with the coding “partner” of your dreams.</span></h4>
-                                <h4><span class="pull-right lead">Get ready to take your “paired-programming” to the next level...</span></h4>
-                                <p>
-                                    <button class="btn btn-default pull-right">@Html.ActionLink("Register Today!", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</button>
-                                </p>
-                            </div>
-                        }
-                    </div>*@
+                            @if (!Request.IsAuthenticated)
+                            {
+                                <div class="row">
+                                    <h4><span class="pull-right lead">We are JsDate and we aim to "plug" you in with the coding “partner” of your dreams.</span></h4>
+                                    <h4><span class="pull-right lead">Get ready to take your “paired-programming” to the next level...</span></h4>
+                                    <p>
+                                        <button class="btn btn-default pull-right">@Html.ActionLink("Register Today!", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</button>
+                                    </p>
+                                </div>
+                            }
+                        </div>*@
                     <div class="item active">
-                        
+
                         <img src="@Model.BlogPosts[0].CoverImageUrl" alt="Chania">
                     </div>
-                    
+
                     <div class="item">
                         <img src="@Model.BlogPosts[1].CoverImageUrl" alt="Flower">
                     </div>
@@ -60,85 +61,143 @@
                 <div class="col-xs-4 padding-bot-40">
                     <img class="head-block-thumb" src="@Model.BlogPosts[2].CoverImageUrl"/>
                 </div>
-                <div class="col-xs-8 padding-left-40">
+                <div class="col-xs-8 head-block-desc">
                     <h3>@Model.BlogPosts[2].BlogPostTitle</h3>
                     <p>@Model.BlogPosts[2].Description</p>
                 </div>
+                <hr/>
             </div>
-        <div class="row">
-            <div class="col-xs-4 padding-bot-40">
-                <img class="head-block-thumb" src="@Model.BlogPosts[2].CoverImageUrl" />
+            <div class="row">
+                <div class="col-xs-4 padding-bot-40">
+                    <img class="head-block-thumb" src="@Model.BlogPosts[2].CoverImageUrl"/>
+                </div>
+                <div class="col-xs-8 head-block-desc">
+                    <h3>@Model.BlogPosts[2].BlogPostTitle</h3>
+                    <p>@Model.BlogPosts[2].Description</p>
+                </div>
+                <hr/>
             </div>
-            <div class="col-xs-8 padding-left-40">
-                <h3>@Model.BlogPosts[2].BlogPostTitle</h3>
-                <p>@Model.BlogPosts[2].Description</p>
-            </div>       
-        </div>
             <div class="row">
                 <div class="col-xs-4">
                     <img class="head-block-thumb" src="@Model.BlogPosts[2].CoverImageUrl"/>
                 </div>
-                <div class="col-xs-8 padding-left-40">
+                <div class="col-xs-8 head-block-desc">
                     <h3>@Model.BlogPosts[2].BlogPostTitle</h3>
                     <p>@Model.BlogPosts[2].Description</p>
                 </div>
-            </div>      
+                <hr/>
+            </div>
         </div>
     </div>
 
-    <div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
+    <br/>
+    <br/>
+    <div class="container-fluid home-banner">
         <div class="row">
-            <div class="col-md-8">
-                <h3>Blog Posts</h3>
-                @foreach (var post in Model.BlogPosts)
+            <div class="text-center">
+                <h3>Break between content</h3>
+            </div>
+            @foreach (var post in Model.BlogPosts)
+            {
+                <div class="col-sm-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Different Type of Post</div>
+                        <div class="panel-body well">
 
-                    //for (int i = 6; i < 12; i++){
-                    //Model.BlogPosts[i].;
-                {
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3>@post.BlogPostTitle<small class="pull-right">@post.TimeCreated</small>
-                            </h3>
-                        </div>
+                            <ul>
+                                <li>@post.BlogPostTitle</li>
+                            </ul>
 
-                        <div class="panel-body">
-                            <div class="col-md-12">
-                                <p>Post Text</p>
-                                <blockquote>@Html.Raw(post.Description)</blockquote>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <p>Category: @post.Category.CategoryTitle</p>
-                                </div>
-                                <div class="col-md-3 pull-right">
-                                    <p>Hashtags</p>
-                                    @if (post.Hashtags.Count > 0)
-                                    {
-                                        string hashtags = "";
-                                        for (int i = 0; i < post.Hashtags.Count - 1; i++)
-                                        {
-                                            hashtags += "#" + post.Hashtags[i].HashtagTitle + ", ";
-                                        }
-                                        hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
-                                        <p>@hashtags</p>
-                                    }
-                                    else
-                                    {
-                                        <p>No hashtags added...</p>
-                                    }
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <small><cite title="Source Title">By: @(post.User.FirstName + " " + post.User.LastName)</cite></small>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                }
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="row">
+
+                <h3>Blog Posts</h3>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-8">
+                    @foreach (var post in Model.BlogPosts)
+
+                        //for (int i = 6; i < 12; i++){
+                        //Model.BlogPosts[i].;
+                    {
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3>
+                                    @post.BlogPostTitle<small class="pull-right date">@post.TimeCreated.ToShortDateString()</small>
+                                </h3>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="col-md-12">
+                                    <p>Post Text</p>
+                                    <blockquote>@Html.Raw(post.Description)</blockquote>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p>Category: @post.Category.CategoryTitle</p>
+                                    </div>
+                                    <div class="col-md-3 pull-right">
+                                        <p>Hashtags</p>
+                                        @if (post.Hashtags.Count > 0)
+                                        {
+                                            string hashtags = "";
+                                            for (int i = 0; i < post.Hashtags.Count - 1; i++)
+                                            {
+                                                hashtags += "#" + post.Hashtags[i].HashtagTitle + ", ";
+                                            }
+                                            hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
+                                            <p>@hashtags</p>
+                                        }
+                                        else
+                                        {
+                                            <p>No hashtags added...</p>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <small><cite title="Source Title">By: @(post.User.FirstName + " " + post.User.LastName)</cite></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Events</div>
+                        <div class="panel-body well">
+                            @foreach (var post in Model.BlogPosts)
+                            {
+                                <ul>
+                                    <li>@post.BlogPostTitle</li>
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">TWEETS</div>
+                        <div class="panel-body well">
+                            @foreach (var post in Model.BlogPosts)
+                            {
+                                <ul>
+                                    <li>@post.BlogPostTitle</li>
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
