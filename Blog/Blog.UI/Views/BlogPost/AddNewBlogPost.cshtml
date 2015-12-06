@@ -1,4 +1,5 @@
-﻿@model Blog.UI.Models.AddBlogPostVM
+﻿@using System.Activities.Expressions
+@model Blog.UI.Models.AddBlogPostVM
 
 @{
     ViewBag.Title = "Add New Blog Post";
@@ -7,21 +8,27 @@
 <br/>
 <div class="container">
     <div class="row" ng-app="validationPost">
-        <div class="well">
+        <div class="well" keep-input-values>
             <form action="/BlogPost/AddNewBlogPost" class="form-horizontal" method="post" name="myForm" novalidate>
                 <fieldset>
                     <legend><b>Add a New Blog Post</b></legend>
+                    @Html.ValidationSummary(false)
                     <div class="form-group">
                         <label class="col-md-2 control-label">Blog Title</label>
                         <div class="col-md-10">
-                            <input class="form-control" id="BlogPost_BlogPostTitle" name="BlogPost.BlogPostTitle" placeholder="Blog Title" type="text" value="">
+                            @Html.TextBoxFor(m => m.BlogPost.BlogPostTitle, new {@class="form-control", @placeholder="Blog Title", @required="", @ng_model="Title"})
+                            @*<input class="form-control" id="BlogPost_BlogPostTitle" name="BlogPost.BlogPostTitle" placeholder="Blog Title" type="text" ng-model="Title" required>*@
+                            <label class="control-label text-danger" ng-show="myForm['BlogPost.BlogPostTitle'].$dirty && myForm['BlogPost.BlogPostTitle'].$invalid && myForm['BlogPost.BlogPostTitle'].$error.required">
+                                Title is required
+                            </label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-2 control-label">Blog Description</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" id="BlogPost_Description" name="BlogPost.Description" placeholder="Blog Description" type="text" value="" ng-model="Description" required ng-maxlength="200"></textarea>
+                            @Html.TextAreaFor(m => m.BlogPost.Description, new {@class="form-control", @placeholder="Blog Description", @ng_model="Description", @required="", @ng_maxlength="200"})
+                            @*<textarea class="form-control" id="BlogPost_Description" name="BlogPost.Description" placeholder="Blog Description" type="text" ng-model="Description" required ng-maxlength="200"></textarea>*@
                             <label class="control-label text-danger" ng-show="myForm['BlogPost.Description'].$dirty && myForm['BlogPost.Description'].$invalid && myForm['BlogPost.Description'].$error.required">
                                 Description is required
                             </label>
@@ -34,7 +41,11 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Cover Image URL</label>
                         <div class="col-md-10">
-                            <input class="form-control" id="BlogPost_CoverImageUrl" name="BlogPost.CoverImageUrl" placeholder="Cover Image URL" type="text" value="">
+                            @Html.TextBoxFor(m => m.BlogPost.CoverImageUrl, new { @class = "form-control", @placeholder = "Cover Image URL", @required = "", @ng_model = "CoverImageUrl" })
+                            @*<input class="form-control" id="BlogPost_CoverImageUrl" name="BlogPost.CoverImageUrl" placeholder="Cover Image URL" type="text" ng-model="CoverImageUrl" required>*@
+                            <label class="control-label text-danger" ng-show="myForm['BlogPost.CoverImageUrl'].$dirty && myForm['BlogPost.CoverImageUrl'].$invalid && myForm['BlogPost.CoverImageUrl'].$error.required">
+                                Cover Image URL is required
+                            </label>
                         </div>
                     </div>
 
@@ -49,7 +60,8 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Content Text</label>
                         <div class="col-md-8">
-                            @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new {@id = "mytextarea"})
+                            @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new {@id="mytextarea"})
+                            @*<textarea cols="20" id="mytextarea" name="BlogPost.BlogPostText" rows="2" ng-model="ContentText" required></textarea>*@
                         </div>
                     </div>
 
@@ -90,5 +102,6 @@
     <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
     <script src="~/Scripts/tag-it.min.js"></script>
     <script src="~/Scripts/app/tagitload.js"></script>
+    <script src="~/Scripts/angular-keep-values.min.js"></script>
     <script src="~/Scripts/app/angvalidation.js"></script>
 }

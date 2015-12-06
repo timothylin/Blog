@@ -40,31 +40,37 @@ namespace Blog.UI.Controllers
         public ActionResult AddNewBlogPost(AddBlogPostVM newPost)
         {
             _ops = new BlogOperations();
-            newPost.BlogPost.User.UserName = User.Identity.GetUserName();
-            newPost.BlogPost.TimeCreated = DateTime.Now;
-            newPost.BlogPost.Status = Status.Pending;
 
-            if (User.IsInRole("Admin"))
+            if (ModelState.IsValid)
             {
-                newPost.BlogPost.Status = Status.Approved;
-            }
+                
+                newPost.BlogPost.User.UserName = User.Identity.GetUserName();
+                newPost.BlogPost.TimeCreated = DateTime.Now;
+                newPost.BlogPost.Status = Status.Pending;
 
-            foreach (var ht in newPost.hashtags)
+                if (User.IsInRole("Admin"))
+                {
+                    newPost.BlogPost.Status = Status.Approved;
+                }
+
+                foreach (var ht in newPost.hashtags)
+                {
+                    var newTag = new Hashtag();
+                    newTag.HashtagTitle = ht;
+                    newPost.BlogPost.Hashtags.Add(newTag);
+                }
+
+                var post = _ops.AddNewBlogPost(newPost.BlogPost).BlogPost;
+
+                return View("BlogPostDetails", post);
+
+                //Ajax API call for confirmation modal
+            }
+            else
             {
-                var newTag = new Hashtag();
-                newTag.HashtagTitle = ht;
-                newPost.BlogPost.Hashtags.Add(newTag);
+                newPost.InitializeCategoriesList(_ops.GetAllCategories().Categories);
+                return View(newPost);
             }
-
-            //newPost.BlogPost.Category.CategoryTitle = _ops.GetCategoryById(newPost.BlogPost.Category.CategoryId).Category.CategoryTitle;
-
-            var post = _ops.AddNewBlogPost(newPost.BlogPost).BlogPost;
-
-            return View("BlogPostDetails", post);
-
-            //Ajax API call for confirmation modal
-
-
         }
 
         //[Authorize(Roles = "Admin, PR")]
