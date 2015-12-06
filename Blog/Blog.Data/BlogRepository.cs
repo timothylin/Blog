@@ -118,36 +118,41 @@ namespace Blog.Data
 
                 blogPost.BlogPostId = p.Get<int>("BlogPostID");
 
-                foreach (var hashtag in blogPost.Hashtags)
+                if (blogPost.Hashtags != null)
                 {
-                    var checkHashtag = hashtags.FirstOrDefault(h => h.HashtagTitle == hashtag.HashtagTitle);
 
-                    if (checkHashtag == null)
+                    foreach (var hashtag in blogPost.Hashtags)
                     {
-                        p = new DynamicParameters();
-                        p.Add("@HashtagTitle", hashtag.HashtagTitle);
-                        p.Add("@HashtagID", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                        var checkHashtag = hashtags.FirstOrDefault(h => h.HashtagTitle == hashtag.HashtagTitle);
 
-                        cn.Execute("AddNewHashtag", p, commandType: CommandType.StoredProcedure);
+                        if (checkHashtag == null)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@HashtagTitle", hashtag.HashtagTitle);
+                            p.Add("@HashtagID", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                        hashtag.HashtagId = p.Get<int>("HashtagID");
+                            cn.Execute("AddNewHashtag", p, commandType: CommandType.StoredProcedure);
 
-                        p = new DynamicParameters();
-                        p.Add("@BlogPostID", blogPost.BlogPostId);
-                        p.Add("@HashtagID", hashtag.HashtagId);
+                            hashtag.HashtagId = p.Get<int>("HashtagID");
 
-                        cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
+                            p = new DynamicParameters();
+                            p.Add("@BlogPostID", blogPost.BlogPostId);
+                            p.Add("@HashtagID", hashtag.HashtagId);
+
+                            cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@BlogPostID", blogPost.BlogPostId);
+                            p.Add("@HashtagID", checkHashtag.HashtagId);
+
+                            cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
+
+                            hashtag.HashtagId = checkHashtag.HashtagId;
+                        }
                     }
-                    else
-                    {
-                        p = new DynamicParameters();
-                        p.Add("@BlogPostID", blogPost.BlogPostId);
-                        p.Add("@HashtagID", checkHashtag.HashtagId);
 
-                        cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
-
-                        hashtag.HashtagId = checkHashtag.HashtagId;
-                    }
                 }
 
                 blogPost = GetBlogPostById(blogPost.BlogPostId);
