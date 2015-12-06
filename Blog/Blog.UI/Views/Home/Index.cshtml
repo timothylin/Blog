@@ -3,10 +3,10 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="no-container">
+<div class="container">
     <br/>
     <div class="row">
-        <div class="col-md-offset-1 col-md-6">
+        <div class="col-md-6">
             <div id="home-slider" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
@@ -18,7 +18,7 @@
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
-                    <div class="item active">
+                    @*<div class="item active">
                         @if (!Request.IsAuthenticated)
                         {
                             <div class="row">
@@ -29,13 +29,9 @@
                                 </p>
                             </div>
                         }
-
-                        @*@foreach(var bannerPost in Model) {
-            <img src="img_chania.jpg" alt="Chania">
-            <h1 class="lead">@bannerPost.BlogPostTitle</h1>
-
-            }*@</div>
-                    <div class="item">
+                    </div>*@
+                    <div class="item active">
+                        
                         <img src="@Model.BlogPosts[0].CoverImageUrl" alt="Chania">
                     </div>
                     
@@ -59,36 +55,36 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="row">
-                <div class="col-md-12 padding-bot-40">
-                    <img src="@Model.BlogPosts[2].CoverImageUrl"/>
+                <div class="col-xs-4 padding-bot-40">
+                    <img class="head-block-thumb" src="@Model.BlogPosts[2].CoverImageUrl"/>
                 </div>
-                <div class="row">
-                    <div class="col-md-8 padding-bot-40">
-                        <img src="@Model.BlogPosts[2].CoverImageUrl"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <img src="@Model.BlogPosts[2].CoverImageUrl"/>
-                    </div>
+                <div class="col-xs-8 padding-left-40">
+                    <h3>@Model.BlogPosts[2].BlogPostTitle</h3>
+                    <p>@Model.BlogPosts[2].Description</p>
                 </div>
             </div>
+        <div class="row">
+            <div class="col-xs-4 padding-bot-40">
+                <img class="head-block-thumb" src="@Model.BlogPosts[2].CoverImageUrl" />
+            </div>
+            <div class="col-xs-8 padding-left-40">
+                <h3>@Model.BlogPosts[2].BlogPostTitle</h3>
+                <p>@Model.BlogPosts[2].Description</p>
+            </div>       
+        </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <img class="head-block-thumb" src="@Model.BlogPosts[2].CoverImageUrl"/>
+                </div>
+                <div class="col-xs-8 padding-left-40">
+                    <h3>@Model.BlogPosts[2].BlogPostTitle</h3>
+                    <p>@Model.BlogPosts[2].Description</p>
+                </div>
+            </div>      
         </div>
     </div>
-
-    @*<div id="home-banner">
-
-            <div class="container">
-
-                <div class="row">
-                    <p>
-                        <button class="btn btn-default pull-right">@Html.ActionLink("Register Today!", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</button>
-                    </p>
-                </div>
-            </div>
-        </div>*@
 
     <div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
         <div class="row">
@@ -101,7 +97,7 @@
                 {
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3>@post.BlogPostTitle<small class="pull-right">Date: @post.TimeCreated</small>
+                            <h3>@post.BlogPostTitle<small class="pull-right">@post.TimeCreated</small>
                             </h3>
                         </div>
 
@@ -137,9 +133,6 @@
                                 <div class="col-md-2">
                                     <small><cite title="Source Title">By: @(post.User.FirstName + " " + post.User.LastName)</cite></small>
                                 </div>
-                                @*<div class="col-md-2">
-                                    <p>Status: @post.Status</p>
-                                </div>*@
                             </div>
                         </div>
                     </div>

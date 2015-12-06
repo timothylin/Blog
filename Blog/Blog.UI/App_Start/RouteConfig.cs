@@ -14,10 +14,23 @@ namespace Blog.UI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Admin",
+                url: "Admin/{action}/{id}",
+                defaults: new { controller = "Admin", action = "AdminDashboard", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "PR",
+                url: "PR/{action}/{id}",
+                defaults: new { controller = "PR", action = "PRDashBoard", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }

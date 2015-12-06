@@ -38,9 +38,5 @@ namespace Blog.UI.Controllers
             return View();
         }
 
-        public ActionResult BlogPost()
-        {
-            return View();
-        }
     }
 }

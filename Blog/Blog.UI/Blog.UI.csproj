@@ -184,6 +184,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\PRController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -200,6 +201,7 @@
     <Compile Include="Models\HomeVM.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PrVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1272,21 +1274,15 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Admin\AngAdmin.cshtml" />
-    <Content Include="Views\Home\PR.cshtml" />
+    <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\BlogPost\Index.cshtml" />
     <Content Include="Views\BlogPost\AddNewBlogPost.cshtml" />
     <Content Include="Views\Page\Index.cshtml" />
     <Content Include="Views\Page\AddNewPage.cshtml" />
-    <Content Include="Views\Shared\_AdminDashboardLayout.cshtml" />
-    <Content Include="Views\Shared\_UserDashboardLayout.cshtml" />
-    <Content Include="Views\Admin\Posts.cshtml" />
-    <Content Include="Views\Admin\Pages.cshtml" />
-    <Content Include="Views\Admin\Users.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\BlogPost\ConfirmBlogPost.cshtml" />
     <Content Include="Views\BlogPost\BlogPostDetails.cshtml" />
     <Content Include="Views\BlogPost\ViewBlogPost.cshtml" />
+    <Content Include="Views\BlogPost\AllPosts.cshtml" />
+    <Content Include="Views\PR\PRDashboard.cshtml" />
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>

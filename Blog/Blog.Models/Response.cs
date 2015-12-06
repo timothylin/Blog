@@ -22,6 +22,7 @@ namespace Blog.Models
         public List<StaticPage> StaticPages { get; set; }
         public Category Category { get; set; }
         public List<Category> Categories { get; set; }
+        public ApplicationUser User { get; set; }
 
         public Response()
         {
@@ -36,6 +37,7 @@ namespace Blog.Models
             StaticPages = new List<StaticPage>();
             Category = new Category();
             Categories = new List<Category>();
+            User = new ApplicationUser();
         }
     }
 }

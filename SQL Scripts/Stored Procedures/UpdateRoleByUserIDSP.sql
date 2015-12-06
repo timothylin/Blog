@@ -1,7 +1,7 @@
 USE [Blogs]
 GO
 
-/****** Object:  StoredProcedure [dbo].[UpdateRoleByUserID]    Script Date: 12/5/2015 6:28:02 PM ******/
+/****** Object:  StoredProcedure [dbo].[UpdateRoleByUserID]    Script Date: 12/5/2015 8:11:50 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,7 +11,7 @@ GO
 CREATE procedure [dbo].[UpdateRoleByUserID]
 (
 @UserID nvarchar(128),
-@roleID int
+@roleID nvarchar(128)
 )
 as
 begin

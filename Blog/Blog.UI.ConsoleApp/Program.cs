@@ -15,6 +15,16 @@ namespace Blog.UI.ConsoleApp
         {
             //var repo = new BlogRepository();
 
+            //var user = repo.UpdateRoleByUserID("06c53da2-4bfe-4a1f-86ad-cf045b593317", "0");
+
+            //foreach (var identityUserRole in user.Roles)
+            //{
+            //    Console.WriteLine(identityUserRole.RoleId);
+            //    Console.WriteLine(identityUserRole.UserId);
+            //}
+
+            //Console.WriteLine(user.Id);
+
             //var hashtags = repo.GetAllBlogPosts();
 
             //foreach (var hashtag in hashtags)
@@ -48,7 +58,7 @@ namespace Blog.UI.ConsoleApp
             //Console.WriteLine(blog.BlogPost.BlogPostText);
             //Console.WriteLine(blog.BlogPost.BlogPostTitle);
 
-            //Console.ReadLine();
+            Console.ReadLine();
         }
     }
 }
