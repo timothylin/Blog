@@ -11,6 +11,8 @@ namespace Blog.UI.Controllers
     public class AdminController : Controller
     {
         private BlogOperations _ops;
+
+        [Authorize(Roles = "Admin")]
         // GET: Admin
         public ActionResult AdminDashboard()
         {
@@ -19,6 +21,13 @@ namespace Blog.UI.Controllers
             vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts;
             vm.Users = _ops.GetAllUsers().Users;
             vm.Roles = _ops.GetAllRoles().IdRoles;
+
+            return View(vm);
+        }
+
+        public ActionResult AddNewUser()
+        {
+            var vm = new RegisterViewModel();
 
             return View(vm);
         }

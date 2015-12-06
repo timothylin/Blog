@@ -8,13 +8,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cerulean/bootstrap.min.css" rel="stylesheet" typ="text/css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cerulean/bootstrap.min.css" rel="stylesheet" typ="text/css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="width=device-width" />
     <title>JsDate</title>
 </head>
 <body id="admin-body" ng-app="Admin">
@@ -230,22 +230,40 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>deinzel</td>
-                                            <td>deanthedeanofmean@xanga.com</td>
-                                            <td>Dean</td>
-                                            <td>Choi</td>
-                                            <td>Admin</td>
-                                        </tr>
-                                        <tr>
-                                            <td>BIGTIMLIM</td>
-                                            <td>thechamp@hotmail.com</td>
-                                            <td>Timothy</td>
-                                            <td>Lim</td>
-                                            <td>Admin</td>
-                                        </tr>
+                                        @foreach (var user in Model.Users)
+                                        {
+                                            <tr>
+                                                <td>@user.UserName</td>
+                                                <td>@user.Email</td>
+                                                <td>@user.FirstName</td>
+                                                <td>@user.LastName</td>
+
+                                                @foreach (var role in user.Roles)
+                                                {
+                                                var userRole = Model.Roles.FirstOrDefault(r => r.Id == role.RoleId);
+
+                                                <td>@userRole.Name</td>
+                                                }
+                                            </tr>
+                                        }
+                                        @*<tr>
+                                                <td>deinzel</td>
+                                                <td>deanthedeanofmean@xanga.com</td>
+                                                <td>Dean</td>
+                                                <td>Choi</td>
+                                                <td>Admin</td>
+                                            </tr>
+                                            <tr>
+                                                <td>BIGTIMLIM</td>
+                                                <td>thechamp@hotmail.com</td>
+                                                <td>Timothy</td>
+                                                <td>Lim</td>
+                                                <td>Admin</td>
+                                            </tr>*@
                                     </tbody>
                                 </table>
+
+                                @Html.ActionLink("Add New User", "AddNewUser", "Admin", new { @class = "btn btn-success" })
                             </div>
                         </div>
                     </div>
@@ -261,4 +279,3 @@
     <script src="~/Scripts/app/admin.js"></script>
 </body>
 </html>
-

@@ -6,11 +6,11 @@ using Blog.Models;
 
 namespace Blog.UI.Models
 {
-    public class PrVM
+    public class PRVM
     {
         public List<BlogPost> BlogPosts { get; set; }
 
-        public PrVM()
+        public PRVM()
         {
             BlogPosts = new List<BlogPost>();
         }

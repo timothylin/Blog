@@ -201,7 +201,7 @@
     <Compile Include="Models\HomeVM.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\PrVM.cs" />
+    <Compile Include="Models\PRVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1286,6 +1286,7 @@
     <Content Include="Views\BlogPost\AllPosts.cshtml" />
     <Content Include="Views\PR\PRDashboard.cshtml" />
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />
+    <Content Include="Views\Admin\AddNewUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

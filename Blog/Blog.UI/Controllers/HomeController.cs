@@ -33,7 +33,7 @@ namespace Blog.UI.Controllers
             return View();
         }
 
-        public ActionResult PR()
+        public ActionResult Pr()
         {
             return View();
         }
