@@ -13,12 +13,14 @@ namespace Blog.UI.Models
         public List<BlogPost> BlogPosts { get; set; }
         public List<ApplicationUser> Users { get; set; }
         public List<IdentityRole> Roles { get; set; }
+        public List<StaticPage> Pages { get; set; } 
 
         public AdminVM()
         {
             BlogPosts = new List<BlogPost>();
             Users = new List<ApplicationUser>();
             Roles = new List<IdentityRole>();
+            Pages = new List<StaticPage>();
         }
     }
 }
