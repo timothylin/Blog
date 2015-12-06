@@ -53,7 +53,7 @@ textarea {
 
 
 #jsDate-logo {
-    max-height: 80px;
+    max-height: 60px;
     margin: 5px 20px;
 }
 
@@ -121,9 +121,9 @@ html, body {
     background-image: none;
 }
 .navbar-nav li {
-    font-size: 20px;
+    font-size: 16px;
     background-color: white;
-    padding-top: 15px;
+    padding-top: 12px;
 }
 
 .navbar-inverse {

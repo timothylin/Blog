@@ -14,7 +14,7 @@
                     <legend><b>Add a New Blog Post</b></legend>
                     @Html.ValidationSummary(false)
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Blog Title</label>
+                        <label for="BlogPost_BlogPostTitle" class="col-md-2 control-label">Blog Title</label>
                         <div class="col-md-10">
                             @Html.TextBoxFor(m => m.BlogPost.BlogPostTitle, new {@class="form-control", @placeholder="Blog Title", @required="", @ng_model="Title"})
                             @*<input class="form-control" id="BlogPost_BlogPostTitle" name="BlogPost.BlogPostTitle" placeholder="Blog Title" type="text" ng-model="Title" required>*@
@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Blog Description</label>
+                        <label for="BlogPost_Description" class="col-md-2 control-label">Blog Description</label>
                         <div class="col-md-10">
                             @Html.TextAreaFor(m => m.BlogPost.Description, new {@class="form-control", @placeholder="Blog Description", @ng_model="Description", @required="", @ng_maxlength="200"})
                             @*<textarea class="form-control" id="BlogPost_Description" name="BlogPost.Description" placeholder="Blog Description" type="text" ng-model="Description" required ng-maxlength="200"></textarea>*@
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Cover Image URL</label>
+                        <label for="BlogPost_CoverImageUrl" class="col-md-2 control-label">Cover Image URL</label>
                         <div class="col-md-10">
                             @Html.TextBoxFor(m => m.BlogPost.CoverImageUrl, new { @class = "form-control", @placeholder = "Cover Image URL", @required = "", @ng_model = "CoverImageUrl" })
                             @*<input class="form-control" id="BlogPost_CoverImageUrl" name="BlogPost.CoverImageUrl" placeholder="Cover Image URL" type="text" ng-model="CoverImageUrl" required>*@
@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Category</label>
+                        <label for="BlogPost_Category_CategoryId" class="col-md-2 control-label">Category</label>
                         <div class="col-md-3">
                             @Html.DropDownListFor(m => m.BlogPost.Category.CategoryId, Model.CategoriesList, "-- Select Category --", new {@class = "form-control"})
                         </div>
@@ -58,7 +58,7 @@
                     
 
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Content Text</label>
+                        <label for="mytextarea" class="col-md-2 control-label">Content Text</label>
                         <div class="col-md-8">
                             @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new {@id="mytextarea"})
                             @*<textarea cols="20" id="mytextarea" name="BlogPost.BlogPostText" rows="2" ng-model="ContentText" required></textarea>*@
