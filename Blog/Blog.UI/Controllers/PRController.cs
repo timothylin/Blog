@@ -8,17 +8,15 @@ using Blog.UI.Models;
 
 namespace Blog.UI.Controllers
 {
-    public class AdminController : Controller
+    public class PRController : Controller
     {
         private BlogOperations _ops;
-        // GET: Admin
-        public ActionResult AdminDashboard()
+        // GET: PR
+        public ActionResult PRDashboard()
         {
             _ops = new BlogOperations();
-            var vm = new AdminVM();
+            var vm = new PrVM();
             vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts;
-            
-            
             return View(vm);
         }
     }

@@ -40,22 +40,30 @@
         <div class="col-sm-3 col-md-2  sidebar">
             <ul class="nav nav-sidebar">
                 <li ng-class="{ active: panel.isSelected(1)}">
-                    <a href ng-click="panel.selectTab(1)">Dashboard</a>
+                    <a href ng-click="panel.selectTab(1)">
+                        <h4>Dashboard</h4></a>
                 </li>
-                <li ng-class="{ active: panel.isSelected(2)}">
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                </li>
+                    <li>
+                        <h4>@Html.ActionLink("Home", "Index", "Home")</h4>
+                    </li>
                 <li ng-class="{ active: panel.isSelected(3)}">
-                    <a href ng-click="panel.selectTab(3)">Posts</a>
+                    <a href ng-click="panel.selectTab(3)">
+                        <h4>Posts</h4></a>
                 </li>
                 <li ng-class="{ active: panel.isSelected(4)}">
-                    <a href ng-click="panel.selectTab(4)">Pages</a>
+                    <a href ng-click="panel.selectTab(4)">
+                        <h4>Pages</h4></a>
                 </li>
                 <li ng-class="{ active: panel.isSelected(5)}">
-                    <a href ng-click="panel.selectTab(5)">Users</a>
+                    <a href ng-click="panel.selectTab(5)">
+                        <h4>@Html.DropDownListFor(m=> )</h4></a>
                 </li>
-                <li>@Html.ActionLink("Add New Page", "AddNewPage", "Page")</li>
-                <li>@Html.ActionLink("Add New Post", "AddNewBlogPost", "BlogPost")</li>
+                <li>
+                    <h4>@Html.ActionLink("Add New Page", "AddNewPage", "Page")</h4>
+                </li>
+                <li>
+                    <h4>@Html.ActionLink("Add New Post", "AddNewBlogPost", "BlogPost")</h4>
+                </li>
             </ul>
             </div>
         <div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
@@ -97,58 +105,60 @@
                 </div>
             </div>
         <div ng-show="panel.isSelected(3)">
-            <div class="col-md-8">
-                <h3>Blog Posts</h3>
+            <div class="container">
+                <div class="col-md-12">
+                    <h3>Blog Posts</h3>
 
-                @foreach (var post in Model.BlogPosts)
-                {
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h4>@post.BlogPostTitle</h4>
-                        </div>
-                        <div class="panel-body">
-                            <div class="col-md-12">
-                                <p>Post Text</p>
-                                @Html.Raw(post.BlogPostText)
+                    @foreach (var post in Model.BlogPosts)
+                    {
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3>@post.BlogPostTitle</h3>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <p>Category: @post.Category.CategoryTitle</p>
+                            <div class="panel-body">
+                                <div class="col-md-12 well">
+                                    <p>Post Text</p>
+                                    @Html.Raw(post.BlogPostText)
                                 </div>
-                                <div class="col-md-4">
-                                    <p>Status: @post.Status</p>
-                                </div>
-                                <div class="col-md-4">
-                                    <p>Hashtags</p>
-                                    @if (post.Hashtags.Count > 0)
-                                    {
-                                        string hashtags = "";
-                                        for (int i = 0; i < post.Hashtags.Count - 1; i++)
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p>Category: @post.Category.CategoryTitle</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p>Hashtags</p>
+                                        @if (post.Hashtags.Count > 0)
                                         {
-                                            hashtags += "#" + post.Hashtags[i].HashtagTitle + ", ";
+                                            string hashtags = "";
+                                            for (int i = 0; i < post.Hashtags.Count - 1; i++)
+                                            {
+                                                hashtags += "#" + post.Hashtags[i].HashtagTitle + ", ";
+                                            }
+                                            hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
+                                            <p>@hashtags</p>
                                         }
-                                        hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
-                                        <p>@hashtags</p>
-                                    }
-                                    else
-                                    {
-                                        <p>No hashtags added...</p>
-                                    }
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <p>Author: @post.User.UserName</p>
+                                        else
+                                        {
+                                            <p>No hashtags added...</p>
+                                        }
+                                    </div>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <p>Date: @post.TimeCreated</p>
-                                    
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p>Author: @post.User.UserName</p>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <p>Date: @post.TimeCreated</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>Status: @post.Status</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
 

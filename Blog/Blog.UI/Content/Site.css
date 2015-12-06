@@ -20,7 +20,7 @@ body {
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 350px;
 }
 
 #jsDate-logo {
@@ -80,7 +80,7 @@ html, body {
 }
 
 
-#home-slider {
+#home-slider item {
     width: 100%;
     min-height: 400px;
     padding: 0;
@@ -107,4 +107,13 @@ html, body {
 
 .padding-bot-40 {
     padding-bottom: 40px;
+}
+
+.padding-left-60 {
+    padding-left: 60px;
+}
+
+.head-block-thumb {
+    max-width: 220px;
+    max-height: 225px;
 }

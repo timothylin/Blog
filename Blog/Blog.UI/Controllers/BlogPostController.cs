@@ -81,5 +81,14 @@ namespace Blog.UI.Controllers
 
             return View(post);
         }
+
+        [Authorize(Roles = "Admin, PR")]
+        public ActionResult ViewAllBlogPosts()
+        {
+            _ops = new BlogOperations();
+            var posts = _ops.GetAllBlogPosts();
+
+            return View("AllPosts", posts);
+        }
     }
 }
