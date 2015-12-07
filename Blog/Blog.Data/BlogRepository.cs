@@ -56,7 +56,7 @@ namespace Blog.Data
                 }
             }
 
-            return blogPosts;
+            return blogPosts.OrderByDescending(p => p.TimeCreated).ToList();
         }
 
         public BlogPost GetBlogPostById(int blogPostId)

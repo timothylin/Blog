@@ -33,15 +33,21 @@
                         </div>*@
                     <div class="item active">
 
-                        <img src="@Model.BlogPosts[0].CoverImageUrl" alt="@Model.BlogPosts[0].BlogPostTitle">
+                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[0].BlogPostId"><img src="@Model.BlogPosts[0].CoverImageUrl" alt="@Model.BlogPosts[0].BlogPostTitle">
+                        <h3 class="carousel-caption">@Model.BlogPosts[0].BlogPostTitle</h3>
+                        </a>
                     </div>
 
                     <div class="item">
-                        <img src="@Model.BlogPosts[1].CoverImageUrl" alt="@Model.BlogPosts[1].BlogPostTitle">
+                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[1].BlogPostId"><img src="@Model.BlogPosts[1].CoverImageUrl" alt="@Model.BlogPosts[1].BlogPostTitle">
+                            <h3 class="carousel-caption">@Model.BlogPosts[1].BlogPostTitle</h3>
+                        </a>
                     </div>
 
                     <div class="item">
-                        <img src="@Model.BlogPosts[2].CoverImageUrl" alt="@Model.BlogPosts[2].BlogPostTitle">
+                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[2].BlogPostId"><img src="@Model.BlogPosts[2].CoverImageUrl" alt="@Model.BlogPosts[2].BlogPostTitle">
+                            <h3 class="carousel-caption">@Model.BlogPosts[2].BlogPostTitle</h3>
+                        </a>
                     </div>
                 </div>
 
@@ -58,33 +64,45 @@
         </div>
         <div class="col-md-6">
             <div class="row">
-                <div class="col-xs-4 padding-bot-40">
+                <div class="col-md-4 col-xs-12 padding-bot-40">
+                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[3].BlogPostId">
                     <img class="head-block-thumb" src="@Model.BlogPosts[3].CoverImageUrl"/>
+                        </a>
                 </div>
-                <div class="col-xs-8 head-block-desc">
+                <div class="col-md-8 col-xs-12 head-block-desc">
+                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[3].BlogPostId">
                     <h3>@Model.BlogPosts[3].BlogPostTitle</h3>
-                    <p>@Model.BlogPosts[3].Description</p>
-                </div>
+                        </a>
+                        <p>@Model.BlogPosts[3].Description</p>
+                    </div>
                 <hr/>
             </div>
             <div class="row">
-                <div class="col-xs-4 padding-bot-40">
+                <div class="col-md-4 col-xs-12 padding-bot-40">
+                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[4].BlogPostId">
                     <img class="head-block-thumb" src="@Model.BlogPosts[4].CoverImageUrl"/>
-                </div>
-                <div class="col-xs-8 head-block-desc">
+                        </a>
+            </div>
+                <div class="col-md-8 col-xs-12 head-block-desc">
+                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[4].BlogPostId">
                     <h3>@Model.BlogPosts[4].BlogPostTitle</h3>
-                    <p>@Model.BlogPosts[4].Description</p>
-                </div>
+                        </a>
+                        <p>@Model.BlogPosts[4].Description</p>
+                 </div>
                 <hr/>
             </div>
             <div class="row">
-                <div class="col-xs-4">
+                <div class="col-md-4 col-xs-12">
+                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[5].BlogPostId">
                     <img class="head-block-thumb" src="@Model.BlogPosts[5].CoverImageUrl"/>
+                        </a>
                 </div>
-                <div class="col-xs-8 head-block-desc">
+                <div class="col-md-8 col-xs-12 head-block-desc">
+                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[5].BlogPostId">
                     <h3>@Model.BlogPosts[5].BlogPostTitle</h3>
-                    <p>@Model.BlogPosts[5].Description</p>
-                </div>
+                        </a>
+                        <p>@Model.BlogPosts[5].Description</p>
+                 </div>
                 <hr/>
             </div>
         </div>
@@ -132,7 +150,10 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3>
-                                    @post.BlogPostTitle<small class="pull-right date">@post.TimeCreated.ToShortDateString()</small>
+                                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[5].BlogPostId">
+                                        @post.BlogPostTitle 
+                                    </a>
+                                    <small class="pull-right date">@post.TimeCreated.ToShortDateString()</small>
                                 </h3>
                             </div>
 
