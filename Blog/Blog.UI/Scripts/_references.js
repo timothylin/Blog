@@ -20,6 +20,7 @@
 /// <reference path="app/tagitload.js" />
 /// <reference path="app/tinymce.js" />
 /// <reference path="bootstrap.min.js" />
+/// <reference path="jquery.dotdotdot.js" />
 /// <reference path="jquery.validate.min.js" />
 /// <reference path="jquery.validate.unobtrusive.js" />
 /// <reference path="jquery-2.1.4.js" />

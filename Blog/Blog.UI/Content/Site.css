@@ -57,6 +57,14 @@ textarea {
     margin: 5px 20px;
 }
 
+#jsDate-logo2 {
+    max-height: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    display: block;
+}
+
 .nav-sidebar {
     margin-right: -21px;
     margin-bottom: 20px;
@@ -73,7 +81,7 @@ textarea {
         padding: 20px;
         overflow-x: hidden;
         overflow-y: auto;
-        background-color: #313145;
+        background-color: #9370db;
         border-right: 1px solid #19191f;
         height: 100%;
     }
@@ -222,19 +230,19 @@ footer {
     color: white;
 }
 
-.glyphicon-plus-sign {
+.glyphicon-plus-sign-alt {
     color: white;
 }
 .glyphicon-user-alt {
     color: white;
     font-size: 75px;
 }
-.glyphicon-link {
+.glyphicon-file-alt {
     color: white;
     font-size: 75px;
 }
 
-.glyphicon-pencil {
+.glyphicon-pencil-alt {
     color: white;
     font-size: 75px;
 }

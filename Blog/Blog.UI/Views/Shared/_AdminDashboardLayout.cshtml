@@ -29,18 +29,24 @@
     </nav>
     <div class="row">
         <div class="col-sm-2 col-md-2 sidebar hidden-sm hidden-xs">
-            <ul class="nav nav-sidebar">
+            <a href="~/Home" title="Home"> <img alt="JS Date" id="jsDate-logo2" src="~/Content/img/Logo_JDate_official.png" /></a>
+            <ul class="nav nav-sidebar nav-pills nav-stacked">
 
                 <li><a href="/Admin/AdminDashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
-                <li><a href="/Home/Index"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                <li><a href="/Admin/ManagePosts"><span class="glyphicon glyphicon-list-alt"></span> Manage Posts</a></li>
-                <li><a href="/Admin/ManageStaticPages">Manage Pages</a></li>
-                <li><a href="/Admin/AddNewUser">Add New User</a></li>
-                <li><a href="/Admin/ManageUsers">Manage Users</a></li>
-                <li><a href="/Page/AddNewPage">Add New Page</a></li>
-                <li><a href="/BlogPost/AddNewBlogPost">Add New Post</a></li>
-            </ul>
-        </div>
+                <li><a href="/Admin/ManagePosts"><span class="glyphicon glyphicon-comment"></span> Posts</a></li>
+                <li><a href="/Admin/ManageStaticPages"><span class="glyphicon glyphicon-file"></span> Static Pages</a></li>
+                <li><a href="/Admin/ManageUsers"><span class="glyphicon glyphicon-user"></span> Users</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus"></span> Add <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/BlogPost/AddNewBlogPost"><span class="glyphicon glyphicon-plus-sign"></span> Post</a></li>
+                    <li><a href="/Page/AddNewPage"><span class="glyphicon glyphicon-plus-sign"></span> Static Page</a></li>
+                    <li><a href="/Admin/AddNewUser"><span class="glyphicon glyphicon-plus-sign"></span> User</a></li>
+                </ul>
+            </li>
+                </ul>
+</div>
 
     </div>
     <div class="body-content">
