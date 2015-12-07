@@ -68,14 +68,18 @@
 
                                 var url4 = Url.Action("DeletePost", "BlogPost", new { id = "{{post.PostId}}" });
                                 url4 = HttpUtility.UrlDecode(url4);
+
+                                var url5 = Url.Action("RestorePost", "BlogPost", new { id = "{{post.PostId}}" });
+                                url5 = HttpUtility.UrlDecode(url5);
+
                             }
 
-                            <a href="@url2" class="btn btn-success disabled" title="Approve" ng-if="post.Status == 'Approved' || post.Status == 'Denied' || post.Status == 'Deleted'"><span class="glyphicon glyphicon-check"></span></a>
-                            <a href="@url2" class="btn btn-success" title="Approve" ng-if="post.Status == 'Pending'"><span class="glyphicon glyphicon-check"></span></a>
+                            <a href="@url2" class="btn btn-success disabled" title="Approve" ng-if="post.Status == 'Approved' || post.Status == 'Deleted'"><span class="glyphicon glyphicon-check"></span></a>
+                            <a href="@url2" class="btn btn-success" title="Approve" ng-if="post.Status == 'Pending' || post.Status == 'Denied'"><span class="glyphicon glyphicon-check"></span></a>
                             <a href="@url3" class="btn btn-warning disabled" title="Deny" ng-if="post.Status == 'Approved' || post.Status == 'Denied' || post.Status == 'Deleted'"><span class="glyphicon glyphicon-ban-circle"></span></a>
                             <a href="@url3" class="btn btn-warning " title="Deny" ng-if="post.Status == 'Pending'"><span class="glyphicon glyphicon-ban-circle"></span></a>
                             <a href="@url4" class="btn btn-danger" title="Remove" ng-if="post.Status == 'Approved' || post.Status == 'Denied' || post.Status == 'Pending'"><span class="glyphicon glyphicon-remove"></span></a>
-                            <a href="@url4" class="btn btn-danger disabled" title="Remove" ng-if="post.Status == 'Deleted'"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a href="@url5" class="btn btn-primary" title="Restore" ng-if="post.Status == 'Deleted'"><span class="glyphicon glyphicon-export"></span></a>
                             <a href="@url1" class="btn btn-info" title="Details">Details</a>
                         </td>
                     </tr>
