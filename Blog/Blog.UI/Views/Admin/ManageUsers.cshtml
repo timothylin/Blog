@@ -1,54 +1,153 @@
-﻿@model Blog.UI.Models.AdminVM
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@model Blog.UI.Models.AdminVM
 
 @{
     ViewBag.Title = "ManageUsers";
     Layout = "~/Views/Shared/_AdminDashboardLayout.cshtml";
 }
-<div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
 
-    <br />
-    <h2>Manage Users</h2>
-    <hr />
-    <div class="container">
-        <div class="col-md-12">
-            <div class="panel">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Manage Users</h3>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Role</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var user in Model.Users)
-            {
-                                <tr>
-                                    <td>@user.UserName</td>
-                                    <td>@user.Email</td>
-                                    <td>@user.FirstName</td>
-                                    <td>@user.LastName</td>
+<br />
 
-                                    @foreach (var role in user.Roles)
-                {
-                    var userRole = Model.Roles.FirstOrDefault(r => r.Id == role.RoleId);
+<div class="container-fluid">
 
-                                        <td>@userRole.Name</td>
-                                    }
-                                </tr>
+    <div class="col-md-10 col-md-offset-2 panel panel-default">
+        <div class="panel-heading">
+            <h2>Manage Users</h2>
+        </div>
+
+        <div @*class="row"*@ ng-app ng-init="users = [
+             @foreach (var user in Model.Users)
+             {
+
+                 <text>{UserName: '@user.UserName', FirstName: '@user.FirstName', LastName: '@user.LastName', Role: '@Model.Roles.FirstOrDefault(r => r.Id == user.Roles.First().RoleId).Name'},</text>
+
+                 @*<text>{PostId: '@post.BlogPostId', Title: '@post.BlogPostTitle.Replace("'", "\\'")', TimeCreated: '@post.TimeCreated.ToString("g")', UserName: '@post.User.UserName', Category: '@post.Category.CategoryTitle', Status: '@post.Status.ToString()'},</text>*@
+             }
+
+     ]">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-xs-4">User Name</th>
+                        <th class="col-xs-2">First Name</th>
+                        <th class="col-xs-2">Last Name</th>
+                        <th class="col-xs-1">Role</th>
+                        <th class="col-xs-2"></th>
+                    </tr>
+                    <tr>
+                        <th><input class="form-control" type="text" ng-model="userFilter.UserName" /></th>
+                        <th><input class="form-control" type="text" ng-model="userFilter.FirstName" /></th>
+                        <th><input class="form-control" type="text" ng-model="userFilter.LastName" /></th>
+                        <th><input class="form-control" type="text" ng-model="userFilter.Role" /></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in users | filter:userFilter">
+                        <td>{{user.UserName}}</td>
+                        <td>{{user.FirstName}}</td>
+                        <td>{{user.LastName}}</td>
+                        <td>
+                            <span class="label label-warning" ng-if="user.Role == 'Default'">{{user.Role}}</span>
+                            <span class="label label-success" ng-if="user.Role == 'Admin'">{{user.Role}}</span>
+                            <span class="label label-info" ng-if="user.Role == 'PR'">{{user.Role}}</span>
+                            <span class="label label-primary" ng-if="user.Role == 'User'">{{user.Role}}</span>
+                        </td>
+                        <td>
+                            @*@{
+                                var url1 = Url.Action("ViewBlogPost", "BlogPost", new { id = "{{post.PostId}}" });
+                                url1 = HttpUtility.UrlDecode(url1);
+
+                                var url2 = Url.Action("ApprovePost", "BlogPost", new { id = "{{post.PostId}}" });
+                                url2 = HttpUtility.UrlDecode(url2);
+
+                                var url3 = Url.Action("DenyPost", "BlogPost", new { id = "{{post.PostId}}" });
+                                url3 = HttpUtility.UrlDecode(url3);
+
+                                var url4 = Url.Action("DeletePost", "BlogPost", new { id = "{{post.PostId}}" });
+                                url4 = HttpUtility.UrlDecode(url4);
+
+                                var url5 = Url.Action("RestorePost", "BlogPost", new { id = "{{post.PostId}}" });
+                                url5 = HttpUtility.UrlDecode(url5);
+
                             }
-                        </tbody>
-                    </table>
 
-                    @Html.ActionLink("Add New User", "AddNewUser", "Admin", new { @class = "btn btn-success" })
-                </div>
-            </div>
+                            <a href="@url2" class="btn btn-success disabled" title="Approve" ng-if="post.Status == 'Approved' || post.Status == 'Deleted'"><span class="glyphicon glyphicon-check"></span></a>
+                            <a href="@url2" class="btn btn-success" title="Approve" ng-if="post.Status == 'Pending' || post.Status == 'Denied'"><span class="glyphicon glyphicon-check"></span></a>
+                            <a href="@url3" class="btn btn-warning disabled" title="Deny" ng-if="post.Status == 'Denied' || post.Status == 'Deleted'"><span class="glyphicon glyphicon-ban-circle"></span></a>
+                            <a href="@url3" class="btn btn-warning " title="Deny" ng-if="post.Status == 'Pending' || post.Status == 'Approved'"><span class="glyphicon glyphicon-ban-circle"></span></a>
+                            <a href="@url4" class="btn btn-danger" title="Remove" ng-if="post.Status == 'Approved' || post.Status == 'Denied' || post.Status == 'Pending'"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a href="@url5" class="btn btn-primary" title="Restore" ng-if="post.Status == 'Deleted'"><span class="glyphicon glyphicon-export"></span></a>
+                            <a href="@url1" class="btn btn-info" title="Details">Details</a>*@
+
+                                <a href="" class="btn btn-success col-xs-offset-3" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                <a href="" class="btn btn-danger" title="Delete"><span class="glyphicon glyphicon-remove-circle"></span></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+
+@section scripts
+{
+    <script src="~/Scripts/angular.min.js"></script>
+}
+
+
+@*<div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
+
+        <br />
+        <h2>Manage Users</h2>
+        <hr />
+        <div class="container">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Manage Users</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Role</th>
+                                    <th>Modify</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var user in Model.Users)
+                {
+                                    <tr>
+                                        <td>@user.UserName</td>
+                                        <td>@user.Email</td>
+                                        <td>@user.FirstName</td>
+                                        <td>@user.LastName</td>
+
+                                        @foreach (var role in user.Roles)
+                    {
+                        var userRole = Model.Roles.FirstOrDefault(r => r.Id == role.RoleId);
+
+                                            <td>@userRole.Name</td>
+                                        }
+
+                                        <td>
+                                            <button class="btn btn-success"><span class="glyphicon glyphicon-edit"></span></button>
+                                            <button class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        @Html.ActionLink("Add New User", "AddNewUser", "Admin", new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
