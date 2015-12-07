@@ -23,9 +23,6 @@ namespace Blog.UI.Controllers
         {
             var vm = new AdminVM();
             vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts;
-            vm.Users = _ops.GetAllUsers().Users;
-            vm.Roles = _ops.GetAllRoles().IdRoles;
-            vm.CreateRolesList(_ops.GetAllRoles().IdRoles);
 
             return View(vm);
         }
@@ -41,6 +38,17 @@ namespace Blog.UI.Controllers
         }
 
         [Authorize(Roles = "Admin")]
+        public ActionResult ManageUsers()
+        {
+            var vm = new AdminVM();
+
+            vm.Users = _ops.GetAllUsers().Users;
+            vm.Roles = _ops.GetAllRoles().IdRoles;
+
+            return View(vm);
+        }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult ManagePosts()
         {
             _ops = new BlogOperations();
@@ -50,6 +58,7 @@ namespace Blog.UI.Controllers
             return View(posts);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult AdminPosts()
         {
             _ops = new BlogOperations();
