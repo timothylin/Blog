@@ -88,6 +88,7 @@ namespace Blog.UI.Controllers
             return View(post);
         }
 
+        //User as well?
         [Authorize(Roles = "Admin, PR")]
         public ActionResult ViewAllBlogPosts()
         {
@@ -95,6 +96,27 @@ namespace Blog.UI.Controllers
             var posts = _ops.GetAllBlogPosts();
 
             return View("AllPosts", posts);
+        }
+
+
+        //Admin maintaining posts
+        [Authorize(Roles = "Admin")]
+        public ActionResult ApprovePost(int id)
+        {
+            
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult DenyPost(int id)
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult DeletePost(int id)
+        {
+            return View();
         }
     }
 }

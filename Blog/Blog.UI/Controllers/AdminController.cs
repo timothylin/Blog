@@ -31,5 +31,15 @@ namespace Blog.UI.Controllers
 
             return View(vm);
         }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult ManagePosts()
+        {
+            _ops = new BlogOperations();
+
+            var posts = _ops.GetAllBlogPosts().BlogPosts;
+
+            return View(posts);
+        }
     }
 }
