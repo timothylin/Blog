@@ -83,7 +83,7 @@ namespace Blog.UI.Controllers
         public ActionResult ViewBlogPost(int id)
         {
             _ops = new BlogOperations();
-            var post = _ops.GetBlogPostById(id);
+            var post = _ops.GetBlogPostById(id).BlogPost;
 
             return View(post);
         }
@@ -93,7 +93,7 @@ namespace Blog.UI.Controllers
         public ActionResult ViewAllBlogPosts()
         {
             _ops = new BlogOperations();
-            var posts = _ops.GetAllBlogPosts();
+            var posts = _ops.GetAllBlogPosts().BlogPosts;
 
             return View("AllPosts", posts);
         }
