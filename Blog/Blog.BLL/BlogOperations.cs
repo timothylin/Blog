@@ -58,6 +58,12 @@ namespace Blog.BLL
             {
                 _response.Success = true;
                 _response.BlogPost = blogPost;
+                _response.Message = "Blog post status was successfully updated";
+            }
+            else
+            {
+                _response.Success = false;
+                _response.Message = "Your blog post status could not be updated";
             }
 
             return _response;

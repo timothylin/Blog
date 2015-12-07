@@ -73,12 +73,7 @@ namespace Blog.UI.Controllers
             }
         }
 
-        //[Authorize(Roles = "Admin, PR")]
-        //[HttpPost]
-        //public ActionResult SubmitBlogPost(BlogPost newPost)
-        //{
-        //    return RedirectToAction("Index", "Home");
-        //}
+       
         [Authorize(Roles = "Admin, PR, User")]
         public ActionResult ViewBlogPost(int id)
         {
@@ -103,20 +98,37 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ApprovePost(int id)
         {
-            
-            return View();
+            _ops = new BlogOperations();
+            var update = _ops.UpdateBlogPostStatus(id, Status.Approved);
+
+            return RedirectToAction("ManagePosts", "Admin");
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult DenyPost(int id)
         {
-            return View();
+            _ops = new BlogOperations();
+            var update = _ops.UpdateBlogPostStatus(id, Status.Denied);
+
+            return RedirectToAction("ManagePosts", "Admin"); ;
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult DeletePost(int id)
         {
-            return View();
+            _ops = new BlogOperations();
+            var update = _ops.UpdateBlogPostStatus(id, Status.Deleted);
+
+            return RedirectToAction("ManagePosts", "Admin");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult RestorePost(int id)
+        {
+            _ops = new BlogOperations();
+            var update = _ops.UpdateBlogPostStatus(id, Status.Pending);
+
+            return RedirectToAction("ManagePosts", "Admin");
         }
 
 
