@@ -1,61 +1,87 @@
-﻿@model Blog.UI.Models.AdminVM
+﻿@model List<Blog.Models.StaticPage>
 
 @{
-    ViewBag.Title = "AdminPages";
+    ViewBag.Title = "Manage Static Pages Pages";
     Layout = "~/Views/Shared/_AdminDashboardLayout.cshtml";
 }
 
-<div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
-    <br />
-    <h2>Pages</h2>
-    <hr />
-<div class="container">
-    <div class="col-md-12">
-        <div class="panel">
-            <div class="panel-heading">
-                <h3 class="panel-title">Pages</h3>
-            </div>
-            <div class="panel-body">
-                <table class="table table-striped">
-                    <thead>
+<div class="container-fluid">
+
+    <div class="col-md-10 col-md-offset-2 panel panel-default">
+        <div class="panel-heading">
+            <h2>Manage Static Pages</h2>
+        </div>
+
+        <div @*class="row"*@ ng-app ng-init="pages = [
+             @foreach (var page in Model)
+             {
+                 <text>{PageId: '@page.StaticPageId', Title: '@page.StaticPageTitle.Replace("'", "\\")', TimeCreated: '@page.TimeCreated.ToString("g")', UserName: '@page.User.UserName', Status: '@page.Status.ToString()'},</text>
+             }
+
+     ]">
+
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Type</th>
-                        <th>Author</th>
-                        <th>Date</th>
-                        <th>Approve</th>
-                        <th>Deny</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Profiles</td>
-                        <td>Page</td>
-                        <td>Dean Choi</td>
-                        <td>12/12/2015</td>
-                        <td><button>Approve</button></td>
-                        <td><button>Deny</button></td>
+                        <th class="col-xs-1">PageID</th>
+                        <th class="col-xs-3">Title</th>
+                        <th class="col-xs-1">User</th>
+                        <th class="col-xs-2">Time Created</th>
+                        <th class="col-xs-1">Status</th>
+                        <th class="col-xs-3"></th>
                     </tr>
                     <tr>
-                        <td>About</td>
-                        <td>Blog</td>
-                        <td>Tim Lim</td>
-                        <td>9/12/2015</td>
-                        <td><button>Approve</button></td>
-                        <td><button>Deny</button></td>
+                        <th><input class="form-control" type="text" ng-model="pageFilter.PageId" /></th>
+                        <th><input class="form-control" type="text" ng-model="pageFilter.Title" /></th>
+                        <th><input class="form-control" type="text" ng-model="pageFilter.UserName" /></th>
+                        <th><input class="form-control" type="text" ng-model="pageFilter.TimeCreated" /></th>
+                        <th><input class="form-control" type="text" ng-model="pageFilter.Status" /></th>
+                        <th></th>
                     </tr>
-                    <tr>
-                        <td>Events</td>
-                        <td>Blog</td>
-                        <td>Patrick Tighe</td>
-                        <td>8/12/2015</td>
-                        <td><button>Approve</button></td>
-                        <td><button>Deny</button></td>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="page in pages | filter:pageFilter">
+                        <td>{{page.PageId}}</td>
+                        <td>{{page.Title}}</td>
+                        <td>{{page.UserName}}</td>
+                        <td>{{page.TimeCreated}}</td>
+                        <td>
+                            <span class="label label-success" ng-if="page.Status == 'Approved'">{{page.Status}}</span>
+                            <span class="label label-warning" ng-if="page.Status == 'Pending'">{{page.Status}}</span>
+                            <span class="label label-danger" ng-if="page.Status == 'Denied'">{{page.Status}}</span>
+                            <span class="label label-danger" ng-if="page.Status == 'Deleted'">{{page.Status}}</span>
+                        </td>
+                        <td>
+                            @{
+                                var url1 = Url.Action("ViewStaticPage", "Page", new { id = "{{page.PageId}}" });
+                                url1 = HttpUtility.UrlDecode(url1);
+
+                                var url2 = Url.Action("ApprovePage", "Page", new { id = "{{page.PageId}}" });
+                                url2 = HttpUtility.UrlDecode(url2);
+
+                                var url3 = Url.Action("DenyPage", "Page", new { id = "{{page.PageId}}" });
+                                url3 = HttpUtility.UrlDecode(url3);
+
+                                var url4 = Url.Action("DeletePage", "Page", new { id = "{{page.PageId}}" });
+                                url4 = HttpUtility.UrlDecode(url4);
+                            }
+
+                            <a href="@url2" class="btn btn-success disabled" title="Approve" ng-if="page.Status == 'Approved' || page.Status == 'Denied' || page.Status == 'Deleted'"><span class="glyphicon glyphicon-check"></span></a>
+                            <a href="@url2" class="btn btn-success" title="Approve" ng-if="page.Status == 'Pending'"><span class="glyphicon glyphicon-check"></span></a>
+                            <a href="@url3" class="btn btn-warning disabled" title="Deny" ng-if="page.Status == 'Approved' || page.Status == 'Denied' || page.Status == 'Deleted'"><span class="glyphicon glyphicon-ban-circle"></span></a>
+                            <a href="@url3" class="btn btn-warning " title="Deny" ng-if="page.Status == 'Pending'"><span class="glyphicon glyphicon-ban-circle"></span></a>
+                            <a href="@url4" class="btn btn-danger" title="Remove" ng-if="page.Status == 'Approved' || page.Status == 'Denied' || page.Status == 'Pending'"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a href="@url4" class="btn btn-danger disabled" title="Remove" ng-if="page.Status == 'Deleted'"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a href="@url1" class="btn btn-info" title="Details">Details</a>
+                        </td>
                     </tr>
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
-</div>
+
+@section scripts
+{
+    <script src="~/Scripts/angular.min.js"></script>
+}

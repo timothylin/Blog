@@ -1289,14 +1289,14 @@
     <Content Include="Views\PR\PRDashboard.cshtml" />
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />
     <Content Include="Views\Shared\_AdminDashboardLayout.cshtml" />
-    <Content Include="Views\Admin\AdminPosts.cshtml" />
-    <Content Include="Views\Admin\AdminPages.cshtml" />
+    <Content Include="Views\Admin\ManageStaticPages.cshtml" />
     <Content Include="Views\Admin\AddNewUser.cshtml" />
     <Content Include="Views\Shared\_PrDashboardLayout.cshtml" />
     <Content Include="Views\Admin\TestAng.cshtml" />
     <Content Include="Views\Admin\ManagePosts.cshtml" />
     <Content Include="Views\Admin\ManageUsers.cshtml" />
     <Content Include="Views\Shared\_LoginPartialDashboard.cshtml" />
+    <Content Include="Views\Page\ViewStaticPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,14 +1,72 @@
-﻿@model Blog.UI.Models.AddStaticPageVM
+﻿@using System.Activities.Expressions
+@model Blog.UI.Models.AddStaticPageVM
 
 @{
-    ViewBag.Title = "AddNewPage";
+    ViewBag.Title = "Add New Blog Post";
 }
 
-<h2>Add a New Page</h2>
+<br />
+<div class="container">
+    <div class="row" ng-app="validationPost">
+        <div class="well" keep-input-values>
+            <form action="/Page/AddNewPage" class="form-horizontal" method="post" name="myForm" novalidate>
+                <fieldset>
+                    <legend><b>Add a New Page</b></legend>
+                    @Html.ValidationSummary(false)
+                    <div class="form-group">
+                        <label for="StaticPage_StaticPageTitle" class="col-md-2 control-label">Page Title</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.StaticPage.StaticPageTitle, new { @class = "form-control", @placeholder = "Page Title", @required = "", @ng_model = "Title" })
+                            <label class="control-label text-danger" ng-show="myForm['StaticPage.StaticPageTitle'].$dirty && myForm['StaticPage.StaticPageTitle'].$invalid && myForm['StaticPage.StaticPageTitle'].$error.required">
+                                Title is required
+                            </label>
+                        </div>
+                    </div>
 
-<textarea id="mytextarea">Hello, World!</textarea>
+                    <div class="form-group">
+                        <label for="mytextarea" class="col-md-2 control-label">Page Content</label>
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(m => m.StaticPage.StaticPageText, new { @id = "mytextarea" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Hashtags</label>
+                        <div class="col-md-8">
+                            <ul id="myTags"></ul>
+                            <div class="pull-right tiny">* No # signs or spaces allowed (10 max)</div>
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(m => m.StaticPage.User.Id)
+
+                    <div class="form-group">
+                        <div class="col-md-10 col-md-offset-2">
+                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Submit</button>
+                            <button type="reset" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Reset</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Styles{
+    <link href="~/Content/jquery.tagit.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app/angvalidation.css" />
+}
 
 @section scripts{
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
     <script src="~/Scripts/tinymce/tinymce.min.js"></script>
     <script src="~/Scripts/app/tinymce.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="~/Scripts/tag-it.min.js"></script>
+    <script src="~/Scripts/app/tagitload.js"></script>
+    <script src="~/Scripts/angular-keep-values.min.js"></script>
+    <script src="~/Scripts/app/angvalidation.js"></script>
 }

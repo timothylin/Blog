@@ -1,0 +1,28 @@
+﻿@model Blog.Models.StaticPage
+
+@{
+    ViewBag.Title = "ViewStaticPage";
+}
+
+<h2>@Model.StaticPageTitle</h2>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3>
+            <small class="pull-right">Date: @Model.TimeCreated</small>
+        </h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="col-md-12">
+
+            <p>@Html.Raw(Model.StaticPageText)</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <small><cite title="Source Title">By: @(Model.User.FirstName + " " + Model.User.LastName)</cite></small>
+            </div>
+        </div>
+    </div>
+</div>
