@@ -1292,6 +1292,7 @@
     <Content Include="Views\Admin\AdminPosts.cshtml" />
     <Content Include="Views\Admin\AdminPages.cshtml" />
     <Content Include="Views\Admin\AddNewUser.cshtml" />
+    <Content Include="Views\Shared\_PrDashboardLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
