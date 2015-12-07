@@ -37,20 +37,6 @@ namespace Blog.Data
 
                 foreach (var blogPost in blogPosts)
                 {
-                    //cmd = new SqlCommand();
-                    //cmd.CommandText = "GetHashtagByBlogPostID";
-                    //cmd.CommandType = CommandType.StoredProcedure;
-                    //cmd.Parameters.AddWithValue("@BlogPostID", blogPost.BlogPostId);
-                    //cmd.Connection = cn;
-
-                    //using (SqlDataReader dr = cmd.ExecuteReader())
-                    //{
-                    //    while (dr.Read())
-                    //    {
-                    //        blogPost.Hashtags.Add(PopulateHashtagsFromReader(dr));
-                    //    }
-                    //}
-
                     blogPost.Hashtags = GetHashtagByBlogPostId(blogPost.BlogPostId, cn);
 
                 }
@@ -81,20 +67,6 @@ namespace Blog.Data
                         blogPost = PopulateBlogPostFromReader(dr);
                     }
                 }
-
-                //cmd = new SqlCommand();
-                //cmd.CommandText = "GetHashtagByBlogPostID";
-                //cmd.CommandType = CommandType.StoredProcedure;
-                //cmd.Parameters.AddWithValue("@BlogPostID", blogPostId);
-                //cmd.Connection = cn;
-
-                //using (SqlDataReader dr = cmd.ExecuteReader())
-                //{
-                //    while (dr.Read())
-                //    {
-                //        blogPost.Hashtags.Add(PopulateHashtagsFromReader(dr));
-                //    }
-                //}
 
                 blogPost.Hashtags = GetHashtagByBlogPostId(blogPost.BlogPostId, cn);
             }
@@ -188,20 +160,6 @@ namespace Blog.Data
                         blogPost = PopulateBlogPostFromReader(dr);
                     }
                 }
-
-                //cmd = new SqlCommand();
-                //cmd.CommandText = "GetHashtagByBlogPostID";
-                //cmd.CommandType = CommandType.StoredProcedure;
-                //cmd.Parameters.AddWithValue("@BlogPostID", blogPostId);
-                //cmd.Connection = cn;
-
-                //using (SqlDataReader dr = cmd.ExecuteReader())
-                //{
-                //    while (dr.Read())
-                //    {
-                //        blogPost.Hashtags.Add(PopulateHashtagsFromReader(dr));
-                //    }
-                //}
 
                 blogPost.Hashtags = GetHashtagByBlogPostId(blogPost.BlogPostId, cn);
             }
