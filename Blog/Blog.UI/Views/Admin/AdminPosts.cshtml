@@ -1,0 +1,67 @@
+﻿@model Blog.UI.Models.AdminVM
+
+@{
+    ViewBag.Title = "AdminPosts";
+    Layout = "~/Views/Shared/_AdminDashboardLayout.cshtml";
+}
+
+<div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
+    <br/>
+    <h2>Posts</h2>
+    <hr/>
+    <div class="container">
+        <div class="col-md-10">
+
+            @foreach (var post in Model.BlogPosts)
+            {
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>@post.BlogPostTitle</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12 well">
+                            <p>Post Text</p>
+                            @Html.Raw(post.BlogPostText)
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>Category: @post.Category.CategoryTitle</p>
+                            </div>
+                            <div class="col-md-8">
+                                <p>Hashtags</p>
+                                @if (post.Hashtags.Count > 0)
+                                {
+                                    string hashtags = "";
+                                    for (int i = 0; i < post.Hashtags.Count - 1; i++)
+                                    {
+                                        hashtags += "#" + post.Hashtags[i].HashtagTitle + ", ";
+                                    }
+                                    hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
+                                    <p>@hashtags</p>
+                                }
+                                else
+                                {
+                                    <p>No hashtags added...</p>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>Author: @post.User.UserName</p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p>Date: @post.TimeCreated</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Status: @post.Status</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

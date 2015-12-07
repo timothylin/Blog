@@ -1,284 +1,64 @@
 ﻿@model Blog.UI.Models.AdminVM
 @{
-    Layout = null;
+    ViewBag.Title = "AdminDashboard";
+    Layout = "~/Views/Shared/_AdminDashboardLayout.cshtml";
 }
 
 
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cerulean/bootstrap.min.css" rel="stylesheet" typ="text/css" />
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <meta name="viewport" content="width=device-width" />
-    <title>JsDate</title>
-</head>
-<body id="admin-body" ng-app="Admin">
-    <div id="admin-nav" class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                @Html.Partial("_LoginPartial")
+
+
+<div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
+    <br/>
+    <h2>Admin Dashboard</h2>
+    <hr/>
+    <!--DASHBOARD-->
+    <div class="container">
+        <div class="col-md-offset-1 col-md-3">
+            <div class="panel new-user-panel">
+                <div class="panel-body">
+                    <div class="col-xs-10">
+                        <span class="glyphicon glyphicon-user glyphicon-user-alt"></span>
+                        <br/>
+                        <a href="/Page/AddNewPage"><h4><span class="glyphicon glyphicon-plus-sign"></span> New User</h4></a>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="#" class="badge"><h4>4</h4></a>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div class="col-md-3">
+            <div class="panel new-post-panel">
+                <div class="panel-body">
+                    <div class="col-xs-10">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <br/>
+                        <a href="/BlogPost/AddNewBlogPost"><h4><span class="glyphicon glyphicon-plus-sign"></span> New Post</h4></a>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="#" class="badge"><h4>4</h4></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="panel new-page-panel">
+                <div class="panel-body">
+                    <div class="col-xs-10">
+                        <span class="glyphicon glyphicon-link"></span>
+                        <br/>
+                        <a href="#"><h4><span class="glyphicon glyphicon-plus-sign"></span> New Page</h4></a>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="#" class="badge"><h4>4</h4></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <section ng-controller="AdminPanelController as panel">
-        <div class="row">
-            <div class="col-sm-3 col-md-2  sidebar">
-                <ul class="nav nav-sidebar">
-                    <li ng-class="{ active: panel.isSelected(1)}">
-                        <a href ng-click="panel.selectTab(1)">
-                            <h4>Dashboard</h4>
-                        </a>
-                    </li>
-                    <li>
-                        <h4>@Html.ActionLink("Home", "Index", "Home")</h4>
-                    </li>
-                    <li ng-class="{ active: panel.isSelected(3)}">
-                        <a href ng-click="panel.selectTab(3)">
-                            <h4>Posts</h4>
-                        </a>
-                    </li>
-                    <li ng-class="{ active: panel.isSelected(4)}">
-                        <a href ng-click="panel.selectTab(4)">
-                            <h4>Pages</h4>
-                        </a>
-                    </li>
-                    <li ng-class="{ active: panel.isSelected(5)}">
-                        <a href ng-click="panel.selectTab(5)">
-                            <h4>@*@Html.DropDownListFor(m=> )*@Users</h4>
-                        </a>
-                    </li>
-                    <li>
-                        <h4>@Html.ActionLink("Add New Page", "AddNewPage", "Page")</h4>
-                    </li>
-                    <li>
-                        <h4>@Html.ActionLink("Add New Post", "AddNewBlogPost", "BlogPost")</h4>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
-                <br />
-                <h2>Admin Dashboard</h2>
-                <hr />
-                <!--DASHBOARD-->
-                <div ng-show="panel.isSelected(1)">
-                    <div class="col-md-3">
-                        <div class="panel">
-                            <div class="panel-body">
-                                <a href="#"><h4 class="glyphicon glyphicon-plus-sign"> New User</h4></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="panel">
-                            <div class="panel-body">
-                                <a href="#"><span class="glyphicon glyphicon-plus-sign"> @Html.ActionLink(" Add New Page", "AddNewPage", "Page")</span></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="panel">
-                            <div class="panel-body">
-                                <a href="#"><span class="glyphicon glyphicon-plus-sign"> @Html.ActionLink(" Add New Post", "AddNewBlogPost", "BlogPost")</span></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="panel">
-                            <div class="panel-body">
-                                <a href="#"><h4 class="glyphicon glyphicon-plus-sign"> New Profile</h4></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div ng-show="panel.isSelected(3)">
-                    <div class="container">
-                        <div class="col-md-12">
-                            <h3>Blog Posts</h3>
-
-                            @foreach (var post in Model.BlogPosts)
-                            {
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <h3>@post.BlogPostTitle</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="col-md-12 well">
-                                            <p>Post Text</p>
-                                            @Html.Raw(post.BlogPostText)
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p>Category: @post.Category.CategoryTitle</p>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>Hashtags</p>
-                                                @if (post.Hashtags.Count > 0)
-                                                {
-                                                    string hashtags = "";
-                                                    for (int i = 0; i < post.Hashtags.Count - 1; i++)
-                                                    {
-                                                        hashtags += "#" + post.Hashtags[i].HashtagTitle + ", ";
-                                                    }
-                                                    hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
-                                                    <p>@hashtags</p>
-                                                }
-                                                else
-                                                {
-                                                    <p>No hashtags added...</p>
-                                                }
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p>Author: @post.User.UserName</p>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <p>Date: @post.TimeCreated</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p>Status: @post.Status</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                <div ng-show="panel.isSelected(4)">
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Pages</h3>
-                                <div class="panel-body">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>Type</th>
-                                                <th>Author</th>
-                                                <th>Date</th>
-                                                <th>Approve</th>
-                                                <th>Deny</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Profiles</td>
-                                                <td>Page</td>
-                                                <td>Dean Choi</td>
-                                                <td>12/12/2015</td>
-                                                <td><button>Approve</button></td>
-                                                <td><button>Deny</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>About</td>
-                                                <td>Blog</td>
-                                                <td>Tim Lim</td>
-                                                <td>9/12/2015</td>
-                                                <td><button>Approve</button></td>
-                                                <td><button>Deny</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Events</td>
-                                                <td>Blog</td>
-                                                <td>Patrick Tighe</td>
-                                                <td>8/12/2015</td>
-                                                <td><button>Approve</button></td>
-                                                <td><button>Deny</button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div ng-show="panel.isSelected(5)">
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Users</h3>
-                            </div>
-                            <div class="panel-body">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Role</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var user in Model.Users)
-                                        {
-                                            <tr>
-                                                <td>@user.UserName</td>
-                                                <td>@user.Email</td>
-                                                <td>@user.FirstName</td>
-                                                <td>@user.LastName</td>
-
-                                                @foreach (var role in user.Roles)
-                                                {
-                                                    var userRole = Model.Roles.FirstOrDefault(r => r.Id == role.RoleId);
-                                                    
-                                                    <td>@userRole.Name</td>
-                                                }
-                                            </tr>
-                                        }
-                                        @*<tr>
-                                                <td>deinzel</td>
-                                                <td>deanthedeanofmean@xanga.com</td>
-                                                <td>Dean</td>
-                                                <td>Choi</td>
-                                                <td>Admin</td>
-                                            </tr>
-                                            <tr>
-                                                <td>BIGTIMLIM</td>
-                                                <td>thechamp@hotmail.com</td>
-                                                <td>Timothy</td>
-                                                <td>Lim</td>
-                                                <td>Admin</td>
-                                            </tr>*@
-                                    </tbody>
-                                </table>
-
-                                @Html.ActionLink("Add New User", "AddNewUser", "Admin", new { @class = "btn btn-success" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @*@RenderSection("scripts", required: false)*@
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/app/admin.js"></script>
-</body>
-</html>
+</div>

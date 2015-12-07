@@ -1,0 +1,57 @@
+﻿@using System.Diagnostics.Eventing.Reader
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cerulean/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Styles", false)
+</head>
+
+<body id="admin-body">
+    <div id="admin-nav" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse pull-right">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 col-md-2  sidebar">
+            <ul class="nav nav-sidebar">
+
+                <li><a href="/Admin/AdminDashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+                <li><a href="/Home/Index"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                <li><a href="/Admin/AdminPosts"><h4>Posts</h4></a></li>
+                <li><a href="/Admin/AdminPages"><h4>Pages</h4></a></li>
+                <li><a href="/Admin/AdminUsers"><h4>Users</h4></a></li>
+                <li><a href="/Page/AddNewPage"><h4>Add New Page</h4></a></li>
+                <li><a href="/BlogPost/AddNewBlogPost"><h4>Add new Post</h4></a></li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="body-content">
+        @RenderBody()
+        <hr />
+    </div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@*@RenderSection("scripts", required: false)*@
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/app/admin.js"></script>
+</body>
+</html>
+

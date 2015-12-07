@@ -62,7 +62,7 @@ textarea {
     margin-bottom: 20px;
     margin-left: -20px;
 }
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {*/
     .sidebar {
         position: fixed;
         bottom: 0;
@@ -77,6 +77,10 @@ textarea {
         border-right: 1px solid #19191f;
         height: 100%;
     }
+/*}*/
+
+.sidebar li:default {
+    background: #19191f;
 }
 
 /*.icon-bar {
@@ -93,7 +97,7 @@ html, body {
     color: white;
 }
 
-.sidebar a:hover {
+.nav-sidebar > li > a:after {
     background-color: #19191f;
 }
 
@@ -128,7 +132,9 @@ html, body {
 
 .navbar-inverse {
     z-index: 1;
-    background-color: #19191f;
+    background-color: #313145;
+    background-image: none;
+    
 }
 
 #home-slider item {
@@ -137,9 +143,7 @@ html, body {
     padding: 0;
 }       
 
-.jumbotron {
-    background-color: transparent;
-}
+
 
 .lead {
     background-color: white;
@@ -192,4 +196,45 @@ footer {
     position:relative;
 }
 
+.new-user-panel{
+    background-color: #00bcd4;
+}
 
+.new-post-panel{
+    background-color: #ffc107;
+}
+.new-page-panel {
+    background-color: #4caf50;
+}
+
+.new-user-panel h4{
+    padding-top: 15px;
+    color: white;
+}
+
+.new-post-panel h4{
+    padding-top: 15px;
+    color: white;
+}
+
+.new-page-panel h4{
+    padding-top: 15px;
+    color: white;
+}
+
+.glyphicon-plus-sign {
+    color: white;
+}
+.glyphicon-user-alt {
+    color: white;
+    font-size: 75px;
+}
+.glyphicon-link {
+    color: white;
+    font-size: 75px;
+}
+
+.glyphicon-pencil {
+    color: white;
+    font-size: 75px;
+}
