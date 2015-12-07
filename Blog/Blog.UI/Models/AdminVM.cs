@@ -29,14 +29,14 @@ namespace Blog.UI.Models
         {
             foreach (var role in listOfRoles)
             {
-                var item = new SelectListItem();
-                item.Value = role.Id;
-                item.Text = role.Name;
+                var item = new SelectListItem
+                {
+                    Value = role.Id,
+                    Text = role.Name
+                };
 
                 RolesList.Add(item);
             }
-
-            
         }
     }
 }

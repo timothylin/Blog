@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Blog.UI.Models
 {
@@ -77,6 +79,12 @@ namespace Blog.UI.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [Display(Name = "Role")]
+        public string RoleId { get; set; }
+
+        [Display(Name = "Role")]
+        public List<SelectListItem> RolesList { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
@@ -85,8 +93,28 @@ namespace Blog.UI.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public RegisterViewModel()
+        {
+            RolesList = new List<SelectListItem>();
+        }
+
+        public void CreateRolesList(List<IdentityRole> listOfRoles)
+        {
+            foreach (var role in listOfRoles)
+            {
+                var item = new SelectListItem
+                {
+                    Value = role.Id,
+                    Text = role.Name
+                };
+
+                RolesList.Add(item);
+            }
+        }
+
     }
 
     public class ResetPasswordViewModel
@@ -104,7 +132,7 @@ namespace Blog.UI.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

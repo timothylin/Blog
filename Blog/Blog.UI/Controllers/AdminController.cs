@@ -12,27 +12,44 @@ namespace Blog.UI.Controllers
     {
         private BlogOperations _ops;
 
+        public AdminController()
+        {
+            _ops = new BlogOperations();
+        }
+
         [Authorize(Roles = "Admin")]
         // GET: Admin
         public ActionResult AdminDashboard()
         {
-            _ops = new BlogOperations();
             var vm = new AdminVM();
             vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts;
             vm.Users = _ops.GetAllUsers().Users;
+            vm.Roles = _ops.GetAllRoles().IdRoles;
             vm.CreateRolesList(_ops.GetAllRoles().IdRoles);
 
             return View(vm);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult AddNewUser()
         {
             var vm = new RegisterViewModel();
+
+            vm.CreateRolesList(_ops.GetAllRoles().IdRoles);
 
             return View(vm);
         }
 
         [Authorize(Roles = "Admin")]
+        public ActionResult ManagePosts()
+        {
+            _ops = new BlogOperations();
+
+            var posts = _ops.GetAllBlogPosts().BlogPosts;
+
+            return View(posts);
+        }
+
         public ActionResult AdminPosts()
         {
             _ops = new BlogOperations();
