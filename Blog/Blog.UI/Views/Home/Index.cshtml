@@ -142,40 +142,36 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-8">
-                    @foreach (var post in Model.BlogPosts)
-
-                        //for (int i = 6; i < 12; i++){
-                        //Model.BlogPosts[i].;
-                    {
+                   @for (int i = 6; i < 12; i++){
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3>
-                                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[5].BlogPostId">
-                                        @post.BlogPostTitle 
+                                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[i].BlogPostId" class="post-title">
+                                        @Model.BlogPosts[i].BlogPostTitle
                                     </a>
-                                    <small class="pull-right date">@post.TimeCreated.ToShortDateString()</small>
+                                    <small class="pull-right date">@Model.BlogPosts[i].TimeCreated.ToShortDateString()</small>
                                 </h3>
                             </div>
 
                             <div class="panel-body">
                                 <div class="col-md-12">
                                     <p>Post Text</p>
-                                    <blockquote>@Html.Raw(post.Description)</blockquote>
+                                    <blockquote>@Html.Raw(Model.BlogPosts[i].Description)</blockquote>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <p>Category: @post.Category.CategoryTitle</p>
+                                        <p>Category: @Model.BlogPosts[i].Category.CategoryTitle</p>
                                     </div>
                                     <div class="col-md-3 pull-right">
                                         <p>Hashtags</p>
-                                        @if (post.Hashtags.Count > 0)
+                                        @if (Model.BlogPosts[i].Hashtags.Count > 0)
                                         {
                                             string hashtags = "";
-                                            for (int i = 0; i < post.Hashtags.Count - 1; i++)
+                                            for (int j = 0; j < Model.BlogPosts[i].Hashtags.Count - 1; j++)
                                             {
-                                                hashtags += "#" + post.Hashtags[i].HashtagTitle + ", ";
+                                                hashtags += "#" + Model.BlogPosts[i].Hashtags[j].HashtagTitle + ", ";
                                             }
-                                            hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
+                                            hashtags += "#" + Model.BlogPosts[i].Hashtags[Model.BlogPosts[i].Hashtags.Count - 1].HashtagTitle;
                                             <p>@hashtags</p>
                                         }
                                         else
@@ -187,7 +183,7 @@
 
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <small><cite title="Source Title">By: @(post.User.FirstName + " " + post.User.LastName)</cite></small>
+                                        <small><cite title="Source Title">By: @(Model.BlogPosts[i].User.FirstName + " " + Model.BlogPosts[i].User.LastName)</cite></small>
                                     </div>
                                 </div>
                             </div>
