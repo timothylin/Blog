@@ -24,6 +24,7 @@
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Role</th>
+                                <th>Modify</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,12 +42,17 @@
 
                                         <td>@userRole.Name</td>
                                     }
+
+                                    <td>
+                                        <button class="btn btn-success"><span class="glyphicon glyphicon-edit"></span></button>
+                                        <button class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
 
-                    @Html.ActionLink("Add New User", "AddNewUser", "Admin", new { @class = "btn btn-success" })
+                    @Html.ActionLink("Add New User", "AddNewUser", "Admin", new { @class = "btn btn-primary" })
                 </div>
             </div>
         </div>
