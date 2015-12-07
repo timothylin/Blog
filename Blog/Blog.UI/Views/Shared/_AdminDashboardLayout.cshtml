@@ -13,7 +13,7 @@
 </head>
 
 <body id="admin-body">
-    <div id="admin-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <nav id="admin-nav" class="navbar navbar-nav navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -22,23 +22,27 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div class="navbar-collapse collapse pull-right">
-                @Html.Partial("_LoginPartial")
+            <div class="navbar-collapse collapse">
+                @Html.Partial("_LoginPartialDashboard")
             </div>
         </div>
-    </div>
+    </nav>
     <div class="row">
         <div class="col-sm-2 col-md-2  sidebar hidden-sm hidden-xs">
             <ul class="nav nav-sidebar">
 
                 <li><a href="/Admin/AdminDashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
                 <li><a href="/Home/Index"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+<<<<<<< HEAD
                 <li><a href="/Admin/ManagePosts"><span class="glyphicon glyphicon-list-alt"></span> Posts</a></li>
+=======
+                <li><a href="/Admin/ManagePosts"><span class="glyphicon glyphicon-list-alt"></span> Manage Posts</a></li>
+>>>>>>> 9feb719c08510923447d75e4fd54a2a534325e48
                 <li><a href="/Admin/AdminPages">Pages</a></li>
                 <li><a href="/Admin/AddNewUser">Add New User</a></li>
                 <li><a href="/Admin/ManageUsers">Manage Users</a></li>
                 <li><a href="/Page/AddNewPage">Add New Page</a></li>
-                <li><a href="/BlogPost/AddNewBlogPost">Add new Post</a></li>
+                <li><a href="/BlogPost/AddNewBlogPost">Add New Post</a></li>
             </ul>
         </div>
 
