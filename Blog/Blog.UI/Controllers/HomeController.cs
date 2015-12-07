@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Blog.BLL;
+using Blog.Models;
 using Blog.UI.Models;
 
 namespace Blog.UI.Controllers
@@ -15,7 +16,7 @@ namespace Blog.UI.Controllers
         {
             _ops = new BlogOperations();
             var vm = new HomeVM();
-            vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts;
+            vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == Status.Approved).ToList();
             return View(vm);
         }
 
