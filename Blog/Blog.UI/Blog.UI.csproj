@@ -1297,6 +1297,7 @@
     <Content Include="Views\Admin\TestAng.cshtml" />
     <Content Include="Views\Admin\ManagePosts.cshtml" />
     <Content Include="Views\Admin\ManageUsers.cshtml" />
+    <Content Include="Views\Shared\_LoginPartialDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
