@@ -5,11 +5,14 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using Blog.BLL;
 using Blog.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Blog.UI.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Blog.UI.Controllers
 {
@@ -18,15 +21,18 @@ namespace Blog.UI.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private BlogOperations _ops;
 
         public AccountController()
         {
+            _ops = new BlogOperations();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _ops = new BlogOperations();
         }
 
         public ApplicationSignInManager SignInManager
@@ -140,7 +146,9 @@ namespace Blog.UI.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            RegisterViewModel vm = new RegisterViewModel();
+
+            return View(vm);
         }
 
         //
@@ -156,10 +164,11 @@ namespace Blog.UI.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    _ops.AddRoleToUser(user.Id, model.RoleId);
+
                     if (!User.IsInRole("Admin"))
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
 
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link

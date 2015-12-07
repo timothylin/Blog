@@ -163,7 +163,26 @@ namespace Blog.Data
 
         public List<StaticPage> GetAllStaticPages()
         {
-            throw new NotImplementedException();
+            List<StaticPage> staticPages = new List<StaticPage>();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var cmd = new SqlCommand();
+                cmd.CommandText = "GetAllStaticPages";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = cn;
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        staticPages.Add(PopulateStaticPageFromReader(dr));
+                    }
+                }
+            }
+
+            return staticPages;
         }
 
         public StaticPage GetStaticPageById(int staticPageId)
@@ -282,7 +301,33 @@ namespace Blog.Data
             return users;
         }
 
-        public ApplicationUser UpdateRoleByUserID(string userId, string roleId)
+        public ApplicationUser AddRoleToUser(string userId, string roleID)
+        {
+            ApplicationUser user = new ApplicationUser();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "AddRoleToUser";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@UserID", userId);
+                cmd.Parameters.AddWithValue("@RoleID", roleID);
+                cmd.Connection = cn;
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        user = PopulateUserFromDataReader(dr);
+                    }
+                }
+            }
+
+            return user;
+        }
+
+        public ApplicationUser UpdateRoleByUserId(string userId, string roleId)
         {
             ApplicationUser user = new ApplicationUser();
 
@@ -292,7 +337,7 @@ namespace Blog.Data
                 cmd.CommandText = "UpdateRoleByUserID";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@UserID", userId);
-                cmd.Parameters.AddWithValue("@roleID", roleId);
+                cmd.Parameters.AddWithValue("@RoleID", roleId);
                 cmd.Connection = cn;
                 cn.Open();
 
@@ -327,8 +372,10 @@ namespace Blog.Data
         {
             IdentityUserRole role = new IdentityUserRole();
 
-            role.RoleId = dr["RoleID"].ToString();
-
+            if (dr["RoleID"] != DBNull.Value)
+            {
+                role.RoleId = dr["RoleID"].ToString();
+            }
             return role;
         }
 

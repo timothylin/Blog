@@ -1231,7 +1231,9 @@
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1287,6 +1289,9 @@
     <Content Include="Views\BlogPost\AllPosts.cshtml" />
     <Content Include="Views\PR\PRDashboard.cshtml" />
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />
+    <Content Include="Views\Shared\_AdminDashboardLayout.cshtml" />
+    <Content Include="Views\Admin\AdminPosts.cshtml" />
+    <Content Include="Views\Admin\AdminPages.cshtml" />
     <Content Include="Views\Admin\AddNewUser.cshtml" />
     <Content Include="Views\Admin\TestAng.cshtml" />
     <Content Include="Views\Admin\ManagePosts.cshtml" />
