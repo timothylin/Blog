@@ -17,7 +17,6 @@
                         <label for="BlogPost_BlogPostTitle" class="col-md-2 control-label">Blog Title</label>
                         <div class="col-md-10">
                             @Html.TextBoxFor(m => m.BlogPost.BlogPostTitle, new {@class="form-control", @placeholder="Blog Title", @required="", @ng_model="Title"})
-                            @*<input class="form-control" id="BlogPost_BlogPostTitle" name="BlogPost.BlogPostTitle" placeholder="Blog Title" type="text" ng-model="Title" required>*@
                             <label class="control-label text-danger" ng-show="myForm['BlogPost.BlogPostTitle'].$dirty && myForm['BlogPost.BlogPostTitle'].$invalid && myForm['BlogPost.BlogPostTitle'].$error.required">
                                 Title is required
                             </label>
@@ -28,7 +27,6 @@
                         <label for="BlogPost_Description" class="col-md-2 control-label">Blog Description</label>
                         <div class="col-md-10">
                             @Html.TextAreaFor(m => m.BlogPost.Description, new {@class="form-control", @placeholder="Blog Description", @ng_model="Description", @required="", @ng_maxlength="200"})
-                            @*<textarea class="form-control" id="BlogPost_Description" name="BlogPost.Description" placeholder="Blog Description" type="text" ng-model="Description" required ng-maxlength="200"></textarea>*@
                             <label class="control-label text-danger" ng-show="myForm['BlogPost.Description'].$dirty && myForm['BlogPost.Description'].$invalid && myForm['BlogPost.Description'].$error.required">
                                 Description is required
                             </label>
@@ -42,7 +40,6 @@
                         <label for="BlogPost_CoverImageUrl" class="col-md-2 control-label">Cover Image URL</label>
                         <div class="col-md-10">
                             @Html.TextBoxFor(m => m.BlogPost.CoverImageUrl, new { @class = "form-control", @placeholder = "Cover Image URL", @required = "", @ng_model = "CoverImageUrl" })
-                            @*<input class="form-control" id="BlogPost_CoverImageUrl" name="BlogPost.CoverImageUrl" placeholder="Cover Image URL" type="text" ng-model="CoverImageUrl" required>*@
                             <label class="control-label text-danger" ng-show="myForm['BlogPost.CoverImageUrl'].$dirty && myForm['BlogPost.CoverImageUrl'].$invalid && myForm['BlogPost.CoverImageUrl'].$error.required">
                                 Cover Image URL is required
                             </label>
@@ -61,7 +58,6 @@
                         <label for="mytextarea" class="col-md-2 control-label">Content Text</label>
                         <div class="col-md-8">
                             @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new {@id="mytextarea"})
-                            @*<textarea cols="20" id="mytextarea" name="BlogPost.BlogPostText" rows="2" ng-model="ContentText" required></textarea>*@
                         </div>
                     </div>
 
@@ -69,7 +65,7 @@
                         <label class="col-md-2 control-label">Hashtags</label>
                         <div class="col-md-8">
                             <ul id="myTags"></ul>
-                            <div class="pull-right tiny">* No # signs or spaces allowed</div>
+                            <div class="pull-right tiny">* No # signs or spaces allowed (10 max)</div>
                         </div>
                     </div>
 
@@ -77,8 +73,8 @@
 
                     <div class="form-group">
                         <div class="col-md-10 col-md-offset-2">
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <button type="reset" class="btn btn-danger">Reset</button>
+                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Submit</button>
+                            <button type="reset" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Reset</button>
                         </div>
                     </div>
                 </fieldset>
