@@ -21,15 +21,18 @@ namespace Blog.UI.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private BlogOperations _ops;
 
         public AccountController()
         {
+            _ops = new BlogOperations();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _ops = new BlogOperations();
         }
 
         public ApplicationSignInManager SignInManager
@@ -143,7 +146,9 @@ namespace Blog.UI.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            RegisterViewModel vm = new RegisterViewModel();
+
+            return View(vm);
         }
 
         //
@@ -159,10 +164,7 @@ namespace Blog.UI.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-
-                    var ops = new BlogOperations();
-
-                    ops.AddRoleToUser(user.Id, "0");
+                    _ops.AddRoleToUser(user.Id, model.RoleId);
 
                     if (!User.IsInRole("Admin"))
                     {
