@@ -6,11 +6,12 @@
     @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
-            @*<li>@Html.ActionLink("All Posts", "ViewAllBlogPosts", "BlogPost")</li>
-            <li>@Html.ActionLink("Dashboard", "AdminDashboard", "Admin")</li>*@
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="btnShowStaticPages">Info <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu" id="staticpages"></ul>
+            </li>
             <li>
                 <a href="/Manage" title="Manage"><span class="glyphicon glyphicon-user"></span> @User.Identity.GetUserName()</a>
-                @*@Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})*@
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-log-out"></span> Log off</a></li>
         </ul>
@@ -19,6 +20,10 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="btnShowStaticPages">Info <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu" id="staticpages"></ul>
+        </li>
         <li>@Html.ActionLink("About", "About", "Home")</li>
         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</li>

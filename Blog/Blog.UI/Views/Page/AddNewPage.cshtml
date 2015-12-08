@@ -16,9 +16,12 @@
                     <div class="form-group">
                         <label for="StaticPage_StaticPageTitle" class="col-md-2 control-label">Page Title</label>
                         <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.StaticPage.StaticPageTitle, new { @class = "form-control", @placeholder = "Page Title", @required = "", @ng_model = "Title" })
+                            @Html.TextBoxFor(m => m.StaticPage.StaticPageTitle, new { @class = "form-control", @placeholder = "Page Title", @required = "", @ng_model = "Title", @ng_maxlength = "100" })
                             <label class="control-label text-danger" ng-show="myForm['StaticPage.StaticPageTitle'].$dirty && myForm['StaticPage.StaticPageTitle'].$invalid && myForm['StaticPage.StaticPageTitle'].$error.required">
                                 Title is required
+                            </label>
+                            <label class="control-label text-danger" ng-show="myForm['StaticPage.StaticPageTitle'].$dirty && myForm['StaticPage.StaticPageTitle'].$invalid && myForm['StaticPage.StaticPageTitle'].$error.maxlength">
+                                Your title cannot be longer than 100 characters
                             </label>
                         </div>
                     </div>

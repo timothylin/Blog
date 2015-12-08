@@ -1,4 +1,5 @@
 ﻿@using System.Diagnostics.Eventing.Reader
+@using Blog.Models
 
 <!DOCTYPE html>
 <html>
@@ -23,11 +24,8 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse">
-                
                 @Html.Partial("_LoginPartialDashboard")
-                <ul class="nav navbar-nav navbar-right">
-                    @Html.Partial("_StaticPages")
-                </ul>
+
 </div>
         </div>
     </nav>
@@ -40,16 +38,16 @@
                 <li><a href="/Admin/ManagePosts"><span class="glyphicon glyphicon-comment"></span> Posts</a></li>
                 <li><a href="/Admin/ManageStaticPages"><span class="glyphicon glyphicon-file"></span> Static Pages</a></li>
                 <li><a href="/Admin/ManageUsers"><span class="glyphicon glyphicon-user"></span> Users</a></li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus"></span> Add <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/BlogPost/AddNewBlogPost"><span class="glyphicon glyphicon-plus-sign"></span> Post</a></li>
-                    <li><a href="/Page/AddNewPage"><span class="glyphicon glyphicon-plus-sign"></span> Static Page</a></li>
-                    <li><a href="/Admin/AddNewUser"><span class="glyphicon glyphicon-plus-sign"></span> User</a></li>
-                </ul>
-            </li>
-                </ul>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus"></span> Add <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/BlogPost/AddNewBlogPost"><span class="glyphicon glyphicon-plus-sign"></span> Post</a></li>
+                        <li><a href="/Page/AddNewPage"><span class="glyphicon glyphicon-plus-sign"></span> Static Page</a></li>
+                        <li><a href="/Admin/AddNewUser"><span class="glyphicon glyphicon-plus-sign"></span> User</a></li>
+                    </ul>
+                </li>
+            </ul>
 </div>
 
     </div>
