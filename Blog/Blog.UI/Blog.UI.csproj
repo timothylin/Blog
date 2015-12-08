@@ -194,6 +194,10 @@
     <Compile Include="Migrations\201512012036027_UserNames.Designer.cs">
       <DependentUpon>201512012036027_UserNames.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512080514401_AccountStatus.cs" />
+    <Compile Include="Migrations\201512080514401_AccountStatus.Designer.cs">
+      <DependentUpon>201512080514401_AccountStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddBlogPostVM.cs" />
@@ -1326,6 +1330,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201512012036027_UserNames.resx">
       <DependentUpon>201512012036027_UserNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512080514401_AccountStatus.resx">
+      <DependentUpon>201512080514401_AccountStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

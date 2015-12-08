@@ -357,6 +357,31 @@ namespace Blog.Data
             return user;
         }
 
+        public ApplicationUser GetUserById(string userId)
+        {
+            ApplicationUser user = new ApplicationUser();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "GetUserByID";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@UserID", userId);
+                cmd.Connection = cn;
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        user = PopulateUserFromDataReader(dr);
+                    }
+                }
+            }
+
+            return user;
+        }
+
         public ApplicationUser UpdateRoleByUserId(string userId, string roleId)
         {
             ApplicationUser user = new ApplicationUser();
@@ -368,6 +393,32 @@ namespace Blog.Data
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@UserID", userId);
                 cmd.Parameters.AddWithValue("@RoleID", roleId);
+                cmd.Connection = cn;
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        user = PopulateUserFromDataReader(dr);
+                    }
+                }
+            }
+
+            return user;
+        }
+
+        public ApplicationUser UpdateUserAccountStatus(string userId, AccountStatus status)
+        {
+            ApplicationUser user = new ApplicationUser();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "UpdateUserAccountStatus";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@UserID", userId);
+                cmd.Parameters.AddWithValue("@AccountStatus", (int)status);
                 cmd.Connection = cn;
                 cn.Open();
 
@@ -413,6 +464,7 @@ namespace Blog.Data
             user.FirstName = dr["FirstName"].ToString();
             user.LastName = dr["LastName"].ToString();
             user.UserName = dr["UserName"].ToString();
+            user.AccountStatus = (AccountStatus) dr["AccountStatus"];
 
             user.Roles.Add(PopulateRoleFromDataReader(dr));
 

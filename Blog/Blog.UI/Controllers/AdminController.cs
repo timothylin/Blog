@@ -53,7 +53,7 @@ namespace Blog.UI.Controllers
         {
             var vm = new AdminVM();
 
-            vm.User = _ops.GetAllUsers().Users.FirstOrDefault(u => u.Id == id);
+            vm.User = _ops.GetUserById(id).User;
             vm.Roles = _ops.GetAllRoles().IdRoles;
             vm.CreateRolesList(_ops.GetAllRoles().IdRoles);
 

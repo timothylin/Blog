@@ -60,11 +60,8 @@ namespace Blog.BLL
                 _response.BlogPost = blogPost;
                 _response.Message = "Blog post status was successfully updated";
             }
-            else
-            {
-                _response.Success = false;
-                _response.Message = "Your blog post status could not be updated";
-            }
+
+            _response.Message = "Your blog post status could not be updated";
 
             return _response;
         }
@@ -214,13 +211,26 @@ namespace Blog.BLL
             _response = new Response();
             var user = _repo.AddRoleToUser(userId, roleId);
 
-            foreach (var role in user.Roles)
+            if (user != null && user.Roles.First().RoleId == roleId)
             {
-                if (role.RoleId == roleId)
-                {
-                    _response.Success = true;
-                    _response.User = user;
-                }
+                _response.Success = true;
+                _response.User = user;
+
+            }
+
+            return _response;
+
+        }
+
+        public Response GetUserById(string userId)
+        {
+            _response = new Response();
+            var user = _repo.GetUserById(userId);
+
+            if (user != null)
+            {
+                _response.Success = true;
+                _response.User = user;
             }
 
             return _response;
@@ -232,16 +242,30 @@ namespace Blog.BLL
             _response = new Response();
             var user = _repo.UpdateRoleByUserId(userId, roleId);
 
-            foreach (var role in user.Roles)
+            if (user != null && user.Roles.First().RoleId == roleId)
             {
-                if (role.RoleId == roleId)
-                {
-                    _response.Success = true;
-                    _response.User = user;
-                }
+                _response.Success = true;
+                _response.User = user;
             }
 
             return _response;
         }
+
+        public Response UpdateUserAccountStatus(string userId, AccountStatus status)
+        {
+            _response = new Response();
+            var user = _repo.UpdateUserAccountStatus(userId, status);
+
+            if (user != null && user.AccountStatus == status)
+            {
+                _response.Success = true;
+                _response.User = user;
+            }
+
+            return _response;
+
+        }
+
+
     }
 }
