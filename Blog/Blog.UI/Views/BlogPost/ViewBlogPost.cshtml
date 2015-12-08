@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="center-block blogpost">
+<div class="blogpost">
 
     <div class="row">
         <img class="img-responsive" src="@Model.CoverImageUrl"/>
@@ -14,21 +14,25 @@
         <h2>
             @Model.BlogPostTitle
         </h2>
+        <small><cite title="Source Title">a post by: @(Model.User.FirstName + " " + Model.User.LastName)</cite></small>
         <h3>@Model.Description</h3>
     </div>
-    <div class="row">
-        <small><cite title="Source Title">a post by: @(Model.User.FirstName + " " + Model.User.LastName)</cite></small>
-        <small class="pull-right tiny">Date: @Model.TimeCreated</small>
-        <p>Category: @Model.Category.CategoryTitle</p>
-    </div>
+    <br />
     <div class="row">
         <p>@Html.Raw(Model.BlogPostText)</p>
     </div>
     <div class="row">
         <div class="col-md-4">
-            <br/>
-            <br/>
+            
+            <p>Category: @Model.Category.CategoryTitle</p>
         </div>
+        <div class="col-md-offset-4 col-md-4">
+            <p>@Model.TimeCreated.ToShortDateString() </p>
+        </div>
+    </div>
+
+<br />
+    <div class="row">
         <div class="col-md-9">
             <p class="tiny">Hashtags</p>
             @if (Model.Hashtags.Count > 0)

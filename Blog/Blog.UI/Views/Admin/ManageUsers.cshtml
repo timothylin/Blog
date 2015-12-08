@@ -95,11 +95,12 @@
                                 <a href="@url4" class="btn btn-danger" title="Remove" ng-if="post.Status == 'Approved' || post.Status == 'Denied' || post.Status == 'Pending'"><span class="glyphicon glyphicon-remove"></span></a>
                                 <a href="@url5" class="btn btn-primary" title="Restore" ng-if="post.Status == 'Deleted'"><span class="glyphicon glyphicon-export"></span></a>
                                 <a href="@url1" class="btn btn-info" title="Details">Details</a>*@
-
-                            <a href="@editUser" class="btn btn-info col-xs-offset-3" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                            <a href="@disableUser" class="btn btn-danger" title="Disable" ng-if="user.AccountStatus == 'Active'"><span class="glyphicon glyphicon-remove-circle"></span></a>
-                            <a href="@activateUser" class="btn btn-success" title="Activate" ng-if="user.AccountStatus == 'Disabled'"><span class="glyphicon glyphicon-ok-circle"></span></a>
-                        </td>
+                            <div class="btn-group">
+                                <a href="@editUser" class="btn btn-info col-xs-offset-3" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                <a href="@disableUser" class="btn btn-danger" title="Disable" ng-if="user.AccountStatus == 'Active'"><span class="glyphicon glyphicon-remove-circle"></span></a>
+                                <a href="@activateUser" class="btn btn-success" title="Activate" ng-if="user.AccountStatus == 'Disabled'"><span class="glyphicon glyphicon-ok-circle"></span></a>
+                            </div>
+                       </td>
                     </tr>
                 </tbody>
             </table>

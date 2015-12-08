@@ -51,8 +51,8 @@
                         <td>{{post.Category}}</td>
                         <td>
                             <span class="label label-success" ng-if="post.Status == 'Approved'">{{post.Status}}</span>
-                            <span class="label label-pending" ng-if="post.Status == 'Pending'">{{post.Status}}</span>
-                            <span class="label label-warning" ng-if="post.Status == 'Denied'">{{post.Status}}</span>
+                            <span class="label label-warning" ng-if="post.Status == 'Pending'">{{post.Status}}</span>
+                            <span class="label label-danger" ng-if="post.Status == 'Denied'">{{post.Status}}</span>
                             <span class="label label-danger" ng-if="post.Status == 'Deleted'">{{post.Status}}</span>
                         </td>
                         <td>
