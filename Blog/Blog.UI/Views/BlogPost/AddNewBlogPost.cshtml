@@ -16,9 +16,12 @@
                     <div class="form-group">
                         <label for="BlogPost_BlogPostTitle" class="col-md-2 control-label">Blog Title</label>
                         <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.BlogPost.BlogPostTitle, new {@class="form-control", @placeholder="Blog Title", @required="", @ng_model="Title"})
+                            @Html.TextBoxFor(m => m.BlogPost.BlogPostTitle, new {@class="form-control", @placeholder="Blog Title", @required="", @ng_model="Title", @ng_maxlength = "100" })
                             <label class="control-label text-danger" ng-show="myForm['BlogPost.BlogPostTitle'].$dirty && myForm['BlogPost.BlogPostTitle'].$invalid && myForm['BlogPost.BlogPostTitle'].$error.required">
                                 Title is required
+                            </label>
+                            <label class="control-label text-danger" ng-show="myForm['BlogPost.BlogPostTitle'].$dirty && myForm['BlogPost.BlogPostTitle'].$invalid && myForm['BlogPost.BlogPostTitle'].$error.maxlength">
+                                Your title cannot be longer than 100 characters
                             </label>
                         </div>
                     </div>

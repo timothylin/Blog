@@ -19,7 +19,7 @@ namespace Blog.UI.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, PR")]
         public ActionResult AddNewPage()
         {
             var newStaticPageVM = new AddStaticPageVM();
@@ -29,7 +29,7 @@ namespace Blog.UI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, PR")]
         public ActionResult AddNewPage(AddStaticPageVM newPage)
         {
             _ops = new BlogOperations();
@@ -38,7 +38,12 @@ namespace Blog.UI.Controllers
             {
                 newPage.StaticPage.User.UserName = User.Identity.GetUserName();
                 newPage.StaticPage.TimeCreated = DateTime.Now;
-                newPage.StaticPage.Status = BlogPostStatus.Approved;
+                newPage.StaticPage.Status = BlogPostStatus.Pending;
+
+                if (User.IsInRole("Admin"))
+                {
+                    newPage.StaticPage.Status = BlogPostStatus.Approved;
+                }
 
                 var page = _ops.AddNewStaticPage(newPage.StaticPage).StaticPage;
 
@@ -77,6 +82,12 @@ namespace Blog.UI.Controllers
 
         [Authorize(Roles = "Admin")]
         public ActionResult DeletePage(int id)
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult RestorePage(int id)
         {
             return View();
         }

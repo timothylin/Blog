@@ -84,7 +84,7 @@ namespace Blog.UI.Controllers
         }
 
         //User as well?
-        [Authorize(Roles = "Admin, PR")]
+        [Authorize(Roles = "Admin, PR, User")]
         public ActionResult ViewAllBlogPosts()
         {
             _ops = new BlogOperations();
