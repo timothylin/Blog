@@ -97,6 +97,20 @@ namespace Blog.BLL
             return _response;
         }
 
+        public Response EditBlogPost(BlogPost b)
+        {
+            _response = new Response();
+            var blogPost = _repo.EditBlogPost(b);
+
+            if (blogPost != null)
+            {
+                _response.Success = true;
+                _response.BlogPost = blogPost;
+            }
+
+            return _response;
+        }
+
         public Response AddNewStaticPage(StaticPage p)
         {
             _response = new Response();
@@ -162,6 +176,20 @@ namespace Blog.BLL
             {
                 _response.Success = true;
                 _response.Hashtag = hashtag;
+            }
+
+            return _response;
+        }
+
+        public Response GetHashtagsByBlogPostId(int blogPostId)
+        {
+            _response = new Response();
+            var hashtags = _repo.GetHashtagByBlogPostId(blogPostId);
+
+            if (hashtags != null)
+            {
+                _response.Success = true;
+                _response.Hashtags = hashtags;
             }
 
             return _response;

@@ -28,6 +28,7 @@ namespace Blog.Models
         public List<Hashtag> Hashtags { get; set; } 
         public ApplicationUser User { get; set; }
         public Category Category { get; set; }
+        public bool HashtagsUpdated { get; set; }
 
         public BlogPost()
         {
