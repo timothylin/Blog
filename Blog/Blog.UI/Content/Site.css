@@ -125,7 +125,7 @@ html, body {
 }
 
 .nav-sidebar > li > a:hover {
-    background-color:  #323045;
+    background-color: #4d394b;
 }
 
 .navbar-nav {
@@ -135,7 +135,7 @@ html, body {
 }
 .navbar-nav li {
     font-size: 16px;
-    background-color: white;
+    /*background-color: #4d394b;*/
     padding-top: 12px;
 }
 

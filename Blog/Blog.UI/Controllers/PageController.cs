@@ -65,20 +65,38 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ApprovePage(int id)
         {
+            _ops = new BlogOperations();
+            var update = _ops.UpdateStaticPageStatus(id, BlogPostStatus.Approved);
 
-            return View();
+            return RedirectToAction("ManageStaticPages", "Admin");
+
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult DenyPage(int id)
         {
-            return View();
+            _ops = new BlogOperations();
+            var update = _ops.UpdateStaticPageStatus(id, BlogPostStatus.Denied);
+
+            return RedirectToAction("ManageStaticPages", "Admin");
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult DeletePage(int id)
         {
-            return View();
+            _ops = new BlogOperations();
+            var update = _ops.UpdateStaticPageStatus(id, BlogPostStatus.Deleted);
+
+            return RedirectToAction("ManageStaticPages", "Admin");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult RestorePage(int id)
+        {
+            _ops = new BlogOperations();
+            var update = _ops.UpdateStaticPageStatus(id, BlogPostStatus.Pending);
+
+            return RedirectToAction("ManageStaticPages", "Admin");
         }
     }
 }

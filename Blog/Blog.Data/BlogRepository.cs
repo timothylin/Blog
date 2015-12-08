@@ -191,6 +191,33 @@ namespace Blog.Data
             return blogPost;
         }
 
+
+        public StaticPage UpdateStaticPageStatus(int staticPageId, BlogPostStatus updateStaticPageStatus)
+        {
+            StaticPage staticPage = new StaticPage();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var cmd = new SqlCommand();
+                cmd.CommandText = "UpdateStaticPageStatus";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@StaticPageID", staticPageId);
+                cmd.Parameters.AddWithValue("@Status", (int) updateStaticPageStatus);
+                cmd.Connection = cn;
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        staticPage = PopulateStaticPageFromReader(dr);
+                    }
+                }
+            }
+
+            return staticPage;
+        }
+
         public List<StaticPage> GetAllStaticPages()
         {
             List<StaticPage> staticPages = new List<StaticPage>();

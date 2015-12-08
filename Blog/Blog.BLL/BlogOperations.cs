@@ -66,6 +66,23 @@ namespace Blog.BLL
             return _response;
         }
 
+        public Response UpdateStaticPageStatus(int staticPageId, BlogPostStatus updatedStaticPageStatus)
+        {
+            _response = new Response();
+            var staticPage = _repo.UpdateStaticPageStatus(staticPageId, updatedStaticPageStatus);
+
+            if (staticPage != null)
+            {
+                _response.Success = true;
+                _response.StaticPage = staticPage;
+                _response.Message = "Static page status was successfully updated";
+            }
+
+            _response.Message = "Your static page status could not be updated";
+
+            return _response;
+        }
+
         public Response AddNewBlogPost(BlogPost b)
         {
             _response = new Response();

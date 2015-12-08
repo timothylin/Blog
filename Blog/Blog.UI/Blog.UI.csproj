@@ -295,6 +295,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\admin.js" />
+    <Content Include="Scripts\app\AllPostsPagination.js" />
     <Content Include="Scripts\app\angvalidation.js" />
     <Content Include="Scripts\app\pr.js" />
     <Content Include="Scripts\app\selectizefortags.js" />
@@ -1238,6 +1239,7 @@
     <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-0.14.3.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
