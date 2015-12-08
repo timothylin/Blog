@@ -1,7 +1,7 @@
 ﻿@model Blog.UI.Models.HomeVM
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Welcome to JSDate ( ͡° ͜ʖ ͡°)";
 }
 
 <div class="container main-body">
@@ -49,6 +49,12 @@
                             <h3 class="carousel-caption">@Model.BlogPosts[2].BlogPostTitle</h3>
                         </a>
                     </div>
+                    <div class="item">
+                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[3].BlogPostId">
+                            <img src="@Model.BlogPosts[3].CoverImageUrl" alt="@Model.BlogPosts[3].BlogPostTitle">
+                            <h3 class="carousel-caption">@Model.BlogPosts[3].BlogPostTitle</h3>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Left and right controls -->
@@ -65,38 +71,24 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-4 col-xs-12 padding-bot-40">
-                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[3].BlogPostId">
-                    <img class="head-block-thumb" src="@Model.BlogPosts[3].CoverImageUrl"/>
-                        </a>
-                </div>
-                <div class="col-md-8 col-xs-12 head-block-desc">
-                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[3].BlogPostId">
-                    <h3>@Model.BlogPosts[3].BlogPostTitle</h3>
-                        </a>
-                        <p>@Model.BlogPosts[3].Description</p>
-                    </div>
-                <hr/>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-xs-12 padding-bot-40">
                     <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[4].BlogPostId">
                     <img class="head-block-thumb" src="@Model.BlogPosts[4].CoverImageUrl"/>
                         </a>
-            </div>
+                </div>
                 <div class="col-md-8 col-xs-12 head-block-desc">
                     <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[4].BlogPostId">
                     <h3>@Model.BlogPosts[4].BlogPostTitle</h3>
                         </a>
                         <p>@Model.BlogPosts[4].Description</p>
-                 </div>
+                    </div>
                 <hr/>
             </div>
             <div class="row">
-                <div class="col-md-4 col-xs-12">
+                <div class="col-md-4 col-xs-12 padding-bot-40">
                     <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[5].BlogPostId">
                     <img class="head-block-thumb" src="@Model.BlogPosts[5].CoverImageUrl"/>
                         </a>
-                </div>
+            </div>
                 <div class="col-md-8 col-xs-12 head-block-desc">
                     <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[5].BlogPostId">
                     <h3>@Model.BlogPosts[5].BlogPostTitle</h3>
@@ -105,53 +97,47 @@
                  </div>
                 <hr/>
             </div>
-        </div>
-    </div>
-
-    <br/>
-    <br/>
-    <div class="container-fluid home-banner">
-        <div class="row">
-            <div class="text-center">
-                <h3>Break between content</h3>
-            </div>
-            @foreach (var post in Model.BlogPosts)
-            {
-                <div class="col-sm-4">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">Different Type of Post</div>
-                        <div class="panel-body well">
-
-                            <ul>
-                                <li>@post.BlogPostTitle</li>
-                            </ul>
-
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[6].BlogPostId">
+                    <img class="head-block-thumb" src="@Model.BlogPosts[6].CoverImageUrl"/>
+                        </a>
                 </div>
-            }
+                <div class="col-md-8 col-xs-12 head-block-desc">
+                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[6].BlogPostId">
+                    <h3>@Model.BlogPosts[6].BlogPostTitle</h3>
+                        </a>
+                        <p>@Model.BlogPosts[6].Description</p>
+                 </div>
+                <hr/>
+            </div>
         </div>
     </div>
 
+    <br/>
+    <br/>
     <div class="container">
         <div class="row">
 
-            <div class="row">
-
+            <div class="col-sm-8 blog-heading">
                 <h3>Blog Posts</h3>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-8">
-                   @for (int i = 6; i < 12; i++){
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3>
-                                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[i].BlogPostId" class="post-title">
-                                        @Model.BlogPosts[i].BlogPostTitle
-                                    </a>
-                                    <small class="pull-right date">@Model.BlogPosts[i].TimeCreated.ToShortDateString()</small>
-                                </h3>
-                            </div>
+                   @for (int i = 7; i < 13; i++){
+                       <div class="thumbnail img-responsive">
+                           <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[i].BlogPostId">
+                               <img src="@Model.BlogPosts[i].CoverImageUrl" alt="@Model.BlogPosts[i].BlogPostTitle" class="portrait">
+                           </a>
+                       </div>
+                       <div>
+                           <h2>
+                               <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[i].BlogPostId">
+                                   @Model.BlogPosts[i].BlogPostTitle
+                               </a>
+                           </h2>
+                           <small class="pull-right tiny">@Model.BlogPosts[i].TimeCreated.ToShortDateString()</small>
+                       </div>
 
                             <div class="panel-body">
                                 <div class="col-md-12">
@@ -183,36 +169,11 @@
 
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <small><cite title="Source Title">By: @(Model.BlogPosts[i].User.FirstName + " " + Model.BlogPosts[i].User.LastName)</cite></small>
+                                        <small><cite title="Source Title">a post by @(Model.BlogPosts[i].User.FirstName + " " + Model.BlogPosts[i].User.LastName)</cite></small>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     }
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">Events</div>
-                        <div class="panel-body well">
-                            @foreach (var post in Model.BlogPosts)
-                            {
-                                <ul>
-                                    <li>@post.BlogPostTitle</li>
-                                </ul>
-                            }
-                        </div>
-                    </div>
-                    <div class="panel panel-info">
-                        <div class="panel-heading">TWEETS</div>
-                        <div class="panel-body well">
-                            @foreach (var post in Model.BlogPosts)
-                            {
-                                <ul>
-                                    <li>@post.BlogPostTitle</li>
-                                </ul>
-                            }
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

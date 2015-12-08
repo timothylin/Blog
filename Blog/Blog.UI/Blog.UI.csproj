@@ -185,6 +185,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\PRController.cs" />
+    <Compile Include="Controllers\StaticPageAPIController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -293,6 +294,7 @@
     <Content Include="Scripts\app\angvalidation.js" />
     <Content Include="Scripts\app\pr.js" />
     <Content Include="Scripts\app\selectizefortags.js" />
+    <Content Include="Scripts\app\staticpages.js" />
     <Content Include="Scripts\app\tagitload.js" />
     <Content Include="Scripts\app\tinymce.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1300,6 +1302,8 @@
     <Content Include="Views\Admin\ManageUsers.cshtml" />
     <Content Include="Views\Shared\_LoginPartialDashboard.cshtml" />
     <Content Include="Views\Page\ViewStaticPage.cshtml" />
+    <Content Include="Views\Shared\_StaticPages.cshtml" />
+    <Content Include="Views\Page\StaticPageDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,6 +9,7 @@ namespace Blog.UI.Models
     public class AddStaticPageVM
     {
         public StaticPage StaticPage { get; set; }
+        public List<string> hashtags { get; set; }
 
         public AddStaticPageVM()
         {

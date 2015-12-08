@@ -1,0 +1,48 @@
+﻿@model Blog.Models.StaticPage
+
+@{
+    ViewBag.Title = "New Static Page Details";
+}
+
+<h2>New Static Page Details</h2>
+
+<div class="container">
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Input</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Title</td>
+                    <td>@Model.StaticPageTitle</td>
+                </tr>
+                <tr>
+                    <td>Static Page ID</td>
+                    <td>@Model.StaticPageId</td>
+                </tr>
+                <tr>
+                    <td>UserName</td>
+                    <td>@Model.User.UserName</td>
+                </tr>
+                <tr>
+                    <td>Time Created</td>
+                    <td>@Model.TimeCreated.ToString("F")</td>
+                </tr>
+
+                <tr>
+                    <td>Status</td>
+                    <td>@Model.Status</td>
+                </tr>
+
+                <tr>
+                    <td>Html Body</td>
+                    <td>@Html.Raw(Model.StaticPageText)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

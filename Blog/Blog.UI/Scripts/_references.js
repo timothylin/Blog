@@ -17,6 +17,7 @@
 /// <reference path="app/angvalidation.js" />
 /// <reference path="app/pr.js" />
 /// <reference path="app/selectizefortags.js" />
+/// <reference path="app/staticpages.js" />
 /// <reference path="app/tagitload.js" />
 /// <reference path="app/tinymce.js" />
 /// <reference path="bootstrap.min.js" />
