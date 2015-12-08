@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Blog.BLL;
+using Blog.Models;
 using Blog.UI.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Blog.UI.Controllers
 {
@@ -17,11 +19,38 @@ namespace Blog.UI.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult AddNewPage()
         {
             var newStaticPageVM = new AddStaticPageVM();
+            newStaticPageVM.StaticPage.User.Id = User.Identity.GetUserId();
+
             return View(newStaticPageVM);
         }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public ActionResult AddNewPage(AddStaticPageVM newPage)
+        {
+            _ops = new BlogOperations();
+
+            if (ModelState.IsValid)
+            {
+                newPage.StaticPage.User.UserName = User.Identity.GetUserName();
+                newPage.StaticPage.TimeCreated = DateTime.Now;
+                newPage.StaticPage.Status = Status.Approved;
+
+                var page = _ops.AddNewStaticPage(newPage.StaticPage).StaticPage;
+
+                return View("StaticPageDetails", page);
+            }
+            else
+            {
+                return View(newPage);
+            }
+
+        }
+
 
         [Authorize(Roles = "Admin, PR, User")]
         public ActionResult ViewStaticPage(int id)

@@ -139,6 +139,30 @@ namespace Blog.Data
             }
         }
 
+        public StaticPage AddNewStaticPage(StaticPage newPage)
+        {
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@UserID", newPage.User.Id);
+                p.Add("@StaticPageTitle", newPage.StaticPageTitle);
+                p.Add("@StaticPageText", newPage.StaticPageText);
+                p.Add("@TimeCreated", newPage.TimeCreated);
+                p.Add("@Status", (int)newPage.Status);
+                p.Add("@StaticPageID", DbType.Int32, direction: ParameterDirection.Output);
+
+                cn.Execute("AddNewStaticPage", p, commandType: CommandType.StoredProcedure);
+
+                newPage.StaticPageId = p.Get<int>("StaticPageID");
+
+                }
+
+                newPage = GetStaticPageById(newPage.StaticPageId);
+
+                return newPage;
+            }
+        
+
         public BlogPost UpdateBlogPostStatus(int blogPostId, Status updatedStatus)
         {
             BlogPost blogPost = new BlogPost();
@@ -438,8 +462,6 @@ namespace Blog.Data
             staticPage.StaticPageText = dr["StaticPageText"].ToString();
             staticPage.TimeCreated = DateTime.Parse(dr["TimeCreated"].ToString());
             staticPage.Status = (Status)dr["Status"];
-            staticPage.Category.CategoryId = (int)dr["CategoryID"];
-            staticPage.Category.CategoryTitle = dr["CategoryTitle"].ToString();
             staticPage.User = PopulateUserFromDataReader(dr);
 
             return staticPage;

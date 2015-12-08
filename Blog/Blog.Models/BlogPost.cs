@@ -12,6 +12,7 @@ namespace Blog.Models
     {
         public int BlogPostId { get; set; }
         [Required(ErrorMessage="Title is required")]
+        [MaxLength(100, ErrorMessage = "Your title cannot be longer than 100 characters")]
         public string BlogPostTitle { get; set; }
         [AllowHtml]
         [Required(ErrorMessage = "Content Text is required")]

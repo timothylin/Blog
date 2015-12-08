@@ -83,6 +83,20 @@ namespace Blog.BLL
             return _response;
         }
 
+        public Response AddNewStaticPage(StaticPage p)
+        {
+            _response = new Response();
+            var staticPage = _repo.AddNewStaticPage(p);
+
+            if (staticPage != null)
+            {
+                _response.Success = true;
+                _response.StaticPage = staticPage;
+            }
+
+            return _response;
+        }
+
         public Response GetAllStaticPages()
         {
             _response = new Response();
