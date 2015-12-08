@@ -103,11 +103,5 @@ namespace Blog.UI.Controllers
 
             return RedirectToAction("ManageStaticPages", "Admin");
         }
-
-        [Authorize(Roles = "Admin")]
-        public ActionResult RestorePage(int id)
-        {
-            return View();
-        }
     }
 }
