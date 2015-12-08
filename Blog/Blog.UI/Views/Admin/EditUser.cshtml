@@ -1,7 +1,7 @@
 ﻿@model Blog.UI.Models.AdminVM
 
 @{
-    ViewBag.Title = "EditUser";
+    ViewBag.Title = "Edit User";
     Layout = "~/Views/Shared/_AdminDashboardLayout.cshtml";
 }
 <div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-10 col-md-offset-2 main">
@@ -10,69 +10,67 @@
     <h2>Edit User</h2>
     <hr />
     <div class="container">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div class="panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">Edit User: @Model.User.FirstName @Model.User.LastName</h3>
                 </div>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>User</th>
-                                <th>Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>User Name</td>
-                                <td>@Model.User.UserName</td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td>@Model.User.Email</td>
-                            </tr>
-                            <tr>
-                                <td>First Name</td>
-                                <td>@Model.User.FirstName</td>
-                            </tr>
-                            <tr>
-                                <td>Last Name</td>
-                                <td>@Model.User.LastName</td>
-                            </tr>
-                            <tr>
-                                <td>Old Role</td>
-                                @foreach (var role in Model.User.Roles)
-                                {
-                                    var userRole = Model.Roles.FirstOrDefault(r => r.Id == role.RoleId);
+                @using (Html.BeginForm("EditUser", "Admin", FormMethod.Post))
+                {
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>User Name</td>
+                                    <td>@Model.User.UserName</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>@Model.User.Email</td>
+                                </tr>
+                                <tr>
+                                    <td>First Name</td>
+                                    <td>@Model.User.FirstName</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name</td>
+                                    <td>@Model.User.LastName</td>
+                                </tr>
+                                <tr>
+                                    <td>Old Role</td>
+                                    @foreach (var role in Model.User.Roles)
+                                    {
+                                        var userRole = Model.Roles.FirstOrDefault(r => r.Id == role.RoleId);
 
-                                    <td>@userRole.Name</td>
-                                }
+                                        <td>@userRole.Name</td>
+                                    }
 
-                            </tr>
-                            @using (Html.BeginForm("EditUser", "Admin", FormMethod.Post))
-                            {
+                                </tr>
                                 <tr>
                                     <td>New Role</td>
 
                                     <td>
                                         @Html.HiddenFor(m => m.User.Id, Model.User.Id)
-                                        @Html.DropDownListFor(m => m.Role.Id, Model.RolesList, "Choose A Role", new {@class = "form-control"})
+                                        @Html.DropDownListFor(m => m.Role.Id, Model.RolesList, "Choose A Role", new { @class = "form-control" })
 
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <input type="submit" class="btn btn-success" value="Update" />
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
 
-                @Html.ActionLink("Return to Manage Users", "ManageUsers", "Admin", new { @class = "btn btn-danger" })
+                            </tbody>
+                        </table>
+
+
+                        @Html.ActionLink("Return to Manage Users", "ManageUsers", "Admin", new { @class = "btn btn-danger" })
+
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </div>
+                }
             </div>
         </div>
     </div>
