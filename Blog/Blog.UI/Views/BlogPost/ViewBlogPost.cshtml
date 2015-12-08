@@ -1,31 +1,35 @@
 ﻿@model Blog.Models.BlogPost
 
 @{
-    ViewBag.Title = "ViewBlogPost";
+    ViewBag.Title = "View Blog Post";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>View Blog Post</h2>
-
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3>
-            @Model.BlogPostTitle<small class="pull-right date">Date: @Model.TimeCreated</small>
-        </h3>
+<div class="center-block blogpost">
+    <div class="row">
+        <small><cite title="Source Title">a post by: @(Model.User.FirstName + " " + Model.User.LastName)</cite></small>
+        <small class="pull-right tiny">Date: @Model.TimeCreated</small>
+        <p>Category: @Model.Category.CategoryTitle</p>
+    </div>
+    <div class="row">
+        <h2>
+            @Model.BlogPostTitle
+        </h2>
+    </div>
+    <div class="row">
+        <img class="img-responsive" src="@Model.CoverImageUrl"/>
     </div>
 
-<div class="panel-body">
-    <div class="col-md-12">
-        <img class="img-responsive" src="@Model.CoverImageUrl"/>
-        <p>Post Text</p>
-        <blockquote>@Html.Raw(Model.BlogPostText)</blockquote>
+    <div class="row">
+        <p>@Html.Raw(Model.BlogPostText)</p>
     </div>
     <div class="row">
         <div class="col-md-4">
-            <p>Category: @Model.Category.CategoryTitle</p>
+            <br/>
+            <br/>
         </div>
-        <div class="col-md-3 pull-right">
-            <p>Hashtags</p>
+        <div class="col-md-9">
+            <p class="tiny">Hashtags</p>
             @if (Model.Hashtags.Count > 0)
             {
                 string hashtags = "";
@@ -42,12 +46,4 @@
             }
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-2">
-            <small><cite title="Source Title">By: @(Model.User.FirstName + " " + Model.User.LastName)</cite></small>
-        </div>
-    </div>
 </div>
-</div>
-
