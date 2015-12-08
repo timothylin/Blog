@@ -392,3 +392,11 @@ fieldset[disabled] .btn-pending.active {
 #rememberMe {
     margin-left: 25px
 }
+
+.edit-blogpost {
+    padding-top: 8px;
+}
+
+.edit-status {
+    padding-top: 5px;
+}

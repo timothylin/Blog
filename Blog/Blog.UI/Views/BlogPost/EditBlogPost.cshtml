@@ -17,7 +17,7 @@
                     
                     <div class="form-group">
                         <label for="BlogPost_BlogPostId" class="col-md-2 control-label">Blog ID#</label>
-                        <div class="col-md-10">
+                        <div class="col-md-10 edit-blogpost" >
                             @Html.DisplayFor(m => m.BlogPost.BlogPostId, new { @class = "form-control" })
                         </div>
                     </div>
@@ -37,7 +37,7 @@
 
                     <div class="form-group">
                         <label for="BlogPost_Status" class="col-md-2 control-label">Status</label>
-                        <div class="col-md-10">
+                        <div class="col-md-10 edit-status">
                             @if (Model.BlogPost.Status == BlogPostStatus.Approved)
                             {
                                 <span class="label label-success">Approved</span>
@@ -59,14 +59,14 @@
 
                     <div class="form-group">
                         <label for="BlogPost_User_UserName" class="col-md-2 control-label">User Name</label>
-                        <div class="col-md-10">
+                        <div class="col-md-10 edit-blogpost">
                             @Html.DisplayFor(m => m.BlogPost.User.UserName, new {@class = "form-control"})
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="BlogPost_TimeCreated" class="col-md-2 control-label">Time Created</label>
-                        <div class="col-md-10">
+                        <div class="col-md-10 edit-blogpost">
                             @Html.DisplayFor(m => m.BlogPost.TimeCreated, new { @class = "form-control" })
                         </div>
                     </div>
