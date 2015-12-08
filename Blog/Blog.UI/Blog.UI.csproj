@@ -203,6 +203,7 @@
     <Compile Include="Models\AddBlogPostVM.cs" />
     <Compile Include="Models\AddStaticPageVM.cs" />
     <Compile Include="Models\AdminVM.cs" />
+    <Compile Include="Models\AllPostsVM.cs" />
     <Compile Include="Models\HomeVM.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -296,8 +297,8 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\admin.js" />
-    <Content Include="Scripts\app\AllPostsPagination.js" />
     <Content Include="Scripts\app\angvalidation.js" />
+    <Content Include="Scripts\app\dotdotdot.js" />
     <Content Include="Scripts\app\pr.js" />
     <Content Include="Scripts\app\selectizefortags.js" />
     <Content Include="Scripts\app\staticpages.js" />
@@ -1070,6 +1071,8 @@
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
     <Content Include="Scripts\jquery.dotdotdot.js" />
     <Content Include="Scripts\jquery.dotdotdot.min.js" />
+    <Content Include="Scripts\jquery.twbsPagination.js" />
+    <Content Include="Scripts\jquery.twbsPagination.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

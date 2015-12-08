@@ -122,13 +122,45 @@ namespace Blog.UI.Controllers
         }
 
 
-        [Authorize(Roles = "Admin, PR, User")]
-        public ActionResult AllPosts()
-        {
-            var vm = new HomeVM();
-            vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == BlogPostStatus.Approved).ToList();
-            return View("AllPosts", vm);
+        //[Authorize(Roles = "Admin, PR, User")]
+        //public ActionResult AllPosts()
+        //{
+        //    _ops = new BlogOperations();
+        //    var vm = new HomeVM();
+        //    vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == BlogPostStatus.Approved).ToList();
 
+        //    return View("AllPosts", vm);
+
+        //}
+
+        [Authorize(Roles = "Admin, PR, User")]
+        public ActionResult AllPosts(int id)
+        {
+            _ops = new BlogOperations();
+            var vM = new AllPostsVM();
+            var allPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == BlogPostStatus.Approved).ToList();
+            vM.PostCount = allPosts.Count;
+            vM.CurrentPage = id;
+            decimal totalPages = (allPosts.Count / 5) + 1;
+
+            vM.TotalPages = decimal.ToInt32(totalPages);
+
+            if (id < vM.TotalPages)
+            {
+                for (int i = 5*(id - 1); i < 5*id; i++)
+                {
+                    vM.BlogPosts.Add(allPosts[i]);
+                }
+            }
+            else if (id == vM.TotalPages)
+            {
+                for (int i = 5*(id - 1); i < ((5*(id - 1)) + (vM.PostCount%5)); i++)
+                {
+                    vM.BlogPosts.Add(allPosts[i]);
+                }
+            }
+
+            return View("AllPosts", vM);
         }
 
 
