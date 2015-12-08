@@ -85,12 +85,13 @@ namespace Blog.UI.Controllers
 
         //User as well?
         [Authorize(Roles = "Admin, PR, User")]
-        public ActionResult ViewAllBlogPosts()
+        public ActionResult AllPosts()
         {
             _ops = new BlogOperations();
-            var posts = _ops.GetAllBlogPosts().BlogPosts;
+            var vm = new HomeVM();
+            vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == BlogPostStatus.Approved).ToList();
+            return View("AllPosts", vm);
 
-            return View("AllPosts", posts);
         }
 
 
