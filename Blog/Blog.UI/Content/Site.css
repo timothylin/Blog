@@ -7,7 +7,6 @@
 
 body {
     padding-top: 85px;
-    padding-bottom: 20px;
     min-height: 400px;
 }
 
@@ -117,11 +116,11 @@ html, body {
 }
 
 #admin-body {
-    padding-top: 50px;
+    padding-top: 80px;
 }
 
 #pr-body {
-    padding-top: 50px;
+    padding-top: 80px;
 }
 
 .nav-sidebar > li > a:hover {
@@ -187,13 +186,12 @@ html, body {
 }
 
 .panel {
-    border-radius: 0;
     border: 0;
 }
 
 footer {
-    background-color: #323045;
-    color: #fff;
+    background-color: #EAEAEA;
+    color: #818181;
     font-size: 14px;
     line-height: 18px;
     padding: 115px 0;
@@ -210,6 +208,33 @@ footer {
 .new-page-panel {
     background-color: #4caf50;
 }
+
+.new-manageusers-panel {
+    background-color: #607d8b;
+}
+
+.new-managepages-panel {
+    background-color: #f44336;
+}
+
+.new-manageposts-panel {
+    background-color: #607d8b;
+}
+.new-manageposts-panel h4{
+    padding-top: 15px;
+    color: white;
+}
+
+.new-managepages-panel h4{
+    padding-top: 15px;
+    color: white;
+}
+
+.new-manageusers-panel h4{
+    padding-top: 15px;
+    color: white;
+}
+
 
 .new-user-panel h4{
     padding-top: 15px;
@@ -241,6 +266,14 @@ footer {
 .glyphicon-pencil-alt {
     color: white;
     font-size: 75px;
+}
+
+.glyphicon-comment-alt {
+    color: white;
+    font-size: 75px;
+}
+.glyphicon-edit-alt {
+    color: white;
 }
 
 /*.carousel {
@@ -320,6 +353,15 @@ footer {
     padding: 0 10px;
 }
 
+.staticpage {
+    margin: 40px auto;
+    max-width: 800px;
+    line-height: 1.6;
+    font-size: 18px;
+    color: #444;
+    padding: 0 10px;
+}
+
 h2 a {
     font-family: 'Lucida Sans Unicode';
     font-weight: 700;
@@ -340,6 +382,17 @@ h2 {
 h3 {
     margin-top: 0;
     color: rgba(0,0,0,0.44);
+    text-decoration: none;
+}
+
+h2 a {
+    color: black;
+    text-decoration: none;
+}
+
+h2 a:hover {
+    color: black;
+    text-decoration: underline;
 }
 
 

@@ -9,64 +9,115 @@
     <h2>Admin Dashboard</h2>
     <hr/>
     <!--DASHBOARD-->
+
+    
+    <!--Only Visible on mobile-->
     <div class="container">
+        <div class="col-md-3 hidden-lg hidden-md">
+            <div class="panel new-manageposts-panel">
+                <a href="/Admin/ManagePosts">
+                    <div class="panel-body">
+                        <div class="col-xs-10">
+                            <span class="glyphicon glyphicon-comment glyphicon-comment-alt"></span>
+                            <br />
+                            <h4><span class="glyphicon glyphicon-edit glyphicon-edit-alt"></span> Manage Posts</h4>
+
+                        </div>
+                        <div class="col-xs-2">
+                            <a href="#" class="badge"><h4>4</h4></a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 hidden-lg hidden-md">
+            <div class="panel new-managepages-panel">
+                <a href="/Admin/ManageStaticPages">
+                    <div class="panel-body">
+                        <div class="col-xs-10">
+                            <span class="glyphicon glyphicon-file glyphicon-file-alt"></span>
+                            <br />
+                            <h4><span class="glyphicon glyphicon-edit glyphicon-edit-alt"></span> Manage Pages</h4>
+
+                        </div>
+                        <div class="col-xs-2">
+                            <a href="#" class="badge"><h4>4</h4></a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 hidden-lg hidden-md">
+            <div class="panel new-manageusers-panel">
+                <a href="/Admin/ManageUsers">
+                    <div class="panel-body">
+                        <div class="col-xs-10">
+                            <span class="glyphicon glyphicon-comment glyphicon-comment-alt"></span>
+                            <br />
+                            <h4><span class="glyphicon glyphicon-edit glyphicon-edit-alt"></span> Manage Users</h4>
+
+                        </div>
+                        <div class="col-xs-2">
+                            <a href="#" class="badge"><h4>4</h4></a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!--VISIBLE ALWAYS-->
         <div class="col-md-offset-1 col-md-3">
             <div class="panel new-user-panel">
-                <div class="panel-body">
-                    <div class="col-xs-10">
-                        <span class="glyphicon glyphicon-user glyphicon-user-alt"></span>
-                        <br/>
-                        <a href="/Admin/AddNewUser"><h4><span class="glyphicon glyphicon-plus-sign glyphicon-plus-sign-alt"></span> New User</h4></a>
+                <a href="/Admin/AddNewUser">
+                    <div class="panel-body">
+                        <div class="col-xs-10">
+                            <span class="glyphicon glyphicon-user glyphicon-user-alt"></span>
+                            <br />
+                            <h4><span class="glyphicon glyphicon-plus-sign glyphicon-plus-sign-alt"></span> New User</h4>
+
+                        </div>
+                        <div class="col-xs-2">
+                            <a href="#" class="badge"><h4>4</h4></a>
+                        </div>
                     </div>
-                    <div class="col-xs-2">
-                        <a href="#" class="badge"><h4>4</h4></a>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="panel new-post-panel">
-                <div class="panel-body">
-                    <div class="col-xs-10">
-                        <span class="glyphicon glyphicon-pencil glyphicon-pencil-alt"></span>
-                        <br/>
-                        <a href="/BlogPost/AddNewBlogPost"><h4><span class="glyphicon glyphicon-plus-sign glyphicon-plus-sign-alt"></span> New Post</h4></a>
+                <a href="/BlogPost/AddNewBlogPost/">
+                    <div class="panel-body">
+
+                        <div class="col-xs-10">
+                            <span class="glyphicon glyphicon-pencil glyphicon-pencil-alt"></span>
+                            <br />
+                            <h4><span class="glyphicon glyphicon-plus-sign glyphicon-plus-sign-alt"></span> New Post</h4>
+
+                        </div>
+                        <div class="col-xs-2">
+                            <a href="#" class="badge"><h4>4</h4></a>
+                        </div>
                     </div>
-                    <div class="col-xs-2">
-                        <a href="#" class="badge"><h4>4</h4></a>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="panel new-page-panel">
-                <div class="panel-body">
-                    <div class="col-xs-10">
-                        <span class="glyphicon glyphicon-file glyphicon-file-alt"></span>
-                        <br/>
-                        <a href="#"><h4><span class="glyphicon glyphicon-plus-sign glyphicon-plus-sign-alt"></span> New Page</h4></a>
-                    </div>
-                    <div class="col-xs-2">
-                        <a href="#" class="badge"><h4>4</h4></a>
+                <a href="/Page/AddNewPage/">
+                    <div class="panel-body">
+                        <div class="col-xs-10">
+                            <span class="glyphicon glyphicon-file glyphicon-file-alt"></span>
+                            <br />
+                            <h4><span class="glyphicon glyphicon-plus-sign glyphicon-plus-sign-alt"></span> New Page</h4>
 
+                        </div>
+                        <div class="col-xs-2">
+                            <a href="#" class="badge"><h4>4</h4></a>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="panel new-post-panel">
-                <div class="panel-body">
-                    <div class="col-xs-10">
-                        <span class="glyphicon glyphicon-comment glyphicon-comment-alt"></span>
-                        <br />
-                        <a href="/BlogPost/AddNewBlogPost"><h4><span class="glyphicon glyphicon-plus-sign glyphicon-plus-sign-alt"></span> New Post</h4></a>
-                    </div>
-                    <div class="col-xs-2">
-                        <a href="#" class="badge"><h4>4</h4></a>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
