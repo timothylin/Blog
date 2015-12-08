@@ -1,14 +1,15 @@
 USE [Blogs]
 GO
 
-/****** Object:  StoredProcedure [dbo].[UpdateStatus]    Script Date: 12/7/2015 11:48:59 AM ******/
+/****** Object:  StoredProcedure [dbo].[UpdateStaticPageStatus]    Script Date: 12/8/2015 1:42:03 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE procedure [dbo].[UpdateStatus]
+
+CREATE procedure [dbo].[UpdateStaticPageStatus]
 (
 	@Status int,
 	@StaticPageID int
@@ -23,5 +24,6 @@ update StaticPages
 exec GetPageByID @StaticPageID
 
 end
+
 GO
 
