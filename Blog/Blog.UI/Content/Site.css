@@ -341,3 +341,7 @@ h3 {
     margin-top: 0;
     color: rgba(0,0,0,0.44);
 }
+
+#rememberMe {
+    margin-left: 25px
+}
