@@ -18,7 +18,7 @@
              @foreach (var user in Model.Users)
              {
 
-                 <text>{UserId: '@user.Id', UserName: '@user.UserName', FirstName: '@user.FirstName', LastName: '@user.LastName', Role: '@Model.Roles.FirstOrDefault(r => r.Id == user.Roles.First().RoleId).Name'},</text>
+                 <text>{UserId: '@user.Id', UserName: '@user.UserName', FirstName: '@user.FirstName', LastName: '@user.LastName', Role: '@Model.Roles.FirstOrDefault(r => r.Id == user.Roles.First().RoleId).Name', AccountStatus: '@user.AccountStatus'},</text>
 
                  @*<text>{PostId: '@post.BlogPostId', Title: '@post.BlogPostTitle.Replace("'", "\\'")', TimeCreated: '@post.TimeCreated.ToString("g")', UserName: '@post.User.UserName', Category: '@post.Category.CategoryTitle', Status: '@post.Status.ToString()'},</text>*@
              }
@@ -32,6 +32,7 @@
                         <th class="col-xs-2">First Name</th>
                         <th class="col-xs-2">Last Name</th>
                         <th class="col-xs-1">Role</th>
+                        <th class="col-xs-1">Account Status</th>
                         <th class="col-xs-2"></th>
                     </tr>
                     <tr>
@@ -39,6 +40,7 @@
                         <th><input class="form-control" type="text" ng-model="userFilter.FirstName" /></th>
                         <th><input class="form-control" type="text" ng-model="userFilter.LastName" /></th>
                         <th><input class="form-control" type="text" ng-model="userFilter.Role" /></th>
+                        <th><input class="form-control" type="text" ng-model="userFilter.AccountStatus" /></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -55,10 +57,18 @@
                             <span class="label label-primary" ng-if="user.Role == 'User'">{{user.Role}}</span>
                         </td>
                         <td>
+                            <span class="label label-danger" ng-if="user.AccountStatus == 'Disabled'">{{user.AccountStatus}}</span>
+                            <span class="label label-success" ng-if="user.AccountStatus == 'Active'">{{user.AccountStatus}}</span>
+                        </td>
+                        <td>
 
                             @{
-                                var url1 = Url.Action("EditUser", "Admin", new { id = "{{user.UserId}}" });
-                                url1 = HttpUtility.UrlDecode(url1);
+                                var editUser = Url.Action("EditUser", "Admin", new { id = "{{user.UserId}}" });
+                                editUser = HttpUtility.UrlDecode(editUser);
+                                var disableUser = Url.Action("DisableUser", "Admin", new { id = "{{user.UserId}}" });
+                                disableUser = HttpUtility.UrlDecode(disableUser);
+                                var activateUser = Url.Action("ActivateUser", "Admin", new { id = "{{user.UserId}}" });
+                                activateUser = HttpUtility.UrlDecode(activateUser);
                             }
                             @*@{
                                     var url1 = Url.Action("ViewBlogPost", "BlogPost", new { id = "{{post.PostId}}" });
@@ -86,8 +96,9 @@
                                 <a href="@url5" class="btn btn-primary" title="Restore" ng-if="post.Status == 'Deleted'"><span class="glyphicon glyphicon-export"></span></a>
                                 <a href="@url1" class="btn btn-info" title="Details">Details</a>*@
 
-                            <a href="@url1" class="btn btn-success col-xs-offset-3" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                            <a href="" class="btn btn-danger" title="Delete"><span class="glyphicon glyphicon-remove-circle"></span></a>
+                            <a href="@editUser" class="btn btn-info col-xs-offset-3" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a href="@disableUser" class="btn btn-danger" title="Disable" ng-if="user.AccountStatus == 'Active'"><span class="glyphicon glyphicon-remove-circle"></span></a>
+                            <a href="@activateUser" class="btn btn-success" title="Activate" ng-if="user.AccountStatus == 'Disabled'"><span class="glyphicon glyphicon-ok-circle"></span></a>
                         </td>
                     </tr>
                 </tbody>

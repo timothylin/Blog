@@ -342,7 +342,6 @@ h3 {
     color: rgba(0,0,0,0.44);
 }
 
-/*Added custom buttons*/
 
 .btn-pending { 
   color: #ffffff; 
@@ -383,9 +382,13 @@ fieldset[disabled] .btn-pending:active,
 fieldset[disabled] .btn-pending.active { 
   background-color: #F5B905; 
   border-color: #EDB200; 
-} 
- 
-.btn-pending .badge { 
-  color: #F5B905; 
-  background-color: #ffffff; 
+}
+
+.btn-pending .badge {
+    color: #F5B905;
+    background-color: #ffffff;
+}
+
+#rememberMe {
+    margin-left: 25px
 }
