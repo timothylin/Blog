@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Blog.BLL;
+using Blog.Models;
 using Blog.UI.Models;
 
 namespace Blog.UI.Controllers
@@ -70,10 +71,24 @@ namespace Blog.UI.Controllers
         }
 
         [Authorize(Roles = "Admin")]
+        public ActionResult DisableUser(string id)
+        {
+            _ops.UpdateUserAccountStatus(id, AccountStatus.Disabled);
+
+            return RedirectToAction("ManageUsers");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult ActivateUser(string id)
+        {
+            _ops.UpdateUserAccountStatus(id, AccountStatus.Active);
+
+            return RedirectToAction("ManageUsers");
+        }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult ManagePosts()
         {
-            _ops = new BlogOperations();
-
             var posts = _ops.GetAllBlogPosts().BlogPosts;
 
             return View(posts);
@@ -82,8 +97,6 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ManageStaticPages()
         {
-            _ops = new BlogOperations();
-            
             var pages = _ops.GetAllStaticPages().StaticPages;
 
             return View(pages);
