@@ -51,8 +51,8 @@
                         <td>{{post.Category}}</td>
                         <td>
                             <span class="label label-success" ng-if="post.Status == 'Approved'">{{post.Status}}</span>
-                            <span class="label label-warning" ng-if="post.Status == 'Pending'">{{post.Status}}</span>
-                            <span class="label label-danger" ng-if="post.Status == 'Denied'">{{post.Status}}</span>
+                            <span class="label label-pending" ng-if="post.Status == 'Pending'">{{post.Status}}</span>
+                            <span class="label label-warning" ng-if="post.Status == 'Denied'">{{post.Status}}</span>
                             <span class="label label-danger" ng-if="post.Status == 'Deleted'">{{post.Status}}</span>
                         </td>
                         <td>
@@ -72,15 +72,19 @@
                                 var url5 = Url.Action("RestorePost", "BlogPost", new { id = "{{post.PostId}}" });
                                 url5 = HttpUtility.UrlDecode(url5);
 
+                                var url6 = Url.Action("EditBlogPost", "BlogPost", new { id = "{{post.PostId}}" });
+                                url6 = HttpUtility.UrlDecode(url6);
                             }
-
-                            <a href="@url2" class="btn btn-success disabled" title="Approve" ng-if="post.Status == 'Approved' || post.Status == 'Deleted'"><span class="glyphicon glyphicon-check"></span></a>
-                            <a href="@url2" class="btn btn-success" title="Approve" ng-if="post.Status == 'Pending' || post.Status == 'Denied'"><span class="glyphicon glyphicon-check"></span></a>
-                            <a href="@url3" class="btn btn-warning disabled" title="Deny" ng-if="post.Status == 'Denied' || post.Status == 'Deleted'"><span class="glyphicon glyphicon-ban-circle"></span></a>
-                            <a href="@url3" class="btn btn-warning " title="Deny" ng-if="post.Status == 'Pending' || post.Status == 'Approved'"><span class="glyphicon glyphicon-ban-circle"></span></a>
-                            <a href="@url4" class="btn btn-danger" title="Remove" ng-if="post.Status == 'Approved' || post.Status == 'Denied' || post.Status == 'Pending'"><span class="glyphicon glyphicon-remove"></span></a>
-                            <a href="@url5" class="btn btn-primary" title="Restore" ng-if="post.Status == 'Deleted'"><span class="glyphicon glyphicon-export"></span></a>
-                            <a href="@url1" class="btn btn-info" title="Details">Details</a>
+                            <div class="btn-group">
+                                <a href="@url2" class="btn btn-success disabled" title="Approve" ng-if="post.Status == 'Approved' || post.Status == 'Deleted'"><span class="glyphicon glyphicon-check"></span></a>
+                                <a href="@url2" class="btn btn-success" title="Approve" ng-if="post.Status == 'Pending' || post.Status == 'Denied'"><span class="glyphicon glyphicon-check"></span></a>
+                                <a href="@url3" class="btn btn-warning disabled" title="Deny" ng-if="post.Status == 'Denied' || post.Status == 'Deleted'"><span class="glyphicon glyphicon-ban-circle"></span></a>
+                                <a href="@url3" class="btn btn-warning " title="Deny" ng-if="post.Status == 'Pending' || post.Status == 'Approved'"><span class="glyphicon glyphicon-ban-circle"></span></a>
+                                <a href="@url4" class="btn btn-danger" title="Remove" ng-if="post.Status == 'Approved' || post.Status == 'Denied' || post.Status == 'Pending'"><span class="glyphicon glyphicon-remove"></span></a>
+                                <a href="@url5" class="btn btn-primary" title="Restore" ng-if="post.Status == 'Deleted'"><span class="glyphicon glyphicon-export"></span></a>
+                                <a href="@url6" class="btn btn-pending" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                <a href="@url1" class="btn btn-info" title="Info"><span class="glyphicon glyphicon-info-sign"></span></a>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

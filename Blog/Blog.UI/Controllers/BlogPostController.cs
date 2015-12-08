@@ -73,6 +73,20 @@ namespace Blog.UI.Controllers
             }
         }
 
+        //Edit Blog Post
+        [Authorize(Roles = "Admin")]
+        public ActionResult EditBlogPost(int id)
+        {
+            _ops = new BlogOperations();
+
+            var editVm = new AddBlogPostVM();
+            editVm.BlogPost = _ops.GetBlogPostById(id).BlogPost;
+            editVm.InitializeCategoriesList(_ops.GetAllCategories().Categories);
+
+            return View(editVm);
+        }
+
+
        
         [Authorize(Roles = "Admin, PR, User")]
         public ActionResult ViewBlogPost(int id)
@@ -83,7 +97,7 @@ namespace Blog.UI.Controllers
             return View(post);
         }
 
-        //User as well?
+
         [Authorize(Roles = "Admin, PR, User")]
         public ActionResult AllPosts()
         {

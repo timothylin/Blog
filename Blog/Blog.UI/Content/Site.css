@@ -341,3 +341,51 @@ h3 {
     margin-top: 0;
     color: rgba(0,0,0,0.44);
 }
+
+/*Added custom buttons*/
+
+.btn-pending { 
+  color: #ffffff; 
+  background-color: #F5B905; 
+  border-color: #EDB200; 
+} 
+ 
+.btn-pending:hover, 
+.btn-pending:focus, 
+.btn-pending:active, 
+.btn-pending.active, 
+.open .dropdown-toggle.btn-pending { 
+  color: #ffffff; 
+  background-color: #DBAB1B; 
+  border-color: #EDB200; 
+} 
+ 
+.btn-pending:active, 
+.btn-pending.active, 
+.open .dropdown-toggle.btn-pending { 
+  background-image: none; 
+} 
+ 
+.btn-pending.disabled, 
+.btn-pending[disabled], 
+fieldset[disabled] .btn-pending, 
+.btn-pending.disabled:hover, 
+.btn-pending[disabled]:hover, 
+fieldset[disabled] .btn-pending:hover, 
+.btn-pending.disabled:focus, 
+.btn-pending[disabled]:focus, 
+fieldset[disabled] .btn-pending:focus, 
+.btn-pending.disabled:active, 
+.btn-pending[disabled]:active, 
+fieldset[disabled] .btn-pending:active, 
+.btn-pending.disabled.active, 
+.btn-pending[disabled].active, 
+fieldset[disabled] .btn-pending.active { 
+  background-color: #F5B905; 
+  border-color: #EDB200; 
+} 
+ 
+.btn-pending .badge { 
+  color: #F5B905; 
+  background-color: #ffffff; 
+}

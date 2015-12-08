@@ -59,7 +59,7 @@ ul.tagit input[type="text"] {
 .tagit-autocomplete.ui-autocomplete { position: absolute; cursor: default; }
 * html .tagit-autocomplete.ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
 .tagit-autocomplete.ui-menu {
-    list-style:none;
+    list-style: none;
     padding: 2px;
     margin: 0;
     display:block;

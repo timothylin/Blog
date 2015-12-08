@@ -1,22 +1,31 @@
 ﻿@using System.Activities.Expressions
+@using Blog.Models
 @model Blog.UI.Models.AddBlogPostVM
 
 @{
-    ViewBag.Title = "Add New Blog Post";
+    ViewBag.Title = "Edit Blog Post";
 }
 
-<br/>
+<br />
 <div class="container">
     <div class="row" ng-app="validationPost">
         <div class="well" keep-input-values>
-            <form action="/BlogPost/AddNewBlogPost" class="form-horizontal" method="post" name="myForm" novalidate>
+            <form action="/BlogPost/EditBlogPost" class="form-horizontal" method="post" name="myForm" novalidate>
                 <fieldset>
-                    <legend><b>Add a New Blog Post</b></legend>
+                    <legend><b>Edit Blog Post</b></legend>
                     @Html.ValidationSummary(false)
+                    
+                    <div class="form-group">
+                        <label for="BlogPost_BlogPostId" class="col-md-2 control-label">Blog ID#</label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(m => m.BlogPost.BlogPostId, new { @class = "form-control" })
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="BlogPost_BlogPostTitle" class="col-md-2 control-label">Blog Title</label>
                         <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.BlogPost.BlogPostTitle, new {@class="form-control", @placeholder="Blog Title", @required="", @ng_model="Title", @ng_maxlength = "100" })
+                            @Html.TextBoxFor(m => m.BlogPost.BlogPostTitle, new {@class = "form-control", @placeholder = "Blog Title", @required = "", @ng_model = "Title", @ng_maxlength = "100"})
                             <label class="control-label text-danger" ng-show="myForm['BlogPost.BlogPostTitle'].$dirty && myForm['BlogPost.BlogPostTitle'].$invalid && myForm['BlogPost.BlogPostTitle'].$error.required">
                                 Title is required
                             </label>
@@ -27,9 +36,45 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="BlogPost_Status" class="col-md-2 control-label">Status</label>
+                        <div class="col-md-10">
+                            @if (Model.BlogPost.Status == BlogPostStatus.Approved)
+                            {
+                                <span class="label label-success">Approved</span>
+                            }
+                            else if (Model.BlogPost.Status == BlogPostStatus.Pending)
+                            {
+                                <span class="label label-pending">Pending</span>
+                            }
+                            else if (Model.BlogPost.Status == BlogPostStatus.Denied)
+                            {
+                                <span class="label label-danger">Denied</span>
+                            }
+                            else if (Model.BlogPost.Status == BlogPostStatus.Deleted)
+                            {
+                                <span class="label label-danger">Deleted</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="BlogPost_User_UserName" class="col-md-2 control-label">User Name</label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(m => m.BlogPost.User.UserName, new {@class = "form-control"})
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="BlogPost_TimeCreated" class="col-md-2 control-label">Time Created</label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(m => m.BlogPost.TimeCreated, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="BlogPost_Description" class="col-md-2 control-label">Blog Description</label>
                         <div class="col-md-10">
-                            @Html.TextAreaFor(m => m.BlogPost.Description, new {@class="form-control", @placeholder="Blog Description", @ng_model="Description", @required="", @ng_maxlength="200"})
+                            @Html.TextAreaFor(m => m.BlogPost.Description, new { @class = "form-control", @placeholder = "Blog Description", @ng_model = "Description", @required = "", @ng_maxlength = "200" })
                             <label class="control-label text-danger" ng-show="myForm['BlogPost.Description'].$dirty && myForm['BlogPost.Description'].$invalid && myForm['BlogPost.Description'].$error.required">
                                 Description is required
                             </label>
@@ -52,15 +97,15 @@
                     <div class="form-group">
                         <label for="BlogPost_Category_CategoryId" class="col-md-2 control-label">Category</label>
                         <div class="col-md-3">
-                            @Html.DropDownListFor(m => m.BlogPost.Category.CategoryId, Model.CategoriesList, "-- Select Category --", new {@class = "form-control"})
+                            @Html.DropDownListFor(m => m.BlogPost.Category.CategoryId, Model.CategoriesList, "-- Select Category --", new { @class = "form-control" })
                         </div>
                     </div>
-                    
+
 
                     <div class="form-group">
                         <label for="mytextarea" class="col-md-2 control-label">Content Text</label>
                         <div class="col-md-8">
-                            @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new {@id="mytextarea"})
+                            @Html.TextAreaFor(m => m.BlogPost.BlogPostText, new { @id = "mytextarea" })
                         </div>
                     </div>
 
@@ -68,21 +113,24 @@
                         <label class="col-md-2 control-label">Hashtags</label>
                         <div class="col-md-8">
                             <ul id="myTags">
-                                @foreach (var ht in Model.hashtags)
+                                @foreach (var ht in Model.BlogPost.Hashtags)
                                 {
-                                    <li>@ht</li>
+                                    <li>@ht.HashtagTitle</li>
                                 }
                             </ul>
                             <div class="pull-right tiny">* No # signs or spaces allowed (10 max)</div>
                         </div>
                     </div>
 
+                    @Html.HiddenFor(m => m.BlogPost.BlogPostId)
                     @Html.HiddenFor(m => m.BlogPost.User.Id)
+                    @Html.HiddenFor(m => m.BlogPost.TimeCreated)
+                    @Html.HiddenFor(m => m.BlogPost.Status)
+                    @Html.HiddenFor(m => m.BlogPost.User.UserName)
 
                     <div class="form-group">
                         <div class="col-md-10 col-md-offset-2">
                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Submit</button>
-                            <button type="reset" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Reset</button>
                         </div>
                     </div>
                 </fieldset>
