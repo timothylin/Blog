@@ -16,7 +16,7 @@ function loadStaticPages() {
 };
 
 function createLink(staticpage) {
-    return '<li><a href="/Page/ViewStaticPage/"' + staticpage.StaticPageId + ' title="' + staticpage.StaticPageTitle + '">'
+    return '<li><a href="/Page/ViewStaticPage/' + staticpage.StaticPageId + '" title="' + staticpage.StaticPageTitle + '">'
         + staticpage.StaticPageTitle + '</a></li>';
 
 }
