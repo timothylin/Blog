@@ -1306,7 +1306,6 @@
     <Content Include="Views\Admin\ManageUsers.cshtml" />
     <Content Include="Views\Shared\_LoginPartialDashboard.cshtml" />
     <Content Include="Views\Page\ViewStaticPage.cshtml" />
-    <Content Include="Views\Shared\_StaticPages.cshtml" />
     <Content Include="Views\Page\StaticPageDetails.cshtml" />
     <Content Include="Views\Admin\EditUser.cshtml" />
   </ItemGroup>
