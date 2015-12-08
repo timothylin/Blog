@@ -7,55 +7,69 @@
 
 
 
-<div class="col-md-8">
-    <h2>All Posts</h2>
-    @foreach (var post in Model.BlogPosts)
-    {
-        <div class="panel">
-            <div class="panel-heading">
-                <h4>@post.BlogPostTitle</h4>
-            </div>
-            <div class="panel-body">
-                <div class="col-md-12">
-                    <p>Post Text</p>
-                    @Html.Raw(post.BlogPostText)
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <p>Category: @post.Category.CategoryTitle</p>
-                    </div>
-                    <div class="col-md-4">
-                        <p>Status: @post.Status</p>
-                    </div>
-                    <div class="col-md-4">
-                        <p>Hashtags</p>
-                        @if (post.Hashtags.Count > 0)
-                        {
-                            string hashtags = "";
-                            for (int i = 0; i < post.Hashtags.Count - 1; i++)
-                            {
-                                hashtags += "#" + post.Hashtags[i].HashtagTitle + ", ";
-                            }
-                            hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
-                            <p>@hashtags</p>
-                        }
-                        else
-                        {
-                            <p>No hashtags added...</p>
-                        }
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <p>Author: @post.User.UserName</p>
-                    </div>
+<div class="container">
+    <div class="row">
 
-                    <div class="col-md-4">
-                        <p>Date: @post.TimeCreated</p>
-
+        <div class="col-sm-8">
+            <h1>All Posts</h1>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8">
+                <br />
+                <br />
+                @foreach (var post in Model.BlogPosts)
+                {
+                    <div class="thumbnail img-responsive">
+                        <a href="/BlogPost/ViewBlogPost/@post.BlogPostId">
+                            <img src="@post.CoverImageUrl" alt="@post.BlogPostTitle" class="portrait">
+                        </a>
                     </div>
-                </div>
+                        <div>
+                            <h2>
+                                <a href="/BlogPost/ViewBlogPost/@post.BlogPostId">
+                                    @post.BlogPostTitle
+                                </a>
+                            </h2>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="col-md-12 blogpost">
+                                <p>@Html.Raw(post.Description)</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p>Category: @post.Category.CategoryTitle</p>
+                                    <small><cite title="Source Title">a post by @(post.User.FirstName + " " + post.User.LastName)</cite></small>
+                                    <small class="pull-right tiny">@post.TimeCreated.ToShortDateString()</small>
+                                </div>
+
+                                <div class="col-md-3 pull-right">
+                                    <p>Hashtags</p>
+                                    @if (post.Hashtags.Count > 0)
+                                    {
+                                        string hashtags = "";
+                                        for (int j = 0; j < post.Hashtags.Count - 1; j++)
+                                        {
+                                            hashtags += "#" + post.Hashtags[j].HashtagTitle + ", ";
+                                        }
+                                        hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
+                                        <p>@hashtags</p>
+                                    }
+                                    else
+                                    {
+                                        <p>No hashtags added...</p>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2">
+
+                                </div>
+                            </div>
+                        </div>
+                }
             </div>
         </div>
-    }
+    </div>
 </div>

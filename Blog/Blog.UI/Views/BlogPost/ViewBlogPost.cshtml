@@ -6,20 +6,21 @@
 }
 
 <div class="center-block blogpost">
+
     <div class="row">
-        <small><cite title="Source Title">a post by: @(Model.User.FirstName + " " + Model.User.LastName)</cite></small>
-        <small class="pull-right tiny">Date: @Model.TimeCreated</small>
-        <p>Category: @Model.Category.CategoryTitle</p>
+        <img class="img-responsive" src="@Model.CoverImageUrl"/>
     </div>
     <div class="row">
         <h2>
             @Model.BlogPostTitle
         </h2>
+        <h3>@Model.Description</h3>
     </div>
     <div class="row">
-        <img class="img-responsive" src="@Model.CoverImageUrl"/>
+        <small><cite title="Source Title">a post by: @(Model.User.FirstName + " " + Model.User.LastName)</cite></small>
+        <small class="pull-right tiny">Date: @Model.TimeCreated</small>
+        <p>Category: @Model.Category.CategoryTitle</p>
     </div>
-
     <div class="row">
         <p>@Html.Raw(Model.BlogPostText)</p>
     </div>

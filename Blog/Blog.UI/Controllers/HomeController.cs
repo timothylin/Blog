@@ -20,6 +20,7 @@ namespace Blog.UI.Controllers
             return View(vm);
         }
 
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -31,11 +32,6 @@ namespace Blog.UI.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
-
-        public ActionResult Pr()
-        {
             return View();
         }
 
