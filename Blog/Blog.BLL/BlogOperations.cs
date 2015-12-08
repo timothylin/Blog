@@ -49,7 +49,7 @@ namespace Blog.BLL
             return _response;
         }
 
-        public Response UpdateBlogPostStatus(int blogPostId, Status updatedStatus)
+        public Response UpdateBlogPostStatus(int blogPostId, BlogPostStatus updatedStatus)
         {
             _response = new Response();
             var blogPost = _repo.UpdateBlogPostStatus(blogPostId, updatedStatus);

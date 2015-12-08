@@ -15,6 +15,8 @@ namespace Blog.UI.Models
         public List<StaticPage> Pages { get; set; }
         public List<IdentityRole> Roles { get; set; }
         public List<SelectListItem> RolesList { get; set; } 
+        public ApplicationUser User { get; set; }
+        public IdentityRole Role { get; set; }
 
         public AdminVM()
         {
@@ -23,6 +25,8 @@ namespace Blog.UI.Models
             Pages = new List<StaticPage>();
             RolesList = new List<SelectListItem>();
             Roles = new List<IdentityRole>();
+            User = new ApplicationUser();
+            Role = new IdentityRole();
         }
 
         public void CreateRolesList(List<IdentityRole> listOfRoles)

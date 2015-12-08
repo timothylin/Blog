@@ -46,11 +46,11 @@ namespace Blog.UI.Controllers
                 
                 newPost.BlogPost.User.UserName = User.Identity.GetUserName();
                 newPost.BlogPost.TimeCreated = DateTime.Now;
-                newPost.BlogPost.Status = Status.Pending;
+                newPost.BlogPost.Status = BlogPostStatus.Pending;
 
                 if (User.IsInRole("Admin"))
                 {
-                    newPost.BlogPost.Status = Status.Approved;
+                    newPost.BlogPost.Status = BlogPostStatus.Approved;
                 }
 
                 foreach (var ht in newPost.hashtags)
@@ -99,7 +99,7 @@ namespace Blog.UI.Controllers
         public ActionResult ApprovePost(int id)
         {
             _ops = new BlogOperations();
-            var update = _ops.UpdateBlogPostStatus(id, Status.Approved);
+            var update = _ops.UpdateBlogPostStatus(id, BlogPostStatus.Approved);
 
             return RedirectToAction("ManagePosts", "Admin");
         }
@@ -108,7 +108,7 @@ namespace Blog.UI.Controllers
         public ActionResult DenyPost(int id)
         {
             _ops = new BlogOperations();
-            var update = _ops.UpdateBlogPostStatus(id, Status.Denied);
+            var update = _ops.UpdateBlogPostStatus(id, BlogPostStatus.Denied);
 
             return RedirectToAction("ManagePosts", "Admin"); ;
         }
@@ -117,7 +117,7 @@ namespace Blog.UI.Controllers
         public ActionResult DeletePost(int id)
         {
             _ops = new BlogOperations();
-            var update = _ops.UpdateBlogPostStatus(id, Status.Deleted);
+            var update = _ops.UpdateBlogPostStatus(id, BlogPostStatus.Deleted);
 
             return RedirectToAction("ManagePosts", "Admin");
         }
@@ -126,7 +126,7 @@ namespace Blog.UI.Controllers
         public ActionResult RestorePost(int id)
         {
             _ops = new BlogOperations();
-            var update = _ops.UpdateBlogPostStatus(id, Status.Pending);
+            var update = _ops.UpdateBlogPostStatus(id, BlogPostStatus.Pending);
 
             return RedirectToAction("ManagePosts", "Admin");
         }

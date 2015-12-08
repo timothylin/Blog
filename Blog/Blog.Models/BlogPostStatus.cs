@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Models
 {
-    public enum Status
+    public enum BlogPostStatus
     {
         Pending,
         Approved,

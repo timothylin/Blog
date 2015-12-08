@@ -17,7 +17,7 @@ namespace Blog.Models
         [AllowHtml]
         [Required(ErrorMessage = "Content Text is required")]
         public string StaticPageText { get; set; }
-        public Status Status { get; set; }
+        public BlogPostStatus Status { get; set; }
         public ApplicationUser User { get; set; }
         public DateTime TimeCreated { get; set; }
 

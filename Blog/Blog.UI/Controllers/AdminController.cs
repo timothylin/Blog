@@ -49,6 +49,27 @@ namespace Blog.UI.Controllers
         }
 
         [Authorize(Roles = "Admin")]
+        public ActionResult EditUser(string id)
+        {
+            var vm = new AdminVM();
+
+            vm.User = _ops.GetAllUsers().Users.FirstOrDefault(u => u.Id == id);
+            vm.Roles = _ops.GetAllRoles().IdRoles;
+            vm.CreateRolesList(_ops.GetAllRoles().IdRoles);
+
+            return View(vm);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public ActionResult EditUser(AdminVM vm)
+        {
+            _ops.UpdateRoleByUserId(vm.User.Id, vm.Role.Id);
+
+            return RedirectToAction("ManageUsers");
+        }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult ManagePosts()
         {
             _ops = new BlogOperations();

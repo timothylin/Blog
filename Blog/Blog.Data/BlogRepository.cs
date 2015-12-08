@@ -163,7 +163,7 @@ namespace Blog.Data
             }
         
 
-        public BlogPost UpdateBlogPostStatus(int blogPostId, Status updatedStatus)
+        public BlogPost UpdateBlogPostStatus(int blogPostId, BlogPostStatus updatedStatus)
         {
             BlogPost blogPost = new BlogPost();
 
@@ -443,7 +443,7 @@ namespace Blog.Data
             {
                 blogPost.ExpirationDate = DateTime.Parse(dr["ExpirationDate"].ToString());
             }
-            blogPost.Status = (Status)dr["Status"];
+            blogPost.Status = (BlogPostStatus)dr["Status"];
             blogPost.Category.CategoryId = (int)dr["CategoryID"];
             blogPost.Category.CategoryTitle = dr["CategoryTitle"].ToString();
             blogPost.Description = dr["Description"].ToString();
@@ -461,7 +461,7 @@ namespace Blog.Data
             staticPage.StaticPageTitle = dr["StaticPageTitle"].ToString();
             staticPage.StaticPageText = dr["StaticPageText"].ToString();
             staticPage.TimeCreated = DateTime.Parse(dr["TimeCreated"].ToString());
-            staticPage.Status = (Status)dr["Status"];
+            staticPage.Status = (BlogPostStatus)dr["Status"];
             staticPage.User = PopulateUserFromDataReader(dr);
 
             return staticPage;

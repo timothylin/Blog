@@ -38,7 +38,7 @@ namespace Blog.UI.Controllers
             {
                 newPage.StaticPage.User.UserName = User.Identity.GetUserName();
                 newPage.StaticPage.TimeCreated = DateTime.Now;
-                newPage.StaticPage.Status = Status.Approved;
+                newPage.StaticPage.Status = BlogPostStatus.Approved;
 
                 var page = _ops.AddNewStaticPage(newPage.StaticPage).StaticPage;
 

@@ -16,7 +16,7 @@ namespace Blog.UI.Controllers
         {
             _ops = new BlogOperations();
             var vm = new HomeVM();
-            vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == Status.Approved).ToList();
+            vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == BlogPostStatus.Approved).ToList();
             return View(vm);
         }
 
