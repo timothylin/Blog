@@ -544,6 +544,65 @@ namespace Blog.Data
             return hashtags;
         }
 
+        public BlogStats GetBlogStats()
+        {
+            BlogStats blogStats = new BlogStats();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                //Total Users
+                cmd.CommandText = "select count(AspNetUsers.Id) from AspNetUsers";
+                cmd.Connection = cn;
+                cn.Open();
+
+                blogStats.TotalUsers = int.Parse(cmd.ExecuteScalar().ToString());
+
+                //Total Admins
+                cmd.CommandText = "select count(AspNetUserRoles.RoleId) from AspNetUserRoles where RoleId = 1";
+                blogStats.TotalAdmins = int.Parse(cmd.ExecuteScalar().ToString());
+
+                //Total Posts
+                cmd.CommandText = "select count(BlogPosts.BlogPostID) from BlogPosts";
+                blogStats.TotalPosts = int.Parse(cmd.ExecuteScalar().ToString());
+
+                //Total Active Posts
+                cmd.CommandText = "select count(BlogPosts.BlogPostID) from BlogPosts where [Status] = 1";
+                blogStats.TotalActivePosts = int.Parse(cmd.ExecuteScalar().ToString());
+
+                //Total Hashtags
+                cmd.CommandText = "select count(BlogPostHashtags.HashTagID) from BlogPostHashtags";
+                blogStats.TotalHashtags = int.Parse(cmd.ExecuteScalar().ToString());
+
+                //Total Static Pages
+                cmd.CommandText = "select count(StaticPages.StaticPageID) from StaticPages where [Status] = 1";
+                blogStats.TotalStaticPages = int.Parse(cmd.ExecuteScalar().ToString());
+
+                //Hashtag Stats
+                cmd.CommandText = "select ht.HashtagID, ht.HashtagTitle, count(bp.HashtagID) As NumHts from BlogPostHashtags bp " +
+                                  "inner join Hashtags ht on bp.HashtagID = ht.HashtagID group by bp.HashtagID, ht.HashtagID, ht.HashtagTitle Order By NumHts Desc";
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Hashtag ht = new Hashtag();
+                        ht.HashtagId = int.Parse(dr["HashtagID"].ToString());
+                        ht.HashtagTitle = dr["HashtagTitle"].ToString();
+                        ht.HashtagCount = int.Parse(dr["NumHts"].ToString());
+
+                        blogStats.Hashtags.Add(ht);
+                    }
+                }
+
+                cn.Close();
+            }
+
+            return blogStats;
+        }
+
+
         private List<Hashtag> AddHashtags(BlogPost blogPost, SqlConnection cn)
         {
             foreach (var hashtag in blogPost.Hashtags)
@@ -656,5 +715,6 @@ namespace Blog.Data
 
         //    return hashtag;
         //}
+
     }
 }

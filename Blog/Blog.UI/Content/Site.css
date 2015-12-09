@@ -191,8 +191,15 @@ html, body {
     padding-left: 10px;
 }
 
-.panel {
-    border: 0;
+
+.panel-info {
+    border-color: #cccccc;
+}
+
+.panel-info > .panel-heading {
+    color: #3a87ad;
+    background-color: #033c73;
+    border-color: #dddddd;
 }
 
 footer {

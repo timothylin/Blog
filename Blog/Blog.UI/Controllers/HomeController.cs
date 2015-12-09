@@ -17,24 +17,12 @@ namespace Blog.UI.Controllers
             _ops = new BlogOperations();
             var vm = new HomeVM();
             vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == PageStatus.Approved).OrderByDescending(p => p.TimeCreated).ToList();
+            vm.BlogStats = _ops.GetBlogStats().BlogStats;
+            vm.Categories = _ops.GetAllCategories().Categories;
 
             return View(vm);
         }
 
-
-        //public ActionResult About()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-
-        //public ActionResult Contact()
-        //{
-        //    ViewBag.Message = "Your contact page.";
-
-        //    return View();
-        //}
 
     }
 }

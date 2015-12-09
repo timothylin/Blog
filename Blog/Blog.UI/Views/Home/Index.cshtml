@@ -4,6 +4,7 @@
     ViewBag.Title = "Welcome to JSDate ( ͡° ͜ʖ ͡°)";
 }
 
+<br/>
 <div class="container">
     @*<br/>*@
     <div class="container">
@@ -110,24 +111,20 @@
                 </div>
             </div>
         </div>
-        <hr/>
+        <hr class="hr-dark"/>
 
-        <br/>
-        <br/>
-        <div class="container">
-            <div class="row">
 
-                <div class="col-sm-8 blog-heading">
-                    <h4>More Posts</h4>
-                </div>
-                </div>
-    <br />
-    <br />
-            @for (int i = 7; i < 13; i++)
-            {
-                <div class="row">
-                    <div class=" well col-xs-12 col-sm-8">
-                        <div class="row">
+        @* Bottom Panes *@
+        <br/>
+        <div class="row">
+            <div class="col-xs-9">
+
+
+                @for (int i = 7; i < 13; i++)
+                {
+                    <div class="row">
+                        <div class="well">
+                            @*<div class="row">*@
                             <div class="thumbnail img-responsive">
                                 <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[i].BlogPostId">
                                     <img src="@Model.BlogPosts[i].CoverImageUrl" alt="@Model.BlogPosts[i].BlogPostTitle" class="portrait">
@@ -143,39 +140,125 @@
                                     <p>@Model.BlogPosts[i].Description</p>
                                 </div>
                             </div>
-                            </div>
+                            @*</div>*@
 
-                            <hr class="hr-dark" />
-                        <div class="row">
-                            
-                            <div class="col-md-4">
-                                <p>Category: @Model.BlogPosts[i].Category.CategoryTitle</p>
-                                <p>@Model.BlogPosts[i].TimeCreated.ToString("g")</p>
-                                <small><cite title="Source Title">a post by <b>@(Model.BlogPosts[i].User.FirstName + " " + Model.BlogPosts[i].User.LastName)</b></cite></small>
-                            </div>
+                            <hr class="hr-dark"/>
+                            <div class="row">
 
-                            <div class="col-md-3 pull-right">
-                                <p>Hashtags:</p>
-                                @if (Model.BlogPosts[i].Hashtags.Count > 0)
-                                {
-                                    string hashtags = "";
-                                    for (int j = 0; j < Model.BlogPosts[i].Hashtags.Count - 1; j++)
+                                <div class="col-md-4">
+                                    <p>Category: @Model.BlogPosts[i].Category.CategoryTitle</p>
+                                    <p>@Model.BlogPosts[i].TimeCreated.ToString("g")</p>
+                                    <small><cite title="Source Title">a post by <b>@(Model.BlogPosts[i].User.FirstName + " " + Model.BlogPosts[i].User.LastName)</b></cite></small>
+                                </div>
+
+                                <div class="col-md-3 pull-right">
+                                    <p>Hashtags:</p>
+                                    @if (Model.BlogPosts[i].Hashtags.Count > 0)
                                     {
-                                        hashtags += "#" + Model.BlogPosts[i].Hashtags[j].HashtagTitle + ", ";
+                                        string hashtags = "";
+                                        for (int j = 0; j < Model.BlogPosts[i].Hashtags.Count - 1; j++)
+                                        {
+                                            hashtags += "#" + Model.BlogPosts[i].Hashtags[j].HashtagTitle + ", ";
+                                        }
+                                        hashtags += "#" + Model.BlogPosts[i].Hashtags[Model.BlogPosts[i].Hashtags.Count - 1].HashtagTitle;
+                                        <cite>@hashtags</cite>
                                     }
-                                    hashtags += "#" + Model.BlogPosts[i].Hashtags[Model.BlogPosts[i].Hashtags.Count - 1].HashtagTitle;
-                                    <cite>@hashtags</cite>
+                                    else
+                                    {
+                                        <p>No hashtags added...</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+                @* Sidebar *@
+                <div class="col-xs-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Blog Stats</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p><em>Total Users:</em> @Model.BlogStats.TotalUsers</p>
+                            <p><em>Admin Users:</em> @Model.BlogStats.TotalAdmins</p>
+                            <p><em>Total Posts:</em> @Model.BlogStats.TotalPosts</p>
+                            <p><em>Active Posts:</em> @Model.BlogStats.TotalActivePosts</p>
+                            <p><em>Unique Hashtags:</em> @Model.BlogStats.TotalHashtags</p>
+                            <p><em>Total Static Pages:</em> @Model.BlogStats.TotalStaticPages</p>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Most Popular #Hashtags</h3>
+                        </div>
+                        <div class="panel-body">
+                            @if (Model.BlogStats.Hashtags.Count < 11)
+                            {
+                                <ol>
+                                    @foreach (var ht in Model.BlogStats.Hashtags)
+                                    {
+                                        <li>@(ht.HashtagTitle) (@ht.HashtagCount)</li>
+                                    }
+                                </ol>
+                            }
+                            else
+                            {
+                                <ol>
+                                    @for (int i = 0; i < 10; i++)
+                                    {
+                                        <li>#@(Model.BlogStats.Hashtags[i].HashtagTitle) (@Model.BlogStats.Hashtags[i].HashtagCount times)</li>
+                                    }
+                                </ol>
+                            }
+                        </div>
+                    </div>
+
+
+                    @foreach (var c in Model.Categories)
+                    {
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Most Recent in @c.CategoryTitle</h3>
+                            </div>
+                            <div class="panel-body">
+                                @{
+                                    var posts = Model.BlogPosts.Where(p => p.Category.CategoryId == c.CategoryId).ToList();
+                                }
+                                @if (posts.Count > 0 && posts.Count < 6)
+                                {
+                                    <ul>
+                                        @foreach (var p in posts)
+                                        {
+                                            <li><a href="/BlogPost/ViewBlogPost/@p.BlogPostId">@p.BlogPostTitle</a></li>
+                                        }
+                                    </ul>
+                                }
+                                else if (posts.Count > 5)
+                                {
+                                    <ul>
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            <li><a href="/BlogPost/ViewBlogPost/@posts[i].BlogPostId">@posts[i].BlogPostTitle</a></li>
+                                        }
+                                    </ul>
                                 }
                                 else
                                 {
-                                    <p>No hashtags added...</p>
+                                    <p>This category has no posts...</p>
                                 }
                             </div>
                         </div>
-                        </div>
-                    </div>
-            }
+
+                    }
+
+                </div>
+
+            </div>
+
         </div>
     </div>
-</div>
 
