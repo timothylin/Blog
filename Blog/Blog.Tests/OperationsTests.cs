@@ -58,9 +58,9 @@ namespace Blog.Tests
         [Test]
         public void TestGetAllStaticPages()
         {
-
+            //was two, now three
             int pageCount = _ops.GetAllStaticPages().StaticPages.Count;
-            Assert.AreEqual(2, pageCount);
+            Assert.AreEqual(3, pageCount);
 
         }
 

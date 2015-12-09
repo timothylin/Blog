@@ -4,167 +4,261 @@
     ViewBag.Title = "Welcome to JSDate ( ͡° ͜ʖ ͡°)";
 }
 
-<div class="container main-body">
-    <br/>
-    <div class="row">
-        <div class="col-md-6">
-            <div id="home-slider" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#home-slider" data-slide-to="0" class="active"></li>
-                    <li data-target="#home-slider" data-slide-to="1"></li>
-                    <li data-target="#home-slider" data-slide-to="2"></li>
-                    <li data-target="#home-slider" data-slide-to="3"></li>
-                </ol>
-
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active carousel-thumbnail">
-
-                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[0].BlogPostId"><img src="@Model.BlogPosts[0].CoverImageUrl" class="portrait" alt="@Model.BlogPosts[0].BlogPostTitle">
-                            <h3 class="carousel-caption">@Model.BlogPosts[0].BlogPostTitle</h3>
-                        </a>
-                    </div>
-
-                    <div class="item carousel-thumbnail">
-                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[1].BlogPostId"><img src="@Model.BlogPosts[1].CoverImageUrl" class="portrait" alt="@Model.BlogPosts[1].BlogPostTitle">
-                            <h3 class="carousel-caption">@Model.BlogPosts[1].BlogPostTitle</h3>
-                        </a>
-                    </div>
-
-                    <div class="item carousel-thumbnail">
-                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[2].BlogPostId"><img src="@Model.BlogPosts[2].CoverImageUrl" class="portrait" alt="@Model.BlogPosts[2].BlogPostTitle">
-                            <h3 class="carousel-caption">@Model.BlogPosts[2].BlogPostTitle</h3>
-                        </a>
-                    </div>
-                    <div class="item carousel-thumbnail">
-                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[3].BlogPostId">
-                            <img src="@Model.BlogPosts[3].CoverImageUrl" class="portrait" alt="@Model.BlogPosts[3].BlogPostTitle">
-                            <h3 class="carousel-caption">@Model.BlogPosts[3].BlogPostTitle</h3>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Left and right controls -->
-                <a class="left carousel-control" href="#home-slider" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#home-slider" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="row">
-                <div class="hidden-lg hidden-md">
-                    <br />
-                    <br />
-                </div>
-                <div class="col-md-4 col-xs-12 padding-bot-40">
-                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[4].BlogPostId">
-                        <img class="head-block-thumb" src="@Model.BlogPosts[4].CoverImageUrl"/>
-                    </a>
-                </div>
-                <div class="col-md-8 col-xs-12 head-block-desc">
-                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[4].BlogPostId">
-                        <h3>@Model.BlogPosts[4].BlogPostTitle</h3>
-                    </a>
-                    <p>@Model.BlogPosts[4].Description</p>
-                </div>
-                <hr/>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-xs-12 padding-bot-40">
-                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[5].BlogPostId">
-                    <img class="head-block-thumb" src="@Model.BlogPosts[5].CoverImageUrl"/>
-                        </a>
-            </div>
-                <div class="col-md-8 col-xs-12 head-block-desc">
-                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[5].BlogPostId">
-                    <h3>@Model.BlogPosts[5].BlogPostTitle</h3>
-                        </a>
-                        <p>@Model.BlogPosts[5].Description</p>
-                 </div>
-                <hr/>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-xs-12">
-                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[6].BlogPostId">
-                    <img class="head-block-thumb" src="@Model.BlogPosts[6].CoverImageUrl"/>
-                        </a>
-                </div>
-                <div class="col-md-8 col-xs-12 head-block-desc">
-                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[6].BlogPostId">
-                    <h3>@Model.BlogPosts[6].BlogPostTitle</h3>
-                        </a>
-                        <p>@Model.BlogPosts[6].Description</p>
-                 </div>
-                <hr/>
-            </div>
-        </div>
-    </div>
-
-    <br/>
-    <br/>
+<br/>
+<div class="container">
+    @*<br/>*@
     <div class="container">
         <div class="row">
+            <div class="col-md-6">
+                <div id="home-slider" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#home-slider" data-slide-to="0" class="active"></li>
+                        <li data-target="#home-slider" data-slide-to="1"></li>
+                        <li data-target="#home-slider" data-slide-to="2"></li>
+                        <li data-target="#home-slider" data-slide-to="3"></li>
+                    </ol>
 
-            <div class="col-sm-8 blog-heading">
-                <h4>More Posts</h4>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-8">
-                    <br/>
-                    <br/>
-                    @for (int i = 7; i < 13; i++)
-                    {
-                        <div class="thumbnail img-responsive">
-                            <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[i].BlogPostId">
-                                <img src="@Model.BlogPosts[i].CoverImageUrl" alt="@Model.BlogPosts[i].BlogPostTitle" class="portrait">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active carousel-thumbnail">
+
+                            <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[0].BlogPostId">
+                                <img src="@Model.BlogPosts[0].CoverImageUrl" class="portrait" alt="@Model.BlogPosts[0].BlogPostTitle">
+                                <h3 class="carousel-caption">@Model.BlogPosts[0].BlogPostTitle</h3>
                             </a>
                         </div>
-                        <div>
-                            <h2>
-                                <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[i].BlogPostId">
-                                    @Model.BlogPosts[i].BlogPostTitle
-                                </a>
-                            </h2>
-                        </div>
-                            <div class="col-md-12 blogpost">
-                                <p>@Html.Raw(Model.BlogPosts[i].Description)</p>
-                            </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <p>Category: @Model.BlogPosts[i].Category.CategoryTitle</p>
-                                <small><cite title="Source Title">a post by @(Model.BlogPosts[i].User.FirstName + " " + Model.BlogPosts[i].User.LastName)</cite></small>
-                                <small class="pull-right tiny">@Model.BlogPosts[i].TimeCreated.ToShortDateString()</small>
-                            </div>
 
-                            <div class="col-md-3 pull-right">
-                                <p>Hashtags</p>
-                                @if (Model.BlogPosts[i].Hashtags.Count > 0)
-                                {
-                                    string hashtags = "";
-                                    for (int j = 0; j < Model.BlogPosts[i].Hashtags.Count - 1; j++)
+                        <div class="item carousel-thumbnail">
+                            <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[1].BlogPostId">
+                                <img src="@Model.BlogPosts[1].CoverImageUrl" class="portrait" alt="@Model.BlogPosts[1].BlogPostTitle">
+                                <h3 class="carousel-caption">@Model.BlogPosts[1].BlogPostTitle</h3>
+                            </a>
+                        </div>
+
+                        <div class="item carousel-thumbnail">
+                            <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[2].BlogPostId">
+                                <img src="@Model.BlogPosts[2].CoverImageUrl" class="portrait" alt="@Model.BlogPosts[2].BlogPostTitle">
+                                <h3 class="carousel-caption">@Model.BlogPosts[2].BlogPostTitle</h3>
+                            </a>
+                        </div>
+                        <div class="item carousel-thumbnail">
+                            <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[3].BlogPostId">
+                                <img src="@Model.BlogPosts[3].CoverImageUrl" class="portrait" alt="@Model.BlogPosts[3].BlogPostTitle">
+                                <h3 class="carousel-caption">@Model.BlogPosts[3].BlogPostTitle</h3>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#home-slider" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#home-slider" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="hidden-lg hidden-md">
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="col-md-4 col-xs-12 padding-bot-40">
+                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[4].BlogPostId">
+                            <img class="head-block-thumb" src="@Model.BlogPosts[4].CoverImageUrl"/>
+                        </a>
+                    </div>
+                    <div class="col-md-8 col-xs-12 head-block-desc">
+                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[4].BlogPostId">
+                            <h3 class="h3">@Model.BlogPosts[4].BlogPostTitle</h3>
+                        </a>
+                        <p>@Model.BlogPosts[4].Description</p>
+                    </div>
+                    <hr/>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-12 padding-bot-40">
+                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[5].BlogPostId">
+                            <img class="head-block-thumb" src="@Model.BlogPosts[5].CoverImageUrl"/>
+                        </a>
+                    </div>
+                    <div class="col-md-8 col-xs-12 head-block-desc">
+                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[5].BlogPostId">
+                            <h3 class="h3">@Model.BlogPosts[5].BlogPostTitle</h3>
+                        </a>
+                        <p>@Model.BlogPosts[5].Description</p>
+                    </div>
+                    <hr/>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[6].BlogPostId">
+                            <img class="head-block-thumb" src="@Model.BlogPosts[6].CoverImageUrl"/>
+                        </a>
+                    </div>
+                    <div class="col-md-8 col-xs-12 head-block-desc">
+                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[6].BlogPostId">
+                            <h3 class="h3">@Model.BlogPosts[6].BlogPostTitle</h3>
+                        </a>
+                        <p>@Model.BlogPosts[6].Description</p>
+                    </div>
+                    <hr/>
+                </div>
+            </div>
+        </div>
+        <hr class="hr-dark"/>
+
+
+        @* Bottom Panes *@
+        <br/>
+        <div class="row">
+            <div class="col-xs-9">
+
+
+                @for (int i = 7; i < 13; i++)
+                {
+                    <div class="row">
+                        <div class="well">
+                            @*<div class="row">*@
+                            <div class="thumbnail img-responsive">
+                                <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[i].BlogPostId">
+                                    <img src="@Model.BlogPosts[i].CoverImageUrl" alt="@Model.BlogPosts[i].BlogPostTitle" class="portrait">
+                                </a>
+                            </div>
+                            <div class="container">
+                                <div class="col-sm-8">
+                                    <h2 class="h2-a">
+                                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[i].BlogPostId">
+                                            @Model.BlogPosts[i].BlogPostTitle
+                                        </a>
+                                    </h2>
+                                    <p>@Model.BlogPosts[i].Description</p>
+                                </div>
+                            </div>
+                            @*</div>*@
+
+                            <hr class="hr-dark"/>
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <p>Category: @Model.BlogPosts[i].Category.CategoryTitle</p>
+                                    <p>@Model.BlogPosts[i].TimeCreated.ToString("g")</p>
+                                    <small><cite title="Source Title">a post by <b>@(Model.BlogPosts[i].User.FirstName + " " + Model.BlogPosts[i].User.LastName)</b></cite></small>
+                                </div>
+
+                                <div class="col-md-3 pull-right">
+                                    <p>Hashtags:</p>
+                                    @if (Model.BlogPosts[i].Hashtags.Count > 0)
                                     {
-                                        hashtags += "#" + Model.BlogPosts[i].Hashtags[j].HashtagTitle + ", ";
+                                        string hashtags = "";
+                                        for (int j = 0; j < Model.BlogPosts[i].Hashtags.Count - 1; j++)
+                                        {
+                                            hashtags += "#" + Model.BlogPosts[i].Hashtags[j].HashtagTitle + ", ";
+                                        }
+                                        hashtags += "#" + Model.BlogPosts[i].Hashtags[Model.BlogPosts[i].Hashtags.Count - 1].HashtagTitle;
+                                        <cite>@hashtags</cite>
                                     }
-                                    hashtags += "#" + Model.BlogPosts[i].Hashtags[Model.BlogPosts[i].Hashtags.Count - 1].HashtagTitle;
-                                    <p>@hashtags</p>
+                                    else
+                                    {
+                                        <p>No hashtags added...</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+                @* Sidebar *@
+                <div class="col-xs-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Blog Stats</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p><em>Total Users:</em> @Model.BlogStats.TotalUsers</p>
+                            <p><em>Admin Users:</em> @Model.BlogStats.TotalAdmins</p>
+                            <p><em>Total Posts:</em> @Model.BlogStats.TotalPosts</p>
+                            <p><em>Active Posts:</em> @Model.BlogStats.TotalActivePosts</p>
+                            <p><em>Unique Hashtags:</em> @Model.BlogStats.TotalHashtags</p>
+                            <p><em>Total Static Pages:</em> @Model.BlogStats.TotalStaticPages</p>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Most Popular #Hashtags</h3>
+                        </div>
+                        <div class="panel-body">
+                            @if (Model.BlogStats.Hashtags.Count < 11)
+                            {
+                                <ol>
+                                    @foreach (var ht in Model.BlogStats.Hashtags)
+                                    {
+                                        <li>@(ht.HashtagTitle) (@ht.HashtagCount)</li>
+                                    }
+                                </ol>
+                            }
+                            else
+                            {
+                                <ol>
+                                    @for (int i = 0; i < 10; i++)
+                                    {
+                                        <li>#@(Model.BlogStats.Hashtags[i].HashtagTitle) (@Model.BlogStats.Hashtags[i].HashtagCount times)</li>
+                                    }
+                                </ol>
+                            }
+                        </div>
+                    </div>
+
+
+                    @foreach (var c in Model.Categories)
+                    {
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Most Recent in @c.CategoryTitle</h3>
+                            </div>
+                            <div class="panel-body">
+                                @{
+                                    var posts = Model.BlogPosts.Where(p => p.Category.CategoryId == c.CategoryId).ToList();
+                                }
+                                @if (posts.Count > 0 && posts.Count < 6)
+                                {
+                                    <ul>
+                                        @foreach (var p in posts)
+                                        {
+                                            <li><a href="/BlogPost/ViewBlogPost/@p.BlogPostId">@p.BlogPostTitle</a></li>
+                                        }
+                                    </ul>
+                                }
+                                else if (posts.Count > 5)
+                                {
+                                    <ul>
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            <li><a href="/BlogPost/ViewBlogPost/@posts[i].BlogPostId">@posts[i].BlogPostTitle</a></li>
+                                        }
+                                    </ul>
                                 }
                                 else
                                 {
-                                    <p>No hashtags added...</p>
+                                    <p>This category has no posts...</p>
                                 }
                             </div>
                         </div>
-                        <hr/>
+
                     }
+
                 </div>
+
             </div>
+
         </div>
     </div>
-</div>
+

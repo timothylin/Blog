@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="BlogPost.cs" />
+    <Compile Include="BlogStats.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Hashtag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

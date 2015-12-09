@@ -325,6 +325,13 @@ namespace Blog.BLL
 
         }
 
+        public Response GetBlogStats()
+        {
+            _response = new Response();
+            _response.BlogStats = _repo.GetBlogStats();
+
+            return _response;
+        }
 
     }
 }

@@ -10,5 +10,6 @@ namespace Blog.Models
     {
         public int HashtagId { get; set; }
         public string HashtagTitle { get; set; }
+        public int HashtagCount { get; set; }
     }
 }

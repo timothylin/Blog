@@ -23,6 +23,7 @@ namespace Blog.Models
         public Category Category { get; set; }
         public List<Category> Categories { get; set; }
         public ApplicationUser User { get; set; }
+        public BlogStats BlogStats { get; set; }
 
         public Response()
         {
@@ -38,6 +39,7 @@ namespace Blog.Models
             Category = new Category();
             Categories = new List<Category>();
             User = new ApplicationUser();
+            BlogStats = new BlogStats();
         }
     }
 }
