@@ -238,6 +238,7 @@ footer {
     color: white;
 }
 
+
 .new-managepages-panel h4{
     padding-top: 15px;
     color: white;
@@ -272,6 +273,11 @@ footer {
     font-size: 75px;
 }
 .glyphicon-file-alt {
+    color: white;
+    font-size: 75px;
+}
+
+.glyphicon-home-alt {
     color: white;
     font-size: 75px;
 }
