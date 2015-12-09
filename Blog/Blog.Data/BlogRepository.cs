@@ -409,7 +409,7 @@ namespace Blog.Data
             return users;
         }
 
-        public ApplicationUser AddRoleToUser(string userId, string roleID)
+        public ApplicationUser AddRoleToUser(string userId, string roleId)
         {
             ApplicationUser user = new ApplicationUser();
 
@@ -419,7 +419,7 @@ namespace Blog.Data
                 cmd.CommandText = "AddRoleToUser";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@UserID", userId);
-                cmd.Parameters.AddWithValue("@RoleID", roleID);
+                cmd.Parameters.AddWithValue("@RoleID", roleId);
                 cmd.Connection = cn;
                 cn.Open();
 
@@ -647,14 +647,14 @@ namespace Blog.Data
 
         }
 
-        private Hashtag PopulateHashtagsFromReader(SqlDataReader dr)
-        {
-            Hashtag hashtag = new Hashtag();
+        //private Hashtag PopulateHashtagsFromReader(SqlDataReader dr)
+        //{
+        //    Hashtag hashtag = new Hashtag();
 
-            hashtag.HashtagId = (int)dr["HashtagID"];
-            hashtag.HashtagTitle = dr["HashtagTitle"].ToString();
+        //    hashtag.HashtagId = (int)dr["HashtagID"];
+        //    hashtag.HashtagTitle = dr["HashtagTitle"].ToString();
 
-            return hashtag;
-        }
+        //    return hashtag;
+        //}
     }
 }
