@@ -65,7 +65,10 @@ namespace Blog.UI.Controllers
         [HttpPost]
         public ActionResult EditUser(AdminVM vm)
         {
-            _ops.UpdateRoleByUserId(vm.User.Id, vm.Role.Id);
+            if (vm.Role.Id != null)
+            {
+                _ops.UpdateRoleByUserId(vm.User.Id, vm.Role.Id);
+            }
 
             return RedirectToAction("ManageUsers");
         }
