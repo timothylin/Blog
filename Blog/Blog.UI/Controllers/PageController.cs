@@ -83,7 +83,6 @@ namespace Blog.UI.Controllers
 
         }
 
-        [Authorize(Roles = "Admin, PR, User")]
         public ActionResult ViewStaticPage(int id)
         {
             var page = _ops.GetStaticPageById(id).StaticPage;
