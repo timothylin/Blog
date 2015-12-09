@@ -17,6 +17,7 @@ namespace Blog.UI.Models
         public List<SelectListItem> RolesList { get; set; } 
         public ApplicationUser User { get; set; }
         public IdentityRole Role { get; set; }
+        public BlogStats BlogStats { get; set; }
 
         public AdminVM()
         {
@@ -27,6 +28,7 @@ namespace Blog.UI.Models
             Roles = new List<IdentityRole>();
             User = new ApplicationUser();
             Role = new IdentityRole();
+            BlogStats = new BlogStats();
         }
 
         public void CreateRolesList(List<IdentityRole> listOfRoles)

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Blog.BLL;
 using Blog.Models;
 using Blog.UI.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Blog.UI.Controllers
 {
@@ -24,6 +25,9 @@ namespace Blog.UI.Controllers
         {
             var vm = new AdminVM();
             vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts;
+            vm.BlogStats = _ops.GetBlogStats().BlogStats;
+
+            vm.User = _ops.GetUserById(User.Identity.GetUserId()).User;
 
             return View(vm);
         }
