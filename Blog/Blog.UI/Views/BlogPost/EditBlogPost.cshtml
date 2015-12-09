@@ -38,19 +38,19 @@
                     <div class="form-group">
                         <label for="BlogPost_Status" class="col-md-2 control-label">Status</label>
                         <div class="col-md-10 edit-status">
-                            @if (Model.BlogPost.Status == BlogPostStatus.Approved)
+                            @if (Model.BlogPost.Status == PageStatus.Approved)
                             {
                                 <span class="label label-success">Approved</span>
                             }
-                            else if (Model.BlogPost.Status == BlogPostStatus.Pending)
+                            else if (Model.BlogPost.Status == PageStatus.Pending)
                             {
                                 <span class="label label-pending">Pending</span>
                             }
-                            else if (Model.BlogPost.Status == BlogPostStatus.Denied)
+                            else if (Model.BlogPost.Status == PageStatus.Denied)
                             {
                                 <span class="label label-danger">Denied</span>
                             }
-                            else if (Model.BlogPost.Status == BlogPostStatus.Deleted)
+                            else if (Model.BlogPost.Status == PageStatus.Deleted)
                             {
                                 <span class="label label-danger">Deleted</span>
                             }

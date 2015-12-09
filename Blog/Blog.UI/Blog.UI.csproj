@@ -1317,6 +1317,7 @@
     <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\BlogPost\EditBlogPost.cshtml" />
     <Content Include="Views\BlogPost\ViewCategory.cshtml" />
+    <Content Include="Views\Page\EditStaticPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -196,7 +196,7 @@ namespace Blog.Data
             }
         
 
-        public BlogPost UpdateBlogPostStatus(int blogPostId, BlogPostStatus updatedStatus)
+        public BlogPost UpdateBlogPostStatus(int blogPostId, PageStatus updatedStatus)
         {
             BlogPost blogPost = new BlogPost();
 
@@ -225,7 +225,7 @@ namespace Blog.Data
         }
 
 
-        public StaticPage UpdateStaticPageStatus(int staticPageId, BlogPostStatus updateStaticPageStatus)
+        public StaticPage UpdateStaticPageStatus(int staticPageId, PageStatus updateStaticPageStatus)
         {
             StaticPage staticPage = new StaticPage();
 
@@ -297,6 +297,24 @@ namespace Blog.Data
                     }
                 }
             }
+            return page;
+        }
+
+        public StaticPage EditStaticPage(StaticPage page)
+        {
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@StaticPageID", page.StaticPageId);
+                p.Add("@StaticPageTitle", page.StaticPageTitle);
+                p.Add("@StaticPageText", page.StaticPageText);
+                p.Add("@Status", page.Status);
+
+                cn.Execute("EditStaticPage", p, commandType: CommandType.StoredProcedure);
+            }
+
+            page = GetStaticPageById(page.StaticPageId);
+
             return page;
         }
 
@@ -604,7 +622,7 @@ namespace Blog.Data
             {
                 blogPost.ExpirationDate = DateTime.Parse(dr["ExpirationDate"].ToString());
             }
-            blogPost.Status = (BlogPostStatus)dr["Status"];
+            blogPost.Status = (PageStatus)dr["Status"];
             blogPost.Category.CategoryId = (int)dr["CategoryID"];
             blogPost.Category.CategoryTitle = dr["CategoryTitle"].ToString();
             blogPost.Description = dr["Description"].ToString();
@@ -622,7 +640,7 @@ namespace Blog.Data
             staticPage.StaticPageTitle = dr["StaticPageTitle"].ToString();
             staticPage.StaticPageText = dr["StaticPageText"].ToString();
             staticPage.TimeCreated = DateTime.Parse(dr["TimeCreated"].ToString());
-            staticPage.Status = (BlogPostStatus)dr["Status"];
+            staticPage.Status = (PageStatus)dr["Status"];
             staticPage.User = PopulateUserFromDataReader(dr);
 
             return staticPage;

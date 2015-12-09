@@ -49,7 +49,7 @@ namespace Blog.BLL
             return _response;
         }
 
-        public Response UpdateBlogPostStatus(int blogPostId, BlogPostStatus updatedStatus)
+        public Response UpdateBlogPostStatus(int blogPostId, PageStatus updatedStatus)
         {
             _response = new Response();
             var blogPost = _repo.UpdateBlogPostStatus(blogPostId, updatedStatus);
@@ -66,7 +66,7 @@ namespace Blog.BLL
             return _response;
         }
 
-        public Response UpdateStaticPageStatus(int staticPageId, BlogPostStatus updatedStaticPageStatus)
+        public Response UpdateStaticPageStatus(int staticPageId, PageStatus updatedStaticPageStatus)
         {
             _response = new Response();
             var staticPage = _repo.UpdateStaticPageStatus(staticPageId, updatedStaticPageStatus);
@@ -143,6 +143,20 @@ namespace Blog.BLL
         {
             _response = new Response();
             var staticPage = _repo.GetStaticPageById(staticPageId);
+
+            if (staticPage != null)
+            {
+                _response.Success = true;
+                _response.StaticPage = staticPage;
+            }
+
+            return _response;
+        }
+
+        public Response EditStaticPage(StaticPage page)
+        {
+            _response = new Response();
+            var staticPage = _repo.EditStaticPage(page);
 
             if (staticPage != null)
             {
