@@ -300,7 +300,9 @@
     <Content Include="Scripts\app\admin.js" />
     <Content Include="Scripts\app\angvalidation.js" />
     <Content Include="Scripts\app\dotdotdot.js" />
+    <Content Include="Scripts\app\jquery-validate-default.js" />
     <Content Include="Scripts\app\pr.js" />
+    <Content Include="Scripts\app\registerUserValidation.js" />
     <Content Include="Scripts\app\selectizefortags.js" />
     <Content Include="Scripts\app\staticpages.js" />
     <Content Include="Scripts\app\tagitload.js" />
