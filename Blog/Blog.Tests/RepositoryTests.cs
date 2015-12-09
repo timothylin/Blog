@@ -37,8 +37,6 @@ namespace Blog.Tests
 
                 Server server = new Server(new ServerConnection(cn));
 
-                
-
                 server.ConnectionContext.ExecuteNonQuery(script);
             }
         }
@@ -78,20 +76,27 @@ namespace Blog.Tests
         [Test]
         public void AddNewBlogPostTest()
         {
-            BlogPost blogPost = new BlogPost();
-
-            blogPost.User.Id = "aef7943d-d5da-4570-98b5-378a077ecfa6";
-            blogPost.BlogPostTitle = "Coding or Love?";
-            blogPost.BlogPostText =
+            BlogPost blogPost = new BlogPost()
+            {
+                User = new ApplicationUser()
+                {
+                    Id = "aef7943d-d5da-4570-98b5-378a077ecfa6"
+                },
+                BlogPostTitle = "Coding or Love?",
+                BlogPostText =
                 "<p>There is power in understanding the journey of others to help create your own. I have always drawn on my muses for inspiration. During my formative years living abroad in Italy, I&rsquo;d devour the VHS tapes of C#&nbsp;stars of the &rsquo;80s that my grandfather would send across the Atlantic. Later on, when I moved back to America and was the kid in school who dressed differently and had trouble reading and writing in English, Coding&nbsp;was my outlet, my source of power.</p>" +
                 "<p> Coding & nbsp;is the vehicle through which I question myself. It & rsquo; s the vehicle in which I learn about myself.</p> " +
                 "<p> Now, after 18 years in the CodingBA, I want to show you the journey. The pain, the sacrifice, the disappointments and the glory.I want to show you what it really means to chase greatness.</p>" +
-                "<p> &nbsp;</p>";
-            blogPost.TimeCreated = DateTime.Parse("2015 - 12 - 07 12:21:27");
-            blogPost.Status = PageStatus.Approved;
-            blogPost.Category.CategoryId = 4;
-            blogPost.Description = "The other day I made a big life decision.";
-            blogPost.CoverImageUrl = "http://i.imgur.com/aooqCVq.png";
+                "<p> &nbsp;</p>",
+                TimeCreated = DateTime.Parse("2015 - 12 - 07 12:21:27"),
+                Status = PageStatus.Approved,
+                Category = new Category()
+                {
+                    CategoryId = 4
+                },
+                Description = "The other day I made a big life decision.",
+                CoverImageUrl = "http://i.imgur.com/aooqCVq.png"
+            };
 
             var returned = _repo.AddNewBlogPost(blogPost);
 
@@ -108,22 +113,29 @@ namespace Blog.Tests
         [Test]
         public void EditBlogPostTest()
         {
-            BlogPost blogPost = new BlogPost();
-
-            blogPost.BlogPostId = 14;
-            blogPost.User.Id = "aef7943d-d5da-4570-98b5-378a077ecfa6";
-            blogPost.BlogPostTitle = "Coding or Love~~~";
-            blogPost.BlogPostText =
+            BlogPost blogPost = new BlogPost()
+            {
+                BlogPostId = 14,
+                User = new ApplicationUser()
+                {
+                    Id = "aef7943d-d5da-4570-98b5-378a077ecfa6"
+                },
+                BlogPostTitle = "Coding or Love~~~",
+                BlogPostText =
                 "<p>There is power in understanding the journey of others to help create your own. I have always drawn on my muses for inspiration. During my formative years living abroad in Italy, I&rsquo;d devour the VHS tapes of C#&nbsp;stars of the &rsquo;80s that my grandfather would send across the Atlantic. Later on, when I moved back to America and was the kid in school who dressed differently and had trouble reading and writing in English, Coding&nbsp;was my outlet, my source of power.</p>" +
                 "<p> Coding & nbsp;is the vehicle through which I question myself. It & rsquo; s the vehicle in which I learn about myself.</p> " +
                 "<p> Now, after 18 years in the CodingBA, I want to show you the journey. The pain, the sacrifice, the disappointments and the glory.I want to show you what it really means to chase greatness.</p>" +
                 "<p> &nbsp;</p>" +
-                "<p> Oh Yeah...</p>";
-            blogPost.TimeCreated = DateTime.Parse("2015 - 12 - 07 12:21:27");
-            blogPost.Status = PageStatus.Pending;
-            blogPost.Category.CategoryId = 3;
-            blogPost.Description = "The other day I made a big life decision...";
-            blogPost.CoverImageUrl = "http://vignette1.wikia.nocookie.net/minecraft/images/4/48/150px-Creeper.png/revision/latest?cb=20140101094930";
+                "<p> Oh Yeah...</p>",
+                TimeCreated = DateTime.Parse("2015 - 12 - 07 12:21:27"),
+                Status = PageStatus.Pending,
+                Category = new Category()
+                {
+                    CategoryId = 3
+                },
+                Description = "The other day I made a big life decision...",
+                CoverImageUrl = "http://vignette1.wikia.nocookie.net/minecraft/images/4/48/150px-Creeper.png/revision/latest?cb=20140101094930"
+            };
 
             var actual = _repo.EditBlogPost(blogPost);
 
@@ -140,15 +152,20 @@ namespace Blog.Tests
         [Test]
         public void AddNewStaticPageTest()
         {
-            StaticPage staticPage = new StaticPage();
-
-            staticPage.User.Id = "74e60034-4ccf-4421-96cd-847d1aa2908a";
-            staticPage.StaticPageTitle = "About 2SB&D";
-            staticPage.StaticPageText = "<p>\"Two Sweet Boys and Dean\" is a start-up dating service based in Akron, Ohio.</p>" +
+            StaticPage staticPage = new StaticPage()
+            {
+                User = new ApplicationUser()
+                {
+                    Id = "74e60034-4ccf-4421-96cd-847d1aa2908a"
+                },
+                StaticPageTitle = "About 2SB&D",
+                StaticPageText = "<p>\"Two Sweet Boys and Dean\" is a start-up dating service based in Akron, Ohio.</p>" +
 "<p> Dean is a struggling DJ with a hidden passion for Bootstrap.Tim is a sweet boy who dreams of one day moving to the big city...of Seattle.Patrick is also a sweet boy who can't resist the \"back-end\".</p>" +
-            "<p> Together, we are here to help them find the \"coding partners\" of their dreams.</p> ";
-            staticPage.Status = PageStatus.Approved;
-            staticPage.TimeCreated = DateTime.Parse("2015-12-07 21:20:10");
+            "<p> Together, we are here to help them find the \"coding partners\" of their dreams.</p> ",
+                Status = PageStatus.Approved,
+                TimeCreated = DateTime.Parse("2015-12-07 21:20:10")
+
+            };
 
             var actual = _repo.AddNewStaticPage(staticPage);
 
@@ -162,17 +179,21 @@ namespace Blog.Tests
         [Test]
         public void EditStaticPageTest()
         {
-            StaticPage staticPage = new StaticPage();
-
-            staticPage.StaticPageId = 2;
-            staticPage.User.Id = "74e60034-4ccf-4421-96cd-847d1aa2908a";
-            staticPage.StaticPageTitle = "About 2SB&D!";
-            staticPage.StaticPageText = "<p>\"Two Sweet Boys and Dean\" is a start-up dating service based in Akron, Ohio.</p>" +
+            StaticPage staticPage = new StaticPage()
+            {
+                StaticPageId = 2,
+                User = new ApplicationUser()
+                {
+                    Id = "74e60034-4ccf-4421-96cd-847d1aa2908a"
+                },
+                StaticPageTitle = "About 2SB&D!",
+                StaticPageText = "<p>\"Two Sweet Boys and Dean\" is a start-up dating service based in Akron, Ohio.</p>" +
 "<p> Dean is a struggling DJ with a hidden passion for Bootstrap.Tim is a sweet boy who dreams of one day moving to the big city...of Seattle.Patrick is also a sweet boy who can't resist the \"back-end\".</p>" +
             "<p> Together, we are here to help them find the \"coding partners\" of their dreams.</p>" +
-            "<p> There you go... </p>";
-            staticPage.Status = PageStatus.Approved;
-            staticPage.TimeCreated = DateTime.Parse("2015-12-07 21:20:10");
+            "<p> There you go... </p>",
+                Status = PageStatus.Approved,
+                TimeCreated = DateTime.Parse("2015-12-07 21:20:10")
+            };
 
             var actual = _repo.EditStaticPage(staticPage);
 
@@ -374,6 +395,24 @@ namespace Blog.Tests
             var count = _repo.GetHashtagByBlogPostId(blogPostId).Count();
 
             Assert.AreEqual(hashtagCount, count);
+        }
+
+        [Test]
+        public void GetBlogStats()
+        {
+            var actual = _repo.GetBlogStats();
+
+            Assert.AreEqual(7, actual.TotalUsers);
+            Assert.AreEqual(4, actual.TotalAdmins);
+
+            // 14 if ran individually
+            Assert.AreEqual(15, actual.TotalPosts);
+
+            Assert.AreEqual(14, actual.TotalActivePosts);
+            Assert.AreEqual(66, actual.TotalHashtags);
+
+            // 2 if ran individually
+            Assert.AreEqual(3, actual.TotalStaticPages);
         }
     }
 }
