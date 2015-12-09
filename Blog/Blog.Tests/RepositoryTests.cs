@@ -17,7 +17,7 @@ namespace Blog.Tests
     public class RepositoryTests
     {
         public string TestSetupCs;
-        public BlogRepository repo = new BlogRepository();
+        public BlogRepository _repo = new BlogRepository();
 
         [TestFixtureSetUp]
         public void Init()
@@ -26,7 +26,7 @@ namespace Blog.Tests
 
             using (SqlConnection cn = new SqlConnection(TestSetupCs))
             {
-                string scriptLoc = @"C:\_repos\Blog\Blog\Blog.Tests\sql\dbsetup.sql";
+                string scriptLoc = @"sql\dbsetup.sql";
 
                 string script = File.ReadAllText(scriptLoc);
 
@@ -45,13 +45,11 @@ namespace Blog.Tests
         [Test]
         public void TestGetAllBlogPosts()
         {
-            int postCount = repo.GetAllBlogPosts().Count;
+            int postCount = _repo.GetAllBlogPosts().Count;
 
             Assert.AreEqual(14, postCount);
         }
 
-
-
-
+        
     }
 }
