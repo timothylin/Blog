@@ -23,6 +23,7 @@ namespace Blog.Tests
         private BlogRepository _repo;
         private JavaScriptSerializer _jss;
 
+
         [TestFixtureSetUp]
         public void Init()
         {
@@ -374,6 +375,5 @@ namespace Blog.Tests
 
             Assert.AreEqual(hashtagCount, count);
         }
-
     }
 }
