@@ -23,6 +23,7 @@ namespace Blog.Tests
         private BlogRepository _repo;
         private JavaScriptSerializer _jss;
 
+
         [TestFixtureSetUp]
         public void Init()
         {
@@ -413,6 +414,5 @@ namespace Blog.Tests
             // 2 if ran individually
             Assert.AreEqual(3, actual.TotalStaticPages);
         }
-
     }
 }
