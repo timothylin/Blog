@@ -57,10 +57,25 @@
 <footer class="container-fluid">
     <div class="row">
         <div class="col-md-4">
-            <a href="~/Home" class="pull-left"> <img alt="JS Date" id="jsDate-logo" src="~/Content/img/Logo_JDate_official_greyscale.png" /></a>
+            <a href="~/Home" class="pull-left"> <img alt="JS Date" id="jsDate-logo" src="~/Content/img/Logo_JDate_official_greyscale.png"/></a>
+        </div>
+        <div class="col-md-4 text-center">
+            <br/>
+            <br/>
+            <ul class="list-inline">
+                <li><a href="/home/index/">
+                    <p>Home</p></a></li>
+                <li><a href="/Account/Register/">Register</a></li>
+                <li><a href="/Account/Login/">Login</a></li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <br/>
+            <br/>
+            <p class="pull-right">&copy; @DateTime.Now.Year - JSDate: brought to you by JDate</p>
         </div>
     </div>
-    <p>&copy; @DateTime.Now.Year - JSDate: brought to you by JDate</p>
+    
 </footer>
 
     @Scripts.Render("~/bundles/jquery")
