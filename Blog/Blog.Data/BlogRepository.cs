@@ -188,13 +188,13 @@ namespace Blog.Data
 
                 newPage.StaticPageId = p.Get<int>("StaticPageID");
 
-                }
-
-                newPage = GetStaticPageById(newPage.StaticPageId);
-
-                return newPage;
             }
-        
+
+            newPage = GetStaticPageById(newPage.StaticPageId);
+
+            return newPage;
+        }
+
 
         public BlogPost UpdateBlogPostStatus(int blogPostId, PageStatus updatedStatus)
         {
@@ -235,7 +235,7 @@ namespace Blog.Data
                 cmd.CommandText = "UpdateStaticPageStatus";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@StaticPageID", staticPageId);
-                cmd.Parameters.AddWithValue("@Status", (int) updateStaticPageStatus);
+                cmd.Parameters.AddWithValue("@Status", (int)updateStaticPageStatus);
                 cmd.Connection = cn;
                 cn.Open();
 
@@ -519,7 +519,7 @@ namespace Blog.Data
 
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
-                
+
                 var p = new DynamicParameters();
 
                 p.Add("@BlogPostID", blogPostId);
@@ -587,16 +587,9 @@ namespace Blog.Data
                 {
                     while (dr.Read())
                     {
-                        Hashtag ht = new Hashtag();
-                        ht.HashtagId = int.Parse(dr["HashtagID"].ToString());
-                        ht.HashtagTitle = dr["HashtagTitle"].ToString();
-                        ht.HashtagCount = int.Parse(dr["NumHts"].ToString());
-
-                        blogStats.Hashtags.Add(ht);
+                        blogStats.Hashtags.Add(PopulateHashtagsFromReader(dr));
                     }
                 }
-
-                cn.Close();
             }
 
             return blogStats;
@@ -650,7 +643,7 @@ namespace Blog.Data
             user.FirstName = dr["FirstName"].ToString();
             user.LastName = dr["LastName"].ToString();
             user.UserName = dr["UserName"].ToString();
-            user.AccountStatus = (AccountStatus) dr["AccountStatus"];
+            user.AccountStatus = (AccountStatus)dr["AccountStatus"];
 
             user.Roles.Add(PopulateRoleFromDataReader(dr));
 
@@ -706,15 +699,16 @@ namespace Blog.Data
 
         }
 
-        //private Hashtag PopulateHashtagsFromReader(SqlDataReader dr)
-        //{
-        //    Hashtag hashtag = new Hashtag();
+        private Hashtag PopulateHashtagsFromReader(SqlDataReader dr)
+        {
+            Hashtag hashtag = new Hashtag();
 
-        //    hashtag.HashtagId = (int)dr["HashtagID"];
-        //    hashtag.HashtagTitle = dr["HashtagTitle"].ToString();
+            hashtag.HashtagId = (int)dr["HashtagID"];
+            hashtag.HashtagTitle = dr["HashtagTitle"].ToString();
+            hashtag.HashtagCount = int.Parse(dr["NumHts"].ToString());
 
-        //    return hashtag;
-        //}
+            return hashtag;
+        }
 
     }
 }

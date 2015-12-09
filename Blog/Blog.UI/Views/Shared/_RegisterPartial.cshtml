@@ -1,6 +1,6 @@
 ﻿@model Blog.UI.Models.RegisterViewModel
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Account", null, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "registerUserForm"}))
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
@@ -58,4 +58,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/app/jquery-validate-default.js"></script>
+    <script src="~/Scripts/app/registerUserValidation.js"></script>
 }
