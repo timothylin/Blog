@@ -121,24 +121,12 @@ namespace Blog.UI.Controllers
             return View(post);
         }
 
-
-        //[Authorize(Roles = "Admin, PR, User")]
-        //public ActionResult AllPosts()
-        //{
-        //    _ops = new BlogOperations();
-        //    var vm = new HomeVM();
-        //    vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == BlogPostStatus.Approved).ToList();
-
-        //    return View("AllPosts", vm);
-
-        //}
-
         [Authorize(Roles = "Admin, PR, User")]
         public ActionResult AllPosts(int id)
         {
             _ops = new BlogOperations();
             var vM = new AllPostsVM();
-            var allPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == BlogPostStatus.Approved).ToList();
+            var allPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == BlogPostStatus.Approved).OrderByDescending(p => p.TimeCreated).ToList();
             vM.PostCount = allPosts.Count;
             vM.CurrentPage = id;
             decimal totalPages = (allPosts.Count / 5) + 1;
@@ -160,7 +148,24 @@ namespace Blog.UI.Controllers
                 }
             }
 
+            vM.Categories = _ops.GetAllCategories().Categories;
+
             return View("AllPosts", vM);
+        }
+
+        //View Posts in a Category
+        [Authorize(Roles = "Admin, PR, User")]
+        public ActionResult ViewCategory(int id)
+        {
+            _ops = new BlogOperations();
+            var vM = new ViewCategoryVM();
+            vM.BlogPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Category.CategoryId == id).OrderByDescending(p => p.TimeCreated).ToList();
+
+            vM.Categories = _ops.GetAllCategories().Categories;
+            vM.CurrentCategory.CategoryId = id;
+            vM.CurrentCategory.CategoryTitle = _ops.GetCategoryById(id).Category.CategoryTitle;
+
+            return View("ViewCategory", vM);
         }
 
 

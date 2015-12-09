@@ -4,13 +4,32 @@
     ViewBag.Title = "All Posts";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br/>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="/BlogPost/AllPosts" aria-expanded="true"><span class="glyphicon glyphicon-list"></span> All Posts</a></li>
+    <li class=""><a href="#" aria-expanded="false"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+            <span class="glyphicon glyphicon-tags"></span> Categories <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            @foreach (var c in Model.Categories)
+            {
+                <li><a href="/BlogPost/ViewCategory/@c.CategoryId">@c.CategoryTitle</a></li>
+            }
+        </ul>
+    </li>
+</ul>
+
+@* Total number of posts/pages (showing this of that) *@
+
+<div class="text-center">
+    <ul class="pagination pagination-sm sync-pagination"></ul>
+</div>
 
 <div class="container">
     <div class="row">
 
-        <div class="col-sm-8">
-            <h1>All Posts</h1>
-        </div>
         <div class="row">
             <div class="col-xs-12 col-sm-8">
                 <br/>
@@ -67,7 +86,7 @@
 </div>
 
 <div class="text-center">
-    <ul class="pagination" id="pagination"></ul>
+    <ul class="pagination sync-pagination"></ul>
 </div>
 
 @section scripts{
@@ -75,7 +94,7 @@
     <script src="~/Scripts/jquery.dotdotdot.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#pagination').twbsPagination({
+            $('.sync-pagination').twbsPagination({
                 totalPages: @Model.TotalPages,
                 startPage: @Model.CurrentPage,
                 visiblePages: 5,

@@ -6,19 +6,17 @@ using Blog.Models;
 
 namespace Blog.UI.Models
 {
-    public class AllPostsVM
+    public class ViewCategoryVM
     {
         public List<BlogPost> BlogPosts { get; set; }
         public List<Category> Categories { get; set; }
-        public int PostCount { get; set; }
-        public int CurrentPage { get; set; }
-        public int TotalPages { get; set; }
+        public Category CurrentCategory { get; set; }
 
-        public AllPostsVM()
+        public ViewCategoryVM()
         {
             BlogPosts = new List<BlogPost>();
             Categories = new List<Category>();
+            CurrentCategory = new Category();
         }
-
     }
 }

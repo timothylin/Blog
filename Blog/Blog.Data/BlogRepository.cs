@@ -42,7 +42,7 @@ namespace Blog.Data
                 }
             }
 
-            return blogPosts.OrderByDescending(p => p.TimeCreated).ToList();
+            return blogPosts;
         }
 
         public BlogPost GetBlogPostById(int blogPostId)
