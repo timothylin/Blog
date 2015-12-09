@@ -13,6 +13,12 @@ namespace Blog.UI.Controllers
     public class PageController : Controller
     {
         private BlogOperations _ops;
+
+        public PageController()
+        {
+            _ops = new BlogOperations();
+        }
+
         // GET: Page
         public ActionResult Index()
         {
@@ -32,35 +38,54 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin, PR")]
         public ActionResult AddNewPage(AddStaticPageVM newPage)
         {
-            _ops = new BlogOperations();
-
             if (ModelState.IsValid)
             {
                 newPage.StaticPage.User.UserName = User.Identity.GetUserName();
                 newPage.StaticPage.TimeCreated = DateTime.Now;
-                newPage.StaticPage.Status = BlogPostStatus.Pending;
+                newPage.StaticPage.Status = PageStatus.Pending;
 
                 if (User.IsInRole("Admin"))
                 {
-                    newPage.StaticPage.Status = BlogPostStatus.Approved;
+                    newPage.StaticPage.Status = PageStatus.Approved;
                 }
 
                 var page = _ops.AddNewStaticPage(newPage.StaticPage).StaticPage;
 
                 return View("StaticPageDetails", page);
             }
-            else
-            {
-                return View(newPage);
-            }
+
+            return View(newPage);
 
         }
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult EditStaticPage(int id)
+        {
+            var vm = new AddStaticPageVM();
+
+            vm.StaticPage = _ops.GetStaticPageById(id).StaticPage;
+
+            return View(vm);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public ActionResult EditStaticPage(AddStaticPageVM vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var page = _ops.EditStaticPage(vm.StaticPage).StaticPage;
+
+                return View("StaticPageDetails", page);
+            }
+
+            return View(vm);
+
+        }
 
         [Authorize(Roles = "Admin, PR, User")]
         public ActionResult ViewStaticPage(int id)
         {
-            _ops = new BlogOperations();
             var page = _ops.GetStaticPageById(id).StaticPage;
 
             return View(page);
@@ -70,8 +95,7 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ApprovePage(int id)
         {
-            _ops = new BlogOperations();
-            var update = _ops.UpdateStaticPageStatus(id, BlogPostStatus.Approved);
+            _ops.UpdateStaticPageStatus(id, PageStatus.Approved);
 
             return RedirectToAction("ManageStaticPages", "Admin");
 
@@ -80,8 +104,7 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DenyPage(int id)
         {
-            _ops = new BlogOperations();
-            var update = _ops.UpdateStaticPageStatus(id, BlogPostStatus.Denied);
+            _ops.UpdateStaticPageStatus(id, PageStatus.Denied);
 
             return RedirectToAction("ManageStaticPages", "Admin");
         }
@@ -89,8 +112,7 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeletePage(int id)
         {
-            _ops = new BlogOperations();
-            var update = _ops.UpdateStaticPageStatus(id, BlogPostStatus.Deleted);
+            _ops.UpdateStaticPageStatus(id, PageStatus.Deleted);
 
             return RedirectToAction("ManageStaticPages", "Admin");
         }
@@ -98,8 +120,7 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult RestorePage(int id)
         {
-            _ops = new BlogOperations();
-            var update = _ops.UpdateStaticPageStatus(id, BlogPostStatus.Pending);
+            _ops.UpdateStaticPageStatus(id, PageStatus.Pending);
 
             return RedirectToAction("ManageStaticPages", "Admin");
         }

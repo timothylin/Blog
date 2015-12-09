@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.ApplicationServices;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Blog.BLL;
 using Blog.Models;
 using Blog.UI.Models;
@@ -14,7 +15,14 @@ namespace Blog.UI.Controllers
     public class BlogPostController : Controller
     {
         private BlogOperations _ops;
-        
+        private JavaScriptSerializer _jss;
+
+        public BlogPostController()
+        {
+            _ops = new BlogOperations();
+            _jss = new JavaScriptSerializer();
+        }
+
         // GET: BlogPost
         public ActionResult Index()
         {
@@ -24,11 +32,9 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin, PR")]
         public ActionResult AddNewBlogPost()
         {
-            _ops = new BlogOperations();
-
             var newBlogPostVM = new AddBlogPostVM();
             newBlogPostVM.BlogPost.User.Id = User.Identity.GetUserId();
-            
+
             newBlogPostVM.InitializeCategoriesList(_ops.GetAllCategories().Categories);
 
             return View(newBlogPostVM);
@@ -39,18 +45,16 @@ namespace Blog.UI.Controllers
         [HttpPost]
         public ActionResult AddNewBlogPost(AddBlogPostVM newPost)
         {
-            _ops = new BlogOperations();
-
             if (ModelState.IsValid)
             {
-                
+
                 newPost.BlogPost.User.UserName = User.Identity.GetUserName();
                 newPost.BlogPost.TimeCreated = DateTime.Now;
-                newPost.BlogPost.Status = BlogPostStatus.Pending;
+                newPost.BlogPost.Status = PageStatus.Pending;
 
                 if (User.IsInRole("Admin"))
                 {
-                    newPost.BlogPost.Status = BlogPostStatus.Approved;
+                    newPost.BlogPost.Status = PageStatus.Approved;
                 }
 
                 foreach (var ht in newPost.hashtags)
@@ -66,19 +70,16 @@ namespace Blog.UI.Controllers
 
                 //Ajax API call for confirmation modal
             }
-            else
-            {
-                newPost.InitializeCategoriesList(_ops.GetAllCategories().Categories);
-                return View(newPost);
-            }
+
+            newPost.InitializeCategoriesList(_ops.GetAllCategories().Categories);
+
+            return View(newPost);
         }
 
         //Edit Blog Post
         [Authorize(Roles = "Admin")]
         public ActionResult EditBlogPost(int id)
         {
-            _ops = new BlogOperations();
-
             var editVm = new AddBlogPostVM();
             editVm.BlogPost = _ops.GetBlogPostById(id).BlogPost;
             editVm.InitializeCategoriesList(_ops.GetAllCategories().Categories);
@@ -86,26 +87,93 @@ namespace Blog.UI.Controllers
             return View(editVm);
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public ActionResult EditBlogPost(AddBlogPostVM vm)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var ht in vm.hashtags)
+                {
+                    var newTag = new Hashtag();
+                    newTag.HashtagTitle = ht;
+                    vm.BlogPost.Hashtags.Add(newTag);
+                }
 
-       
+                var oldHashtags = _jss.Serialize(_ops.GetHashtagsByBlogPostId(vm.BlogPost.BlogPostId).Hashtags.OrderBy(h => h.HashtagTitle).Select(h => h.HashtagTitle));
+
+                var newHashtags = _jss.Serialize(vm.BlogPost.Hashtags.OrderBy(h => h.HashtagTitle).Select(h => h.HashtagTitle));
+
+                if (oldHashtags != newHashtags)
+                {
+                    vm.BlogPost.HashtagsUpdated = true;
+                }
+
+                var blogPost = _ops.EditBlogPost(vm.BlogPost).BlogPost;
+
+                return View("BlogPostDetails", blogPost);
+
+            }
+
+            vm.InitializeCategoriesList(_ops.GetAllCategories().Categories);
+
+            return View(vm);
+
+        }
+
         [Authorize(Roles = "Admin, PR, User")]
         public ActionResult ViewBlogPost(int id)
         {
-            _ops = new BlogOperations();
             var post = _ops.GetBlogPostById(id).BlogPost;
 
             return View(post);
         }
 
-
         [Authorize(Roles = "Admin, PR, User")]
-        public ActionResult AllPosts()
+        public ActionResult AllPosts(int id)
         {
             _ops = new BlogOperations();
-            var vm = new HomeVM();
-            vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == BlogPostStatus.Approved).ToList();
-            return View("AllPosts", vm);
+            var vM = new AllPostsVM();
+            var allPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == PageStatus.Approved).OrderByDescending(p => p.TimeCreated).ToList();
+            vM.PostCount = allPosts.Count;
+            vM.CurrentPage = id;
+            decimal totalPages = (allPosts.Count / 5) + 1;
 
+            vM.TotalPages = decimal.ToInt32(totalPages);
+
+            if (id < vM.TotalPages)
+            {
+                for (int i = 5 * (id - 1); i < 5 * id; i++)
+                {
+                    vM.BlogPosts.Add(allPosts[i]);
+                }
+            }
+            else if (id == vM.TotalPages)
+            {
+                for (int i = 5 * (id - 1); i < ((5 * (id - 1)) + (vM.PostCount % 5)); i++)
+                {
+                    vM.BlogPosts.Add(allPosts[i]);
+                }
+            }
+
+            vM.Categories = _ops.GetAllCategories().Categories;
+
+            return View("AllPosts", vM);
+        }
+
+        //View Posts in a Category
+        [Authorize(Roles = "Admin, PR, User")]
+        public ActionResult ViewCategory(int id)
+        {
+            _ops = new BlogOperations();
+            var vM = new ViewCategoryVM();
+            vM.BlogPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Category.CategoryId == id).OrderByDescending(p => p.TimeCreated).ToList();
+
+            vM.Categories = _ops.GetAllCategories().Categories;
+            vM.CurrentCategory.CategoryId = id;
+            vM.CurrentCategory.CategoryTitle = _ops.GetCategoryById(id).Category.CategoryTitle;
+
+            return View("ViewCategory", vM);
         }
 
 
@@ -113,8 +181,7 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ApprovePost(int id)
         {
-            _ops = new BlogOperations();
-            var update = _ops.UpdateBlogPostStatus(id, BlogPostStatus.Approved);
+            _ops.UpdateBlogPostStatus(id, PageStatus.Approved);
 
             return RedirectToAction("ManagePosts", "Admin");
         }
@@ -122,8 +189,7 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DenyPost(int id)
         {
-            _ops = new BlogOperations();
-            var update = _ops.UpdateBlogPostStatus(id, BlogPostStatus.Denied);
+            _ops.UpdateBlogPostStatus(id, PageStatus.Denied);
 
             return RedirectToAction("ManagePosts", "Admin"); ;
         }
@@ -131,8 +197,7 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeletePost(int id)
         {
-            _ops = new BlogOperations();
-            var update = _ops.UpdateBlogPostStatus(id, BlogPostStatus.Deleted);
+            _ops.UpdateBlogPostStatus(id, PageStatus.Deleted);
 
             return RedirectToAction("ManagePosts", "Admin");
         }
@@ -140,8 +205,7 @@ namespace Blog.UI.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult RestorePost(int id)
         {
-            _ops = new BlogOperations();
-            var update = _ops.UpdateBlogPostStatus(id, BlogPostStatus.Pending);
+            _ops.UpdateBlogPostStatus(id, PageStatus.Pending);
 
             return RedirectToAction("ManagePosts", "Admin");
         }

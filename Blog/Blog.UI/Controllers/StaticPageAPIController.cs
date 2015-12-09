@@ -17,7 +17,7 @@ namespace Blog.UI.Controllers
         {
             _ops = new BlogOperations();
 
-            return _ops.GetAllStaticPages().StaticPages.Where(p => p.Status == BlogPostStatus.Approved).ToList();
+            return _ops.GetAllStaticPages().StaticPages.Where(p => p.Status == PageStatus.Approved).ToList();
         }
 
         public StaticPage Get(int id)

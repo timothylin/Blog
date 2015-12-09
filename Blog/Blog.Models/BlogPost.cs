@@ -22,12 +22,13 @@ namespace Blog.Models
         [Required(ErrorMessage = "Description is required")]
         [MaxLength(200, ErrorMessage= "Your description cannot be longer than 200 characters")]
         public string Description { get; set; }
-        public BlogPostStatus Status { get; set; }
+        public PageStatus Status { get; set; }
         public DateTime TimeCreated { get; set; }
         public DateTime? ExpirationDate { get; set; }
         public List<Hashtag> Hashtags { get; set; } 
         public ApplicationUser User { get; set; }
         public Category Category { get; set; }
+        public bool HashtagsUpdated { get; set; }
 
         public BlogPost()
         {

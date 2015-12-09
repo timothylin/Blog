@@ -37,12 +37,12 @@ namespace Blog.Data
 
                 foreach (var blogPost in blogPosts)
                 {
-                    blogPost.Hashtags = GetHashtagByBlogPostId(blogPost.BlogPostId, cn);
+                    blogPost.Hashtags = GetHashtagByBlogPostId(blogPost.BlogPostId);
 
                 }
             }
 
-            return blogPosts.OrderByDescending(p => p.TimeCreated).ToList();
+            return blogPosts;
         }
 
         public BlogPost GetBlogPostById(int blogPostId)
@@ -68,7 +68,7 @@ namespace Blog.Data
                     }
                 }
 
-                blogPost.Hashtags = GetHashtagByBlogPostId(blogPost.BlogPostId, cn);
+                blogPost.Hashtags = GetHashtagByBlogPostId(blogPost.BlogPostId);
             }
 
             return blogPost;
@@ -77,7 +77,7 @@ namespace Blog.Data
 
         public BlogPost AddNewBlogPost(BlogPost blogPost)
         {
-            var hashtags = GetAllHashtags();
+            //var hashtags = GetAllHashtags();
 
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
@@ -99,37 +99,39 @@ namespace Blog.Data
                 if (blogPost.Hashtags != null)
                 {
 
-                    foreach (var hashtag in blogPost.Hashtags)
-                    {
-                        var checkHashtag = hashtags.FirstOrDefault(h => h.HashtagTitle == hashtag.HashtagTitle);
+                    blogPost.Hashtags = AddHashtags(blogPost, cn);
 
-                        if (checkHashtag == null)
-                        {
-                            p = new DynamicParameters();
-                            p.Add("@HashtagTitle", hashtag.HashtagTitle);
-                            p.Add("@HashtagID", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                    //foreach (var hashtag in blogPost.Hashtags)
+                    //{
+                    //    var checkHashtag = hashtags.FirstOrDefault(h => h.HashtagTitle == hashtag.HashtagTitle);
 
-                            cn.Execute("AddNewHashtag", p, commandType: CommandType.StoredProcedure);
+                    //    if (checkHashtag == null)
+                    //    {
+                    //        p = new DynamicParameters();
+                    //        p.Add("@HashtagTitle", hashtag.HashtagTitle);
+                    //        p.Add("@HashtagID", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                            hashtag.HashtagId = p.Get<int>("HashtagID");
+                    //        cn.Execute("AddNewHashtag", p, commandType: CommandType.StoredProcedure);
 
-                            p = new DynamicParameters();
-                            p.Add("@BlogPostID", blogPost.BlogPostId);
-                            p.Add("@HashtagID", hashtag.HashtagId);
+                    //        hashtag.HashtagId = p.Get<int>("HashtagID");
 
-                            cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
-                        }
-                        else
-                        {
-                            p = new DynamicParameters();
-                            p.Add("@BlogPostID", blogPost.BlogPostId);
-                            p.Add("@HashtagID", checkHashtag.HashtagId);
+                    //        p = new DynamicParameters();
+                    //        p.Add("@BlogPostID", blogPost.BlogPostId);
+                    //        p.Add("@HashtagID", hashtag.HashtagId);
 
-                            cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
+                    //        cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
+                    //    }
+                    //    else
+                    //    {
+                    //        p = new DynamicParameters();
+                    //        p.Add("@BlogPostID", blogPost.BlogPostId);
+                    //        p.Add("@HashtagID", checkHashtag.HashtagId);
 
-                            hashtag.HashtagId = checkHashtag.HashtagId;
-                        }
-                    }
+                    //        cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
+
+                    //        hashtag.HashtagId = checkHashtag.HashtagId;
+                    //    }
+                    //}
 
                 }
 
@@ -137,6 +139,37 @@ namespace Blog.Data
 
                 return blogPost;
             }
+        }
+
+        public BlogPost EditBlogPost(BlogPost blogPost)
+        {
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@BlogPostID", blogPost.BlogPostId);
+                p.Add("@BlogPostTitle", blogPost.BlogPostTitle);
+                p.Add("@BlogPostText", blogPost.BlogPostText);
+                p.Add("@Status", (int)blogPost.Status);
+                p.Add("@CategoryID", blogPost.Category.CategoryId);
+                p.Add("@Description", blogPost.Description);
+                p.Add("@CoverImageUrl", blogPost.CoverImageUrl);
+
+                cn.Execute("EditBlogPost", p, commandType: CommandType.StoredProcedure);
+
+                if (blogPost.HashtagsUpdated)
+                {
+                    p = new DynamicParameters();
+                    p.Add("@BlogPostID", blogPost.BlogPostId);
+
+                    cn.Execute("DeleteBlogPostHashtagsByBlogPostID", p, commandType: CommandType.StoredProcedure);
+
+                    AddHashtags(blogPost, cn);
+                }
+            }
+
+            blogPost = GetBlogPostById(blogPost.BlogPostId);
+
+            return blogPost;
         }
 
         public StaticPage AddNewStaticPage(StaticPage newPage)
@@ -163,7 +196,7 @@ namespace Blog.Data
             }
         
 
-        public BlogPost UpdateBlogPostStatus(int blogPostId, BlogPostStatus updatedStatus)
+        public BlogPost UpdateBlogPostStatus(int blogPostId, PageStatus updatedStatus)
         {
             BlogPost blogPost = new BlogPost();
 
@@ -184,15 +217,15 @@ namespace Blog.Data
                         blogPost = PopulateBlogPostFromReader(dr);
                     }
                 }
-
-                blogPost.Hashtags = GetHashtagByBlogPostId(blogPost.BlogPostId, cn);
             }
+
+            blogPost.Hashtags = GetHashtagByBlogPostId(blogPost.BlogPostId);
 
             return blogPost;
         }
 
 
-        public StaticPage UpdateStaticPageStatus(int staticPageId, BlogPostStatus updateStaticPageStatus)
+        public StaticPage UpdateStaticPageStatus(int staticPageId, PageStatus updateStaticPageStatus)
         {
             StaticPage staticPage = new StaticPage();
 
@@ -264,6 +297,24 @@ namespace Blog.Data
                     }
                 }
             }
+            return page;
+        }
+
+        public StaticPage EditStaticPage(StaticPage page)
+        {
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@StaticPageID", page.StaticPageId);
+                p.Add("@StaticPageTitle", page.StaticPageTitle);
+                p.Add("@StaticPageText", page.StaticPageText);
+                p.Add("@Status", page.Status);
+
+                cn.Execute("EditStaticPage", p, commandType: CommandType.StoredProcedure);
+            }
+
+            page = GetStaticPageById(page.StaticPageId);
+
             return page;
         }
 
@@ -461,25 +512,74 @@ namespace Blog.Data
             return user;
         }
 
-        private List<Hashtag> GetHashtagByBlogPostId(int blogPostId, SqlConnection cn)
+
+        public List<Hashtag> GetHashtagByBlogPostId(int blogPostId)
         {
             List<Hashtag> hashtags = new List<Hashtag>();
 
-            var cmd = new SqlCommand();
-            cmd.CommandText = "GetHashtagByBlogPostID";
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@BlogPostID", blogPostId);
-            cmd.Connection = cn;
-
-            using (SqlDataReader dr = cmd.ExecuteReader())
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
-                while (dr.Read())
-                {
-                    hashtags.Add(PopulateHashtagsFromReader(dr));
-                }
+                
+                var p = new DynamicParameters();
+
+                p.Add("@BlogPostID", blogPostId);
+
+                hashtags = cn.Query<Hashtag>("GetHashtagByBlogPostID", p, commandType: CommandType.StoredProcedure).ToList();
+
+                //var cmd = new SqlCommand();
+                //cmd.CommandText = "GetHashtagByBlogPostID";
+                //cmd.CommandType = CommandType.StoredProcedure;
+                //cmd.Parameters.AddWithValue("@BlogPostID", blogPostId);
+                //cmd.Connection = cn;
+
+                //using (SqlDataReader dr = cmd.ExecuteReader())
+                //{
+                //    while (dr.Read())
+                //    {
+                //        hashtags.Add(PopulateHashtagsFromReader(dr));
+                //    }
+                //}
             }
 
             return hashtags;
+        }
+
+        private List<Hashtag> AddHashtags(BlogPost blogPost, SqlConnection cn)
+        {
+            foreach (var hashtag in blogPost.Hashtags)
+            {
+                var checkHashtag = GetAllHashtags().FirstOrDefault(h => h.HashtagTitle == hashtag.HashtagTitle);
+                var p = new DynamicParameters();
+
+                if (checkHashtag == null)
+                {
+                    p = new DynamicParameters();
+                    p.Add("@HashtagTitle", hashtag.HashtagTitle);
+                    p.Add("@HashtagID", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                    cn.Execute("AddNewHashtag", p, commandType: CommandType.StoredProcedure);
+
+                    hashtag.HashtagId = p.Get<int>("HashtagID");
+
+                    p = new DynamicParameters();
+                    p.Add("@BlogPostID", blogPost.BlogPostId);
+                    p.Add("@HashtagID", hashtag.HashtagId);
+
+                    cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
+                }
+                else
+                {
+                    p = new DynamicParameters();
+                    p.Add("@BlogPostID", blogPost.BlogPostId);
+                    p.Add("@HashtagID", checkHashtag.HashtagId);
+
+                    cn.Execute("AddBlogPostHashtags", p, commandType: CommandType.StoredProcedure);
+
+                    hashtag.HashtagId = checkHashtag.HashtagId;
+                }
+            }
+
+            return blogPost.Hashtags;
         }
 
         private ApplicationUser PopulateUserFromDataReader(SqlDataReader dr)
@@ -522,7 +622,7 @@ namespace Blog.Data
             {
                 blogPost.ExpirationDate = DateTime.Parse(dr["ExpirationDate"].ToString());
             }
-            blogPost.Status = (BlogPostStatus)dr["Status"];
+            blogPost.Status = (PageStatus)dr["Status"];
             blogPost.Category.CategoryId = (int)dr["CategoryID"];
             blogPost.Category.CategoryTitle = dr["CategoryTitle"].ToString();
             blogPost.Description = dr["Description"].ToString();
@@ -540,7 +640,7 @@ namespace Blog.Data
             staticPage.StaticPageTitle = dr["StaticPageTitle"].ToString();
             staticPage.StaticPageText = dr["StaticPageText"].ToString();
             staticPage.TimeCreated = DateTime.Parse(dr["TimeCreated"].ToString());
-            staticPage.Status = (BlogPostStatus)dr["Status"];
+            staticPage.Status = (PageStatus)dr["Status"];
             staticPage.User = PopulateUserFromDataReader(dr);
 
             return staticPage;

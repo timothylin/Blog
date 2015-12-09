@@ -26,6 +26,18 @@ namespace Blog.UI
             );
 
             routes.MapRoute(
+                name: "AllPosts",
+                url: "BlogPost/AllPosts",
+                defaults: new { controller = "BlogPost", action = "AllPosts", id = 1 }
+            );
+
+            routes.MapRoute(
+                name: "AllPosts2",
+                url: "AllPosts",
+                defaults: new { controller = "BlogPost", action = "AllPosts", id = 1 }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

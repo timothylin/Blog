@@ -16,7 +16,7 @@ namespace Blog.UI.Controllers
         {
             _ops = new BlogOperations();
             var vm = new PRVM();
-            vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts;
+            vm.BlogPosts = _ops.GetAllBlogPosts().BlogPosts.OrderByDescending(p => p.TimeCreated).ToList();
             return View(vm);
         }
     }

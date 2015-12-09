@@ -49,7 +49,7 @@ namespace Blog.BLL
             return _response;
         }
 
-        public Response UpdateBlogPostStatus(int blogPostId, BlogPostStatus updatedStatus)
+        public Response UpdateBlogPostStatus(int blogPostId, PageStatus updatedStatus)
         {
             _response = new Response();
             var blogPost = _repo.UpdateBlogPostStatus(blogPostId, updatedStatus);
@@ -66,7 +66,7 @@ namespace Blog.BLL
             return _response;
         }
 
-        public Response UpdateStaticPageStatus(int staticPageId, BlogPostStatus updatedStaticPageStatus)
+        public Response UpdateStaticPageStatus(int staticPageId, PageStatus updatedStaticPageStatus)
         {
             _response = new Response();
             var staticPage = _repo.UpdateStaticPageStatus(staticPageId, updatedStaticPageStatus);
@@ -87,6 +87,20 @@ namespace Blog.BLL
         {
             _response = new Response();
             var blogPost = _repo.AddNewBlogPost(b);
+
+            if (blogPost != null)
+            {
+                _response.Success = true;
+                _response.BlogPost = blogPost;
+            }
+
+            return _response;
+        }
+
+        public Response EditBlogPost(BlogPost b)
+        {
+            _response = new Response();
+            var blogPost = _repo.EditBlogPost(b);
 
             if (blogPost != null)
             {
@@ -139,6 +153,20 @@ namespace Blog.BLL
             return _response;
         }
 
+        public Response EditStaticPage(StaticPage page)
+        {
+            _response = new Response();
+            var staticPage = _repo.EditStaticPage(page);
+
+            if (staticPage != null)
+            {
+                _response.Success = true;
+                _response.StaticPage = staticPage;
+            }
+
+            return _response;
+        }
+
         public Response GetAllHashtags()
         {
             _response = new Response();
@@ -162,6 +190,20 @@ namespace Blog.BLL
             {
                 _response.Success = true;
                 _response.Hashtag = hashtag;
+            }
+
+            return _response;
+        }
+
+        public Response GetHashtagsByBlogPostId(int blogPostId)
+        {
+            _response = new Response();
+            var hashtags = _repo.GetHashtagByBlogPostId(blogPostId);
+
+            if (hashtags != null)
+            {
+                _response.Success = true;
+                _response.Hashtags = hashtags;
             }
 
             return _response;

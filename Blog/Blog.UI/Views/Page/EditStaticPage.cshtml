@@ -1,0 +1,66 @@
+﻿@model Blog.UI.Models.AddStaticPageVM
+
+@{
+    ViewBag.Title = "Edit Static Page";
+}
+
+<br />
+<div class="container">
+    <div class="row" ng-app="validationPost">
+        <div class="well" keep-input-values>
+            <form action="/Page/EditStaticPage" class="form-horizontal" method="post" name="myForm" novalidate>
+                <fieldset>
+                    <legend><b>Edit Page</b></legend>
+                    @Html.ValidationSummary(false)
+                    <div class="form-group">
+                        <label for="StaticPage_StaticPageTitle" class="col-md-2 control-label">Page Title</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.StaticPage.StaticPageTitle, new { @class = "form-control", @placeholder = "Page Title", @required = "", @ng_model = "Title", @ng_maxlength = "100" })
+                            <label class="control-label text-danger" ng-show="myForm['StaticPage.StaticPageTitle'].$dirty && myForm['StaticPage.StaticPageTitle'].$invalid && myForm['StaticPage.StaticPageTitle'].$error.required">
+                                Title is required
+                            </label>
+                            <label class="control-label text-danger" ng-show="myForm['StaticPage.StaticPageTitle'].$dirty && myForm['StaticPage.StaticPageTitle'].$invalid && myForm['StaticPage.StaticPageTitle'].$error.maxlength">
+                                Your title cannot be longer than 100 characters
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mytextarea" class="col-md-2 control-label">Page Content</label>
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(m => m.StaticPage.StaticPageText, new { @id = "mytextarea" })
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(m => m.StaticPage.StaticPageId)
+                    @Html.HiddenFor(m => m.StaticPage.Status)
+                    @Html.HiddenFor(m => m.StaticPage.TimeCreated)
+                    @Html.HiddenFor(m => m.StaticPage.User.Id)
+
+                    <div class="form-group">
+                        <div class="col-md-10 col-md-offset-2">
+                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Submit</button>
+                            <button type="reset" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Reset</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Styles{
+
+    <link rel="stylesheet" type="text/css" href="~/Content/app/angvalidation.css" />
+}
+
+@section scripts{
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/app/tinymce.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="~/Scripts/angular-keep-values.min.js"></script>
+    <script src="~/Scripts/app/angvalidation.js"></script>
+}
