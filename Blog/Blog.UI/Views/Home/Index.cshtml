@@ -133,43 +133,35 @@
                                 </a>
                             </h2>
                         </div>
-
-                        <div class="panel-body">
                             <div class="col-md-12 blogpost">
                                 <p>@Html.Raw(Model.BlogPosts[i].Description)</p>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <p>Category: @Model.BlogPosts[i].Category.CategoryTitle</p>
-                                    <small><cite title="Source Title">a post by @(Model.BlogPosts[i].User.FirstName + " " + Model.BlogPosts[i].User.LastName)</cite></small>
-                                    <small class="pull-right tiny">@Model.BlogPosts[i].TimeCreated.ToShortDateString()</small>
-                                </div>
-
-                                <div class="col-md-3 pull-right">
-                                    <p>Hashtags</p>
-                                    @if (Model.BlogPosts[i].Hashtags.Count > 0)
-                                    {
-                                        string hashtags = "";
-                                        for (int j = 0; j < Model.BlogPosts[i].Hashtags.Count - 1; j++)
-                                        {
-                                            hashtags += "#" + Model.BlogPosts[i].Hashtags[j].HashtagTitle + ", ";
-                                        }
-                                        hashtags += "#" + Model.BlogPosts[i].Hashtags[Model.BlogPosts[i].Hashtags.Count - 1].HashtagTitle;
-                                        <p>@hashtags</p>
-                                    }
-                                    else
-                                    {
-                                        <p>No hashtags added...</p>
-                                    }
-                                </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>Category: @Model.BlogPosts[i].Category.CategoryTitle</p>
+                                <small><cite title="Source Title">a post by @(Model.BlogPosts[i].User.FirstName + " " + Model.BlogPosts[i].User.LastName)</cite></small>
+                                <small class="pull-right tiny">@Model.BlogPosts[i].TimeCreated.ToShortDateString()</small>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-2">
-
-                                </div>
+                            <div class="col-md-3 pull-right">
+                                <p>Hashtags</p>
+                                @if (Model.BlogPosts[i].Hashtags.Count > 0)
+                                {
+                                    string hashtags = "";
+                                    for (int j = 0; j < Model.BlogPosts[i].Hashtags.Count - 1; j++)
+                                    {
+                                        hashtags += "#" + Model.BlogPosts[i].Hashtags[j].HashtagTitle + ", ";
+                                    }
+                                    hashtags += "#" + Model.BlogPosts[i].Hashtags[Model.BlogPosts[i].Hashtags.Count - 1].HashtagTitle;
+                                    <p>@hashtags</p>
+                                }
+                                else
+                                {
+                                    <p>No hashtags added...</p>
+                                }
                             </div>
                         </div>
+                        <hr/>
                     }
                 </div>
             </div>
