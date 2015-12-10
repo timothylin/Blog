@@ -23,11 +23,6 @@ namespace Blog.UI.Controllers
             _jss = new JavaScriptSerializer();
         }
 
-        // GET: BlogPost
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         [Authorize(Roles = "Admin, PR")]
         public ActionResult AddNewBlogPost()

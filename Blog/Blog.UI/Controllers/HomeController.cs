@@ -12,6 +12,7 @@ namespace Blog.UI.Controllers
     public class HomeController : Controller
     {
         private BlogOperations _ops;
+
         public ActionResult Index()
         {
             _ops = new BlogOperations();

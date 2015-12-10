@@ -1297,9 +1297,7 @@
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
-    <Content Include="Views\BlogPost\Index.cshtml" />
     <Content Include="Views\BlogPost\AddNewBlogPost.cshtml" />
-    <Content Include="Views\Page\Index.cshtml" />
     <Content Include="Views\Page\AddNewPage.cshtml" />
     <Content Include="Views\BlogPost\BlogPostDetails.cshtml" />
     <Content Include="Views\BlogPost\ViewBlogPost.cshtml" />
