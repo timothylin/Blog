@@ -1,11 +1,64 @@
 ﻿@model Blog.Models.BlogPost
 
 @{
-    ViewBag.Title = "View Blog Post";
+    ViewBag.Title = Model.BlogPostTitle;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+            <div class="well">
+                <img src="@Model.CoverImageUrl" class="img-responsive">
+                <div class="row addmargin">
+                    @*<div class="col-sm-9">*@
+                        <h2 class="h2-a"><b>@Model.BlogPostTitle</b></h2>
+                        <blockquote>
+                            <p>@Model.Description</p>
+                        </blockquote>
+                        @*<hr class="hr-dark" />*@
+                        <p>
+                            @Html.Raw(Model.BlogPostText)
+                        </p>
+                    @*</div>*@
+                </div>
+                @*</div>*@
 
-<div class="blogpost">
+                <hr class="hr-dark" />
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <p>Category: @Model.Category.CategoryTitle</p>
+                        <p>@Model.TimeCreated.ToString("g")</p>
+                        <small><cite title="Source Title">a post by <b>@(Model.User.FirstName + " " + Model.User.LastName)</b></cite></small>
+                    </div>
+
+                    <div class="col-md-3 pull-right">
+                        <p>Hashtags:</p>
+                        @if (Model.Hashtags.Count > 0)
+                        {
+                            string hashtags = "";
+                            for (int j = 0; j < Model.Hashtags.Count - 1; j++)
+                            {
+                                hashtags += "#" + Model.Hashtags[j].HashtagTitle + ", ";
+                            }
+                            hashtags += "#" + Model.Hashtags[Model.Hashtags.Count - 1].HashtagTitle;
+                            <cite>@hashtags</cite>
+                        }
+                        else
+                        {
+                            <p>No hashtags added...</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+</div>
+
+
+
+@*<div class="blogpost">
 
     <div class="row">
         <img class="img-responsive" src="@Model.CoverImageUrl"/>
@@ -51,4 +104,4 @@
             }
         </div>
     </div>
-</div>
+</div>*@

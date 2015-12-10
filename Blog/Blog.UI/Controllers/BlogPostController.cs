@@ -137,9 +137,7 @@ namespace Blog.UI.Controllers
             var allPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == PageStatus.Approved).OrderByDescending(p => p.TimeCreated).ToList();
             vM.PostCount = allPosts.Count;
             vM.CurrentPage = id;
-            decimal totalPages = (allPosts.Count / 5) + 1;
-
-            vM.TotalPages = decimal.ToInt32(totalPages);
+            vM.TotalPages = (int)Math.Ceiling((double)vM.PostCount/(double)5);
 
             if (id < vM.TotalPages)
             {
@@ -174,6 +172,22 @@ namespace Blog.UI.Controllers
             vM.CurrentCategory.CategoryTitle = _ops.GetCategoryById(id).Category.CategoryTitle;
 
             return View("ViewCategory", vM);
+        }
+
+        //Search Posts
+        [Authorize(Roles = "Admin, PR, User")]
+        public ActionResult SearchPosts()
+        {
+            _ops = new BlogOperations();
+            var vM = new AllPostsVM();
+            vM.BlogPosts =
+                _ops.GetAllBlogPosts()
+                    .BlogPosts.Where(p => p.Status == PageStatus.Approved)
+                    .OrderBy(p => p.BlogPostTitle)
+                    .ToList();
+            vM.Categories = _ops.GetAllCategories().Categories;
+
+            return View("SearchPosts", vM);
         }
 
 

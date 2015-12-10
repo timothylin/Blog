@@ -8,7 +8,8 @@ namespace Blog.Models
 {
     public enum AccountStatus
     {
-        Active = 1,
+        Default,
+        Active,
         Disabled
     }
 }

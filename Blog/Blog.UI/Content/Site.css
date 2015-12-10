@@ -54,6 +54,9 @@ textarea {
 
 /*--------------*/
 
+.addmargin {
+    margin: 20px;
+}
 
 #jsDate-logo {
     max-height: 60px;
@@ -233,7 +236,7 @@ footer {
 }
 
 .new-managepages-panel {
-    background-color: #f44336;
+    background-color: #2f4f4f;
 }
 
 .new-manageposts-panel {
@@ -327,7 +330,7 @@ footer {
 
 .thumbnail {
   position: relative;
-  width: 830px;
+  width: 9000px;
   height: 400px;
   overflow: hidden;
 }
@@ -393,6 +396,7 @@ footer {
 /*h2 a*/
 .h2-a {
     /*font-family: 'Lucida Sans Unicode';*/
+    margin-top: 0px;
     font-weight: 700;
     font-style: normal;
     font-size: 36px;

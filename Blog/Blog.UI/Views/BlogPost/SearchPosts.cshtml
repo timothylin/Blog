@@ -1,0 +1,87 @@
+﻿@model Blog.UI.Models.AllPostsVM
+
+@{
+    ViewBag.Title = "Search Posts";
+}
+
+<ul class="nav nav-tabs">
+    <li class=""><a href="/BlogPost/AllPosts" aria-expanded="false"><span class="glyphicon glyphicon-list"></span> All Posts</a></li>
+    <li class="active"><a href="/BlogPost/SearchPosts" aria-expanded="true"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+            <span class="glyphicon glyphicon-tags"></span> Categories <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            @foreach (var c in Model.Categories)
+            {
+                <li><a href="/BlogPost/ViewCategory/@c.CategoryId">@c.CategoryTitle</a></li>
+            }
+        </ul>
+    </li>
+</ul>
+<div class="container">
+    <div class="row">
+        <div ng-app ng-init="posts = [
+             
+             @foreach (var post in Model.BlogPosts)
+             {
+                 string hashtags = "";
+                 for (int j = 0; j < post.Hashtags.Count - 1; j++)
+                      {
+                            hashtags += "#" + post.Hashtags[j].HashtagTitle + ", ";
+                      }
+                 hashtags += "#" + post.Hashtags[post.Hashtags.Count - 1].HashtagTitle;
+                 <text>{PostId: '@post.BlogPostId', Title: '@post.BlogPostTitle.Replace("'", "\\'")', TimeCreated: '@post.TimeCreated.ToString("g")', Author: '@(post.User.FirstName + " " + post.User.LastName)', Category: '@post.Category.CategoryTitle', Hashtags: '@hashtags'},</text>
+             }
+
+     ]">
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th class="col-xs-1">PostID</th>
+                <th class="col-xs-3">Title</th>
+                <th class="col-xs-1">Author</th>
+                <th class="col-xs-2">Time Created</th>
+                <th class="col-xs-1">Category</th>
+                <th class="col-xs-3">Hashtags</th>
+                <th class="col-xs-1"></th>
+            </tr>
+            <tr>
+                <th><input class="form-control" type="text" ng-model="postFilter.PostId"/></th>
+                <th><input class="form-control" type="text" ng-model="postFilter.Title"/></th>
+                <th><input class="form-control" type="text" ng-model="postFilter.Author"/></th>
+                <th><input class="form-control" type="text" ng-model="postFilter.TimeCreated"/></th>
+                <th><input class="form-control" type="text" ng-model="postFilter.Category"/></th>
+                <th><input class="form-control" type="text" ng-model="postFilter.Hashtags"/></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="post in posts | filter:postFilter">
+                <td>{{post.PostId}}</td>
+                <td><b>{{post.Title}}</b></td>
+                <td>{{post.Author}}</td>
+                <td>{{post.TimeCreated}}</td>
+                <td>{{post.Category}}</td>
+                <td>{{post.Hashtags}}</td>
+                <td>
+                    @{
+                        var url1 = Url.Action("ViewBlogPost", "BlogPost", new {id = "{{post.PostId}}"});
+                        url1 = HttpUtility.UrlDecode(url1);
+                    }
+                        <a href="@url1" class="btn btn-info" title="Info"><span class="glyphicon glyphicon-info-sign"></span> View Post</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/angular.min.js"></script>
+}
+
+
