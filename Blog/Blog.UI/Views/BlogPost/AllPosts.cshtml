@@ -31,6 +31,7 @@
 
             <div class="col-xs-12 col-sm-offset-1 col-sm-10">
                 <p>Showing Posts <b>@((Model.CurrentPage - 1)*5 + 1) to @((Model.CurrentPage)*5)</b> of @Model.PostCount Total</p>
+                <br/>
                 @foreach (var post in Model.BlogPosts)
                 {
                     <div class="row">
