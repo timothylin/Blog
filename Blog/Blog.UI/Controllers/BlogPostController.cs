@@ -176,6 +176,22 @@ namespace Blog.UI.Controllers
             return View("ViewCategory", vM);
         }
 
+        //Search Posts
+        [Authorize(Roles = "Admin, PR, User")]
+        public ActionResult SearchPosts()
+        {
+            _ops = new BlogOperations();
+            var vM = new AllPostsVM();
+            vM.BlogPosts =
+                _ops.GetAllBlogPosts()
+                    .BlogPosts.Where(p => p.Status == PageStatus.Approved)
+                    .OrderBy(p => p.BlogPostTitle)
+                    .ToList();
+            vM.Categories = _ops.GetAllCategories().Categories;
+
+            return View("SearchPosts", vM);
+        }
+
 
         //Admin maintaining posts
         [Authorize(Roles = "Admin")]

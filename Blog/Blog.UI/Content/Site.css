@@ -54,6 +54,9 @@ textarea {
 
 /*--------------*/
 
+.addmargin {
+    margin: 20px;
+}
 
 #jsDate-logo {
     max-height: 60px;

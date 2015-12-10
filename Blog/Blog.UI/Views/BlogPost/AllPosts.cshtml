@@ -6,7 +6,7 @@
 }
 <ul class="nav nav-tabs">
     <li class="active"><a href="/BlogPost/AllPosts" aria-expanded="true"><span class="glyphicon glyphicon-list"></span> All Posts</a></li>
-    <li class=""><a href="#" aria-expanded="false"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+    <li class=""><a href="/BlogPost/SearchPosts" aria-expanded="false"><span class="glyphicon glyphicon-search"></span> Search</a></li>
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
             <span class="glyphicon glyphicon-tags"></span> Categories <span class="caret"></span>
@@ -42,8 +42,7 @@
                                     <img src="@post.CoverImageUrl" alt="@post.BlogPostTitle" class="portrait">
                                 </a>
                             </div>
-                            <div class="container">
-                                <div class="col-sm-10">
+                            <div class="row addmargin">
                                     <h2 class="h2-a">
                                         <a href="/BlogPost/ViewBlogPost/@post.BlogPostId">
                                             @post.BlogPostTitle
@@ -56,7 +55,6 @@
                                     <p>
                                         @Html.Raw(post.BlogPostText)
                                     </p>
-                                </div>
                             </div>
                             @*</div>*@
 
