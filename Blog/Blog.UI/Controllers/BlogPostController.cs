@@ -148,7 +148,7 @@ namespace Blog.UI.Controllers
             }
             else if (id == vM.TotalPages)
             {
-                for (int i = 5 * (id - 1); i < ((5 * (id - 1)) + (vM.PostCount % 5)); i++)
+                for (int i = 5 * (id - 1); i < vM.PostCount; i++)
                 {
                     vM.BlogPosts.Add(allPosts[i]);
                 }
