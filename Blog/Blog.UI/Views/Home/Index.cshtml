@@ -190,6 +190,7 @@
                             <p><em>Total Static Pages:</em> @Model.BlogStats.TotalStaticPages</p>
                             <p><em>Couples Formed:</em> 8</p>
                             <p><em>Paired-programming "Sessions":</em> 19</p>
+                            <p><em>Tim-Approved:</em> You know it...</p>
                         </div>
                     </div>
 
@@ -212,7 +213,7 @@
                                 <ol>
                                     @for (int i = 0; i < 10; i++)
                                     {
-                                        <li>#@(Model.BlogStats.Hashtags[i].HashtagTitle) (@Model.BlogStats.Hashtags[i].HashtagCount times)</li>
+                                        <li>#@(Model.BlogStats.Hashtags[i].HashtagTitle) (@Model.BlogStats.Hashtags[i].HashtagCount mentions)</li>
                                     }
                                 </ol>
                             }
@@ -224,7 +225,7 @@
                     {
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Most Recent in @c.CategoryTitle</h3>
+                                <h3 class="panel-title"><a href="/BlogPost/ViewCategory/@c.CategoryId">Most Recent in @c.CategoryTitle</a></h3>
                             </div>
                             <div class="panel-body">
                                 @{

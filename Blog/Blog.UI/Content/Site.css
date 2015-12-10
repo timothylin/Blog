@@ -384,6 +384,7 @@ footer {
 /*h2 a*/
 .h2-a {
     /*font-family: 'Lucida Sans Unicode';*/
+    margin-top: 0px;
     font-weight: 700;
     font-style: normal;
     font-size: 36px;

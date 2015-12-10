@@ -10,61 +10,62 @@
     <!--DASHBOARD-->
     
     <!--Only Visible on mobile-->
-    <div class="container">
-        <div class="col-md-3 hidden-lg hidden-md">
-            <div class="panel new-manageposts-panel">
-                <a href="/Admin/ManagePosts">
-                    <div class="panel-body">
-                        <div class="col-xs-10">
-                            <span class="glyphicon glyphicon-comment glyphicon-comment-alt"></span>
-                            <br />
-                            <h4><span class="glyphicon glyphicon-edit glyphicon-edit-alt"></span> Manage Posts</h4>
+<div class="container">
+    <div class="col-md-3 hidden-lg hidden-md">
+        <div class="panel new-manageposts-panel">
+            <a href="/Admin/ManagePosts">
+                <div class="panel-body">
+                    <div class="col-xs-10">
+                        <span class="glyphicon glyphicon-comment glyphicon-comment-alt"></span>
+                        <br/>
+                        <h4><span class="glyphicon glyphicon-edit glyphicon-edit-alt"></span> Manage Posts</h4>
 
-                        </div>
-                        <div class="col-xs-2">
-                            <a href="#" class="badge"><h4>@Model.BlogStats.TotalActivePosts</h4></a>
-                        </div>
                     </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-3 hidden-lg hidden-md">
-            <div class="panel new-managepages-panel">
-                <a href="/Admin/ManageStaticPages">
-                    <div class="panel-body">
-                        <div class="col-xs-10">
-                            <span class="glyphicon glyphicon-file glyphicon-file-alt"></span>
-                            <br />
-                            <h4><span class="glyphicon glyphicon-edit glyphicon-edit-alt"></span> Manage Pages</h4>
-
-                        </div>
-                        <div class="col-xs-2">
-                            <a href="#" class="badge"><h4>@Model.BlogStats.TotalStaticPages</h4></a>
-                        </div>
+                    <div class="col-xs-2">
+                        <a href="#" class="badge"><h4>@Model.BlogStats.TotalActivePosts</h4></a>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
         </div>
-        <div class="col-md-3 hidden-lg hidden-md">
-            <div class="panel new-manageusers-panel">
-                <a href="/Admin/ManageUsers">
-                    <div class="panel-body">
-                        <div class="col-xs-10">
-                            <span class="glyphicon glyphicon-comment glyphicon-comment-alt"></span>
-                            <br />
-                            <h4><span class="glyphicon glyphicon-edit glyphicon-edit-alt"></span> Manage Users</h4>
+    </div>
+    <div class="col-md-3 hidden-lg hidden-md">
+        <div class="panel new-managepages-panel">
+            <a href="/Admin/ManageStaticPages">
+                <div class="panel-body">
+                    <div class="col-xs-10">
+                        <span class="glyphicon glyphicon-file glyphicon-file-alt"></span>
+                        <br/>
+                        <h4><span class="glyphicon glyphicon-edit glyphicon-edit-alt"></span> Manage Pages</h4>
 
-                        </div>
-                        <div class="col-xs-2">
-                            <a href="#" class="badge"><h4>@Model.BlogStats.TotalUsers</h4></a>
-                        </div>
                     </div>
-                </a>
-            </div>
+                    <div class="col-xs-2">
+                        <a href="#" class="badge"><h4>@Model.BlogStats.TotalStaticPages</h4></a>
+                    </div>
+                </div>
+            </a>
         </div>
+    </div>
+    <div class="col-md-3 hidden-lg hidden-md">
+        <div class="panel new-manageusers-panel">
+            <a href="/Admin/ManageUsers">
+                <div class="panel-body">
+                    <div class="col-xs-10">
+                        <span class="glyphicon glyphicon-comment glyphicon-comment-alt"></span>
+                        <br/>
+                        <h4><span class="glyphicon glyphicon-edit glyphicon-edit-alt"></span> Manage Users</h4>
 
-        <!--VISIBLE ALWAYS-->
-        <div class="col-md-offset-1 col-md-3">
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="#" class="badge"><h4>@Model.BlogStats.TotalUsers</h4></a>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!--VISIBLE ALWAYS-->
+    <div class="row">
+        <div class="col-md-3">
             <div class="panel new-user-panel">
                 <a href="/Admin/AddNewUser">
                     <div class="panel-body">
@@ -89,7 +90,7 @@
 
                         <div class="col-xs-10">
                             <span class="glyphicon glyphicon-pencil glyphicon-pencil-alt"></span>
-                            <br />
+                            <br/>
                             <h4><span class="glyphicon glyphicon-plus-sign glyphicon-plus-sign-alt"></span> New Post</h4>
 
                         </div>
@@ -107,7 +108,7 @@
                     <div class="panel-body">
                         <div class="col-xs-10">
                             <span class="glyphicon glyphicon-file glyphicon-file-alt"></span>
-                            <br />
+                            <br/>
                             <h4><span class="glyphicon glyphicon-plus-sign glyphicon-plus-sign-alt"></span> New Page</h4>
 
                         </div>
@@ -118,5 +119,22 @@
                 </a>
             </div>
         </div>
+
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Blog Stats</h3>
+                </div>
+                <div class="panel-body">
+                    <p><em>Total Users:</em> @Model.BlogStats.TotalUsers</p>
+                    <p><em>Admin Users:</em> @Model.BlogStats.TotalAdmins</p>
+                    <p><em>Total Posts:</em> @Model.BlogStats.TotalPosts</p>
+                    <p><em>Active Posts:</em> @Model.BlogStats.TotalActivePosts</p>
+                    <p><em>Unique Hashtags:</em> @Model.BlogStats.TotalHashtags</p>
+                    <p><em>Total Static Pages:</em> @Model.BlogStats.TotalStaticPages</p>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 </div>
