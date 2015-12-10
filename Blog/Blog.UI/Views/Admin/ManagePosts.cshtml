@@ -75,7 +75,7 @@
                                 var url6 = Url.Action("EditBlogPost", "BlogPost", new { id = "{{post.PostId}}" });
                                 url6 = HttpUtility.UrlDecode(url6);
                             }
-                            <div class="btn-group">
+                            <div class="btn-group col-xs-offset-2">
                                 <a href="@url2" class="btn btn-success disabled" title="Approve" ng-if="post.Status == 'Approved' || post.Status == 'Deleted'"><span class="glyphicon glyphicon-check"></span></a>
                                 <a href="@url2" class="btn btn-success" title="Approve" ng-if="post.Status == 'Pending' || post.Status == 'Denied'"><span class="glyphicon glyphicon-check"></span></a>
                                 <a href="@url3" class="btn btn-warning disabled" title="Deny" ng-if="post.Status == 'Denied' || post.Status == 'Deleted'"><span class="glyphicon glyphicon-ban-circle"></span></a>

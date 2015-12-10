@@ -65,10 +65,11 @@
                             </tbody>
                         </table>
 
-
-                        @Html.ActionLink("Return to Manage Users", "ManageUsers", "Admin", new { @class = "btn btn-danger" })
-
-                        <button type="submit" class="btn btn-success">Update</button>
+                        <a href="@Url.Action("ManageUsers", "Admin")" class="btn btn-danger" title="Return to Manage Users">
+                            <span class="glyphicon glyphicon-repeat"></span>
+                             Return to Manage Users
+                        </a>
+                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Update</button>
                     </div>
                 }
             </div>

@@ -25,7 +25,7 @@
                     <tr>
                         <th class="col-xs-1">PageID</th>
                         <th class="col-xs-3">Title</th>
-                        <th class="col-xs-1">User</th>
+                        <th class="col-xs-2">User</th>
                         <th class="col-xs-2">Time Created</th>
                         <th class="col-xs-1">Status</th>
                         <th class="col-xs-3"></th>
@@ -71,7 +71,7 @@
                                 var url6 = Url.Action("EditStaticPage", "Page", new { id = "{{page.PageId}}" });
                                 url6 = HttpUtility.UrlDecode(url6);
                             }
-                            <div class="btn-group">
+                            <div class="btn-group col-xs-offset-2">
                                 <a href="@url2" class="btn btn-success disabled" title="Approve" ng-if="page.Status == 'Approved' || page.Status == 'Deleted'"><span class="glyphicon glyphicon-check"></span></a>
                                 <a href="@url2" class="btn btn-success" title="Approve" ng-if="page.Status == 'Pending' || page.Status == 'Denied'"><span class="glyphicon glyphicon-check"></span></a>
                                 <a href="@url3" class="btn btn-warning disabled" title="Deny" ng-if="page.Status == 'Denied' || page.Status == 'Deleted'"><span class="glyphicon glyphicon-ban-circle"></span></a>
@@ -79,7 +79,7 @@
                                 <a href="@url4" class="btn btn-danger" title="Remove" ng-if="page.Status == 'Approved' || page.Status == 'Denied' || page.Status == 'Pending'"><span class="glyphicon glyphicon-remove"></span></a>
                                 <a href="@url5" class="btn btn-primary" title="Restore" ng-if="page.Status == 'Deleted'"><span class="glyphicon glyphicon-export"></span></a>
                                 <a href="@url6" class="btn btn-pending" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                <a href="@url1" class="btn btn-info" title="Details">Details</a>
+                                <a href="@url1" class="btn btn-info" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
                             </div>
                         </td>
                     </tr>
