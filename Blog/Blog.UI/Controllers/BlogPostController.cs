@@ -137,9 +137,7 @@ namespace Blog.UI.Controllers
             var allPosts = _ops.GetAllBlogPosts().BlogPosts.Where(p => p.Status == PageStatus.Approved).OrderByDescending(p => p.TimeCreated).ToList();
             vM.PostCount = allPosts.Count;
             vM.CurrentPage = id;
-            decimal totalPages = (allPosts.Count / 5) + 1;
-
-            vM.TotalPages = decimal.ToInt32(totalPages);
+            vM.TotalPages = (int)Math.Ceiling((double)vM.PostCount/(double)5);
 
             if (id < vM.TotalPages)
             {
