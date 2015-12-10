@@ -119,60 +119,64 @@
     <div class="col-sm-8">
 
         <div class="row">
-            @for (int i = 7; i < 13; i++)
+            @if (Model.BlogPosts.Count > 7)
             {
-                <div class="well well-margin">
-                    <div class="row">
+                for (int i = 7; i < 12; i++)
+                {
+                    <div class="well well-margin">
+                        <div class="row">
 
-                        <div>
                             <div>
-                                @*<div class="row">*@
-                                <div class="thumbnail img-responsive">
-                                    <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[i].BlogPostId">
-                                        <img src="@Model.BlogPosts[i].CoverImageUrl" alt="@Model.BlogPosts[i].BlogPostTitle" class="portrait">
-                                    </a>
-                                </div>
-                                <div class="container">
-                                    <div class="col-sm-7">
-                                        <h2 class="h2-a">
-                                            <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[i].BlogPostId">
-                                                @Model.BlogPosts[i].BlogPostTitle
-                                            </a>
-                                        </h2>
-                                        <small><cite title="Source Title">a post by <b>@(Model.BlogPosts[i].User.FirstName + " " + Model.BlogPosts[i].User.LastName)</b></cite></small>
-                                        <p>@Model.BlogPosts[i].Description</p>
+                                <div>
+                                    @*<div class="row">*@
+                                    <div class="thumbnail img-responsive">
+                                        <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[i].BlogPostId">
+                                            <img src="@Model.BlogPosts[i].CoverImageUrl" alt="@Model.BlogPosts[i].BlogPostTitle" class="portrait">
+                                        </a>
                                     </div>
-                                </div>
-                                @*</div>*@
-                                <div class="col-xs-12">
-                                    <hr class="hr-dark"/>
-                                </div>
-                                <div class="col-md-4 padding-left-20">
-                                    <p>Category: @Model.BlogPosts[i].Category.CategoryTitle</p>
-                                    <p>@Model.BlogPosts[i].TimeCreated.ToString("g")</p>
-                                </div>
+                                    <div class="container">
+                                        <div class="col-sm-7">
+                                            <h2 class="h2-a">
+                                                <a href="/BlogPost/ViewBlogPost/@Model.BlogPosts[i].BlogPostId">
+                                                    @Model.BlogPosts[i].BlogPostTitle
+                                                </a>
+                                            </h2>
+                                            <small><cite title="Source Title">a post by <b>@(Model.BlogPosts[i].User.FirstName + " " + Model.BlogPosts[i].User.LastName)</b></cite></small>
+                                            <p>@Model.BlogPosts[i].Description</p>
+                                        </div>
+                                    </div>
+                                    @*</div>*@
+                                    <div class="col-xs-12">
+                                        <hr class="hr-dark" />
+                                    </div>
+                                    <div class="col-md-4 padding-left-20">
+                                        <p>Category: @Model.BlogPosts[i].Category.CategoryTitle</p>
+                                        <p>@Model.BlogPosts[i].TimeCreated.ToString("g")</p>
+                                    </div>
 
-                                <div class="col-md-3 pull-right">
-                                    <p>Hashtags:</p>
-                                    @if (Model.BlogPosts[i].Hashtags.Count > 0)
-                                    {
-                                        string hashtags = "";
-                                        for (int j = 0; j < Model.BlogPosts[i].Hashtags.Count - 1; j++)
+                                    <div class="col-md-3 pull-right">
+                                        <p>Hashtags:</p>
+                                        @if (Model.BlogPosts[i].Hashtags.Count > 0)
                                         {
-                                            hashtags += "#" + Model.BlogPosts[i].Hashtags[j].HashtagTitle + ", ";
+                                            string hashtags = "";
+                                            for (int j = 0; j < Model.BlogPosts[i].Hashtags.Count - 1; j++)
+                                            {
+                                                hashtags += "#" + Model.BlogPosts[i].Hashtags[j].HashtagTitle + ", ";
+                                            }
+                                            hashtags += "#" + Model.BlogPosts[i].Hashtags[Model.BlogPosts[i].Hashtags.Count - 1].HashtagTitle;
+                                            <cite>@hashtags</cite>
                                         }
-                                        hashtags += "#" + Model.BlogPosts[i].Hashtags[Model.BlogPosts[i].Hashtags.Count - 1].HashtagTitle;
-                                        <cite>@hashtags</cite>
-                                    }
-                                    else
-                                    {
-                                        <p>No hashtags added...</p>
-                                    }
+                                        else
+                                        {
+                                            <p>No hashtags added...</p>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
+
             }
             <div class="text-center">
                 <a href="/BlogPost/AllPosts" class="btn btn-primary"><span class="glyphicon glyphicon-comment"></span> View All Posts</a>
@@ -204,6 +208,7 @@
                 <p>
                     <em>Paired-programming "Sessions":</em> 19
                 </p>
+                <p><em>Tim-Approved:</em> You know it...</p>
             </div>
         </div>
 
